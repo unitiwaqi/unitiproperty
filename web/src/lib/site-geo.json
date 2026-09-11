@@ -6,7 +6,7 @@
       "properties": {
         "id": "site-boundary",
         "kind": "site-boundary",
-        "accuracy": "Approximate boundary traced from Uniti's own cadastral site plan and hand-registered to real-world satellite imagery via two chained registrations (cadastral-to-satellite piecewise-affine warp, then satellite-to-lat/lon anchor+scale). Indicative only \u2014 not survey-accurate, not for legal or transactional use. Not to be confused with the \u00b1 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the broader site context."
+        "accuracy": "Approximate boundary traced from Uniti's own cadastral site plan and hand-registered to real-world satellite imagery via two chained registrations (cadastral-to-satellite piecewise-affine warp, then satellite-to-lat/lon anchor+scale). Measured registration residual is on the order of 50-100 m (median 69 m against the OpenStreetMap coastline; see MEASURED RESIDUAL in this file). Indicative only - not survey-accurate, not for legal or transactional use. Not to be confused with the +/- 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the broader site context."
       },
       "geometry": {
         "type": "Polygon",
@@ -262,7 +262,7 @@
         "id": "uniti",
         "kind": "zone-polygon",
         "color": "#7a2f34",
-        "accuracy": "Approximate boundary traced from Uniti's own cadastral site plan and hand-registered to real-world satellite imagery via two chained registrations (cadastral-to-satellite piecewise-affine warp, then satellite-to-lat/lon anchor+scale). Indicative only \u2014 not survey-accurate, not for legal or transactional use. Not to be confused with the \u00b1 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the broader site context."
+        "accuracy": "Approximate boundary traced from Uniti's own cadastral site plan and hand-registered to real-world satellite imagery via two chained registrations (cadastral-to-satellite piecewise-affine warp, then satellite-to-lat/lon anchor+scale). Measured registration residual is on the order of 50-100 m (median 69 m against the OpenStreetMap coastline; see MEASURED RESIDUAL in this file). Indicative only - not survey-accurate, not for legal or transactional use. Not to be confused with the +/- 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the broader site context."
       },
       "geometry": {
         "type": "Polygon",
@@ -3686,7 +3686,7 @@
         "id": "marina",
         "kind": "zone-polygon",
         "color": "#6f8f5c",
-        "accuracy": "Approximate boundary traced from Uniti's own cadastral site plan and hand-registered to real-world satellite imagery via two chained registrations (cadastral-to-satellite piecewise-affine warp, then satellite-to-lat/lon anchor+scale). Indicative only \u2014 not survey-accurate, not for legal or transactional use. Not to be confused with the \u00b1 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the broader site context."
+        "accuracy": "Approximate boundary traced from Uniti's own cadastral site plan and hand-registered to real-world satellite imagery via two chained registrations (cadastral-to-satellite piecewise-affine warp, then satellite-to-lat/lon anchor+scale). Measured registration residual is on the order of 50-100 m (median 69 m against the OpenStreetMap coastline; see MEASURED RESIDUAL in this file). Indicative only - not survey-accurate, not for legal or transactional use. Not to be confused with the +/- 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the broader site context."
       },
       "geometry": {
         "type": "Polygon",
@@ -5782,7 +5782,7 @@
         "id": "nature",
         "kind": "zone-polygon",
         "color": "#3d5a99",
-        "accuracy": "Approximate boundary traced from Uniti's own cadastral site plan and hand-registered to real-world satellite imagery via two chained registrations (cadastral-to-satellite piecewise-affine warp, then satellite-to-lat/lon anchor+scale). Indicative only \u2014 not survey-accurate, not for legal or transactional use. Not to be confused with the \u00b1 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the broader site context."
+        "accuracy": "Approximate boundary traced from Uniti's own cadastral site plan and hand-registered to real-world satellite imagery via two chained registrations (cadastral-to-satellite piecewise-affine warp, then satellite-to-lat/lon anchor+scale). Measured registration residual is on the order of 50-100 m (median 69 m against the OpenStreetMap coastline; see MEASURED RESIDUAL in this file). Indicative only - not survey-accurate, not for legal or transactional use. Not to be confused with the +/- 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the broader site context."
       },
       "geometry": {
         "type": "Polygon",
@@ -6830,7 +6830,7 @@
         "id": "shipyard",
         "kind": "zone-polygon",
         "color": "#c1622c",
-        "accuracy": "Approximate boundary traced from Uniti's own cadastral site plan and hand-registered to real-world satellite imagery via two chained registrations (cadastral-to-satellite piecewise-affine warp, then satellite-to-lat/lon anchor+scale). Indicative only \u2014 not survey-accurate, not for legal or transactional use. Not to be confused with the \u00b1 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the broader site context."
+        "accuracy": "Approximate boundary traced from Uniti's own cadastral site plan and hand-registered to real-world satellite imagery via two chained registrations (cadastral-to-satellite piecewise-affine warp, then satellite-to-lat/lon anchor+scale). Measured registration residual is on the order of 50-100 m (median 69 m against the OpenStreetMap coastline; see MEASURED RESIDUAL in this file). Indicative only - not survey-accurate, not for legal or transactional use. Not to be confused with the +/- 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the broader site context."
       },
       "geometry": {
         "type": "Polygon",
@@ -8178,7 +8178,7 @@
         "id": "walit",
         "kind": "zone-polygon",
         "color": "#9c4f8f",
-        "accuracy": "Approximate boundary traced from Uniti's own cadastral site plan and hand-registered to real-world satellite imagery via two chained registrations (cadastral-to-satellite piecewise-affine warp, then satellite-to-lat/lon anchor+scale). Indicative only \u2014 not survey-accurate, not for legal or transactional use. Not to be confused with the \u00b1 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the broader site context."
+        "accuracy": "Approximate boundary traced from Uniti's own cadastral site plan and hand-registered to real-world satellite imagery via two chained registrations (cadastral-to-satellite piecewise-affine warp, then satellite-to-lat/lon anchor+scale). Measured registration residual is on the order of 50-100 m (median 69 m against the OpenStreetMap coastline; see MEASURED RESIDUAL in this file). Indicative only - not survey-accurate, not for legal or transactional use. Not to be confused with the +/- 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the broader site context."
       },
       "geometry": {
         "type": "Polygon",

@@ -59,11 +59,40 @@ INVESTABLE_ZONE_IDS = list(ZONE_COLOR.keys())
 ACCURACY_NOTE = (
     "Approximate boundary traced from Uniti's own cadastral site plan and hand-registered "
     "to real-world satellite imagery via two chained registrations (cadastral-to-satellite "
-    "piecewise-affine warp, then satellite-to-lat/lon anchor+scale). Indicative only — not "
-    "survey-accurate, not for legal or transactional use. Not to be confused with the "
-    "± 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the "
-    "broader site context."
+    "piecewise-affine warp, then satellite-to-lat/lon anchor+scale). Measured registration "
+    "residual is on the order of 50-100 m (median 69 m against the OpenStreetMap coastline; "
+    "see MEASURED RESIDUAL in this file). Indicative only - not survey-accurate, not for "
+    "legal or transactional use. Not to be confused with the +/- 38 acre investable-parcel "
+    "figure quoted elsewhere; the site-boundary outline is the broader site context."
 )
+
+# --- MEASURED RESIDUAL -------------------------------------------------------------
+# Checked 2026-09-11 after the map was reported as looking misaligned. What was measured,
+# and what it does and doesn't establish:
+#
+#   * OSM road overlay (strongest evidence). Rendering OpenStreetMap's real N143/M143/138
+#     geometry onto satMap.png through this transform traces the roads visible in the
+#     image with no drift detectable by eye across the full ~2 km of the site. A gross
+#     georeferencing error would be obvious here and is not present.
+#   * Coastline residual vs OSM: median 69 m, mean 79 m (image-frame artifacts excluded).
+#     Treat as an upper bound, not a verdict - OSM's coastline is generalised, and this is
+#     a tidal mudflat estuary where the "shoreline" genuinely moves.
+#   * Same-boundary / two-imagery-source check (geometry/alignment-evidence.png): the site
+#     outline falls on land in BOTH satMap.png and Esri World Imagery at the seaward
+#     corner. The two sources disagree about where the waterline is, because they were
+#     captured at different dates/tidal states - that difference is not registration error.
+#
+# A gradient cross-correlation between satMap.png and Esri was also tried and is NOT
+# trustworthy here: satMap.png has burned-in vector annotations (the white dashed boundary,
+# the pink dash-dot road line, road shields, place labels) which dominate a gradient-based
+# score while corresponding to nothing on the ground. It proposed scale 4.18 / +2.5deg /
+# +180 m, which made BOTH physical checks worse (coastline 69->104 m, campus overlap
+# 65.8->59.5%). Rejected. Do not re-derive the transform from image correlation without
+# first masking those annotations.
+#
+# Bottom line: this transform is about as good as this input data supports. Getting below
+# this residual needs real surveyed parcel coordinates, not a better fit.
+# ------------------------------------------------------------------------------------
 
 
 def transform_ring(coords_px):

@@ -179,8 +179,9 @@ export function GeoMap({
       <div className="pointer-events-none absolute left-3 top-3 max-w-[270px] border border-hairline/20 bg-bg-base/85 px-3 py-2 text-[10.5px] leading-[1.4] text-ink/70 backdrop-blur-[4px]">
         <strong className="text-ink">Approximate boundaries.</strong> Traced from Uniti&apos;s
         cadastral plan, indicative only — not survey-accurate, not for legal or transactional
-        use. The outline shown is the broader site context, not the ± 38 acre investable
-        parcel quoted elsewhere.
+        use (registration residual ~50–100m against real satellite/OSM data). The outline
+        shown is the broader site context, not the ± 38 acre investable parcel quoted
+        elsewhere.
       </div>
     </div>
   );
