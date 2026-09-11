@@ -16,17 +16,18 @@ independent public references:
     road, the Linggi River mouth, Kampung Tanjung Agas).
   - OpenStreetMap way 476596586 — the real coastline geometry for this stretch of coast.
 
-Method:
+Method (revised 2026-09-11, see "REVISION" below for what changed and why):
   1. Anchor point: satMap.png pixel (572, 227) (the Kolej UNITI building cluster, read off
      a pixel-grid overlay of satMap.png) <-> the real centroid of OSM way 967037434.
-  2. Scale + rotation: rotation is fixed at 0 (both satMap.png and boundMap.png have
-     north-up compass arrows, confirmed by inspection). Scale was NOT derived from the "38
-     acres" stat in DETAILS.md/the fact strip — that number produced a site polygon whose
-     coastal edge sat ~280m inland of the real coastline (see validation step). Instead,
-     scale was solved for directly: the value (3.99 m/px) that places the traced boundary's
-     known on-coast pixel (426, 333) exactly on the real OSM coastline.
+  2. Scale + rotation: fit by ICP (iterative closest point) of satMap.png's own coastline
+     (extracted from the image by luminance thresholding — water is visibly brighter than
+     land here — then cleaned of image-frame edge artifacts) against the real OpenStreetMap
+     coastline (way 476596586), rotating/scaling about the anchor. Converged to 4.30 m/px,
+     -6.75 degrees. Scale was NOT derived from the "38 acres" stat in DETAILS.md/the fact
+     strip — that number produced a site polygon whose coastal edge sat ~280m inland of the
+     real coastline.
   3. The `uniti` zone parcel and overall `boundary` are the exact pixel arrays from
-     build_satmap.py, transformed through that scale+anchor.
+     build_satmap.py, transformed through that scale+rotation+anchor.
   4. The other 4 zones (marina, nature, shipyard, walit) have no traced polygon anywhere in
      the supplied assets — only marker positions (left/top % on boundMap.png, from the
      prototype's zoneData). They're placed as POINTS, not polygons: the naive percentage
@@ -36,6 +37,23 @@ Method:
      constant offset (plausible — it looks like the prototype's CSS object-position crop),
      not a scale/rotation error, which is a real Simplifying assumption, not a
      measured fact — hence "indicative only" on every feature this script emits.
+
+REVISION 2026-09-11: user reported the live map "not properly aligned". Investigated with
+real ground truth (see geometry/README.md and geometry/apply_parcel_polygons.py's
+MEASURED RESIDUAL block for the full writeup) and concluded the rotation=0 assumption in
+the original version of this script was the weak point — never actually tested, just
+asserted from eyeballing the compass-rose icons on satMap.png/boundMap.png. Refit scale AND
+rotation together against the real OSM coastline (previous version only fit scale, holding
+rotation at the assumed 0). Validated the new fit two ways NEITHER of which was the fitting
+target, so both are honest checks: (a) OSM's real road network (N143/M143/138), rendered
+through the new transform, still traces the visible roads in satMap.png with no visible
+drift; (b) the transformed Uniti parcel's overlap with the real OSM Kolej UNITI campus
+polygon is statistically unchanged (64.8% vs the old transform's 65.8% — within noise, not
+a regression). Coastline residual (the fitting target, so not independent, but still the
+best available proxy for overall registration quality) improved from median 69m to ~28m.
+A separate attempt to further refine via gradient cross-correlation between satMap.png and
+Esri imagery was tried and REJECTED — see apply_parcel_polygons.py's MEASURED RESIDUAL
+block for why (satMap.png's burned-in vector annotations dominate that kind of score).
 
 Validation performed before trusting this transform (see validation_plot2.png, not checked
 in — regenerate via the `--validate` flag): the transformed Uniti parcel overlaps the real
@@ -89,21 +107,33 @@ ZONE_PCT = {
 # ---- real-world anchor (from OpenStreetMap, see module docstring) ----
 ANCHOR_PX = (572, 227)
 ANCHOR_LATLON = (2.407386676923077, 101.96684483846154)  # OSM way 967037434 centroid
-SCALE_M_PER_PX = 3.99  # solved against the real OSM coastline, see docstring
+SCALE_M_PER_PX = 4.30  # fit by ICP against the real OSM coastline, see REVISION in docstring
+ROTATION_DEG = -6.75  # fit jointly with scale; previous version wrongly assumed 0, see REVISION
 MLAT = 111320.0
 MLON = 111320.0 * math.cos(math.radians(ANCHOR_LATLON[0]))
 
 ACCURACY_NOTE = (
     "Approximate boundary traced from Uniti's own cadastral site plan and hand-registered "
-    "to real-world satellite imagery. Indicative only — not survey-accurate, not for "
-    "legal or transactional use. Not to be confused with the ± 38 acre investable-parcel "
-    "figure quoted elsewhere; this outline is the broader site context."
+    "to real-world satellite imagery. Measured registration residual is on the order of "
+    "30-60 m (median ~28 m against the OpenStreetMap coastline, the ICP fitting target; "
+    "treat that as optimistic and the independent road/campus checks in this file's "
+    "REVISION note as the more honest bound). Indicative only - not survey-accurate, not "
+    "for legal or transactional use. Not to be confused with the +/- 38 acre "
+    "investable-parcel figure quoted elsewhere; this outline is the broader site context."
 )
 
 
 def px_to_latlon(x, y):
-    lat = ANCHOR_LATLON[0] - (y - ANCHOR_PX[1]) * SCALE_M_PER_PX / MLAT
-    lon = ANCHOR_LATLON[1] + (x - ANCHOR_PX[0]) * SCALE_M_PER_PX / MLON
+    """satMap.png pixel -> (lat, lon), via the anchor + scale + rotation fit. Rotation is
+    applied about ANCHOR_PX before scaling to metres and offsetting from ANCHOR_LATLON."""
+    th = math.radians(ROTATION_DEG)
+    c, s = math.cos(th), math.sin(th)
+    u = (x - ANCHOR_PX[0]) * SCALE_M_PER_PX
+    v = (ANCHOR_PX[1] - y) * SCALE_M_PER_PX  # pixel y grows downward; north is +v
+    east_m = c * u - s * v
+    north_m = s * u + c * v
+    lat = ANCHOR_LATLON[0] + north_m / MLAT
+    lon = ANCHOR_LATLON[1] + east_m / MLON
     return (lat, lon)
 
 

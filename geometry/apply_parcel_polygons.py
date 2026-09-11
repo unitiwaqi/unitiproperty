@@ -59,39 +59,57 @@ INVESTABLE_ZONE_IDS = list(ZONE_COLOR.keys())
 ACCURACY_NOTE = (
     "Approximate boundary traced from Uniti's own cadastral site plan and hand-registered "
     "to real-world satellite imagery via two chained registrations (cadastral-to-satellite "
-    "piecewise-affine warp, then satellite-to-lat/lon anchor+scale). Measured registration "
-    "residual is on the order of 50-100 m (median 69 m against the OpenStreetMap coastline; "
-    "see MEASURED RESIDUAL in this file). Indicative only - not survey-accurate, not for "
+    "piecewise-affine warp, then satellite-to-lat/lon anchor+scale+rotation). Measured "
+    "registration residual is on the order of 30-60 m (median ~28 m against the "
+    "OpenStreetMap coastline, the fitting target -- see MEASURED RESIDUAL in this file for "
+    "the more honest independent checks). Indicative only - not survey-accurate, not for "
     "legal or transactional use. Not to be confused with the +/- 38 acre investable-parcel "
     "figure quoted elsewhere; the site-boundary outline is the broader site context."
 )
 
 # --- MEASURED RESIDUAL -------------------------------------------------------------
-# Checked 2026-09-11 after the map was reported as looking misaligned. What was measured,
-# and what it does and doesn't establish:
+# Checked 2026-09-11 after the map was reported as looking misaligned (twice - see both
+# entries below). What was measured, and what it does and doesn't establish:
 #
-#   * OSM road overlay (strongest evidence). Rendering OpenStreetMap's real N143/M143/138
-#     geometry onto satMap.png through this transform traces the roads visible in the
-#     image with no drift detectable by eye across the full ~2 km of the site. A gross
-#     georeferencing error would be obvious here and is not present.
-#   * Coastline residual vs OSM: median 69 m, mean 79 m (image-frame artifacts excluded).
-#     Treat as an upper bound, not a verdict - OSM's coastline is generalised, and this is
-#     a tidal mudflat estuary where the "shoreline" genuinely moves.
+# FIRST PASS -- confirmed the map wasn't badly broken, but didn't fix anything:
+#   * OSM road overlay. Rendering OpenStreetMap's real N143/M143/138 geometry through the
+#     then-current transform (scale only, rotation assumed 0) onto satMap.png traced the
+#     roads visible in the image with no drift detectable by eye. Ruled out a GROSS
+#     georeferencing error, but "no visible drift by eye over roughly this line width" is a
+#     coarse instrument -- it did not rule out the ~7 degree rotation error found below.
+#   * Coastline residual vs OSM under the scale-only transform: median 69 m, mean 79 m
+#     (image-frame artifacts excluded).
 #   * Same-boundary / two-imagery-source check (geometry/alignment-evidence.png): the site
 #     outline falls on land in BOTH satMap.png and Esri World Imagery at the seaward
-#     corner. The two sources disagree about where the waterline is, because they were
-#     captured at different dates/tidal states - that difference is not registration error.
+#     corner. Confirms the reported "over water" complaint was a tidal/capture-date
+#     difference between the two imagery sources, not the boundary being in the wrong
+#     place -- but doesn't rule out a smaller in-plane error elsewhere.
+#   * A gradient cross-correlation between satMap.png and Esri was tried as a way to find
+#     a better fit and REJECTED: satMap.png has burned-in vector annotations (the white
+#     dashed boundary, the pink dash-dot road line, road shields, place labels) which
+#     dominate a gradient-based score while corresponding to nothing on the ground. It
+#     proposed scale 4.18 / +2.5deg / +180 m, which made BOTH physical checks below worse
+#     (coastline 69->104 m, campus overlap 65.8->59.5%). Do not re-derive the transform
+#     from image correlation without first masking those annotations.
 #
-# A gradient cross-correlation between satMap.png and Esri was also tried and is NOT
-# trustworthy here: satMap.png has burned-in vector annotations (the white dashed boundary,
-# the pink dash-dot road line, road shields, place labels) which dominate a gradient-based
-# score while corresponding to nothing on the ground. It proposed scale 4.18 / +2.5deg /
-# +180 m, which made BOTH physical checks worse (coastline 69->104 m, campus overlap
-# 65.8->59.5%). Rejected. Do not re-derive the transform from image correlation without
-# first masking those annotations.
+# SECOND PASS -- found and fixed the real error, rotation=0 was never actually verified:
+#   * Extracted satMap.png's own coastline by luminance thresholding (water reads brighter
+#     than land here), cleaned of image-frame edge artifacts, and fit scale+rotation
+#     JOINTLY against the real OSM coastline by ICP about the same anchor. Converged to
+#     4.30 m/px, -6.75 degrees (previous version: 3.99 m/px, rotation locked to 0 on the
+#     unchecked assumption that satMap.png's printed compass rose meant true north-up).
+#   * Coastline residual (the fitting target, so not independent) dropped from median 69 m
+#     to ~28 m.
+#   * Checked against the two independent tests NOT used in this fit: OSM road overlay
+#     still traces the visible roads with no visible drift; real-campus overlap under the
+#     Uniti parcel is 64.8% (vs the old transform's 65.8%) -- statistically unchanged, not
+#     a regression. Both independent checks support the rotation fix; neither contradicts
+#     it, unlike the rejected cross-correlation attempt above.
 #
 # Bottom line: this transform is about as good as this input data supports. Getting below
-# this residual needs real surveyed parcel coordinates, not a better fit.
+# this residual needs real surveyed parcel coordinates, not a better fit -- see
+# geometry/README.md for what was checked (JUPEM MyGDI / eBiz) and why that's a formal
+# request/purchase process, not a free shortcut.
 # ------------------------------------------------------------------------------------
 
 

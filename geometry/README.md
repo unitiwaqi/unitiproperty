@@ -20,6 +20,24 @@ satMap.png and Esri was also tried and rejected — satMap.png's burned-in vecto
 made both physical checks worse. Full writeup in `apply_parcel_polygons.py`'s
 `MEASURED RESIDUAL` comment block. No geometry changed as a result of this investigation.
 
+**Update, same day (3):** user asked whether real coordinates were obtainable without going
+through Uniti's surveyor. Checked Malaysia's official channels (JUPEM MyGDI data-sharing —
+requires a formal written application even for the public/individual category; JUPEM eBiz —
+digital cadastral lot data is a paid product) — both are legitimate but are a request/purchase
+process, not a free technical shortcut, and weren't pursued without the user directing that
+specifically. Instead, found and fixed a real (if modest) error in the transform itself: the
+"update (2)" investigation above never actually verified its `rotation = 0` assumption, only
+eyeballed satMap.png's printed compass rose. Extracted satMap.png's own coastline by
+luminance thresholding and fit scale+rotation jointly (ICP) against the real OSM coastline —
+converged to 4.30 m/px / -6.75deg (was 3.99 m/px / rotation locked to 0). Coastline residual
+(the fitting target) dropped from median 69m to ~28m; checked against the two independent
+tests not used in the fit — OSM road overlay still traces cleanly, real-campus overlap under
+the Uniti parcel is statistically unchanged (64.8% vs 65.8%) — neither regressed, unlike the
+rejected cross-correlation attempt in update (2). `output/georeference_zones.py` and
+`apply_parcel_polygons.py` both updated and re-run; `web/src/lib/site-geo.json` regenerated.
+See `output/georeference_zones.py`'s docstring REVISION note and
+`apply_parcel_polygons.py`'s `MEASURED RESIDUAL` block for the full writeup.
+
 ## Review
 
 - `boundmap-parcels-review.png`: outlines over the 1201 × 1154 source raster embedded in boundMap.svg.
