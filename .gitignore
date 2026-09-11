@@ -1,5 +1,6 @@
 # Blender autosave backups — not meant to be versioned
 *.blend1
+*.blend
 
 # OS
 .DS_Store
@@ -12,3 +13,5 @@ node_modules/
 dist/
 .env
 .env.local
+
+output/
