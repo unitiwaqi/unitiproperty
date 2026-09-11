@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#14120f;font-family:'Public Sans',system-ui,sans-serif}
+  a{color:#c1622c}
+  a:hover{color:#d97b45}
+  ::selection{background:#c1622c;color:#14120f}
+  ::-webkit-scrollbar{width:0;height:0}
+</style>
+</helmet>
+
+<div style="{{ rootStyle }}">
+
+  <!-- floating preview toggle (not part of the site) -->
+  <div style="position:fixed;right:16px;bottom:16px;z-index:60;display:flex;gap:2px;padding:4px;background:rgba(12,11,9,0.9);border:1px solid rgba(244,239,228,0.15);border-radius:999px;backdrop-filter:blur(10px);box-shadow:0 8px 24px rgba(0,0,0,0.4)">
+    <button style="{{ devStyle_desktop }}" onClick="{{ setDesktop }}">Desktop</button>
+    <button style="{{ devStyle_mobile }}" onClick="{{ setMobile }}">Mobile</button>
+  </div>
+
+  <div style="{{ canvasWrapStyle }}">
+  <div style="{{ canvasStyle }}">
+
+    <!-- ============ SITE NAV ============ -->
+    <div style="{{ navStyle }}">
+      <div style="font:800 20px/1 'Archivo';letter-spacing:.06em;color:#f4efe4">UNITI<span style="color:#c1622c">PROPERTY</span></div>
+      <div style="{{ navLinksStyle }}">
+        <a href="#" onClick="{{ goHome }}" style="text-decoration:none;color:rgba(244,239,228,0.75);font:600 13px 'Public Sans';letter-spacing:.03em;padding-bottom:4px;border-bottom:1px solid transparent;transition:color .15s,border-color .15s" style-hover="color:#f4efe4;border-bottom-color:#c1622c">HOME</a>
+        <a href="#" onClick="{{ goExplore }}" style="text-decoration:none;color:rgba(244,239,228,0.75);font:600 13px 'Public Sans';letter-spacing:.03em;padding-bottom:4px;border-bottom:1px solid transparent;transition:color .15s,border-color .15s" style-hover="color:#f4efe4;border-bottom-color:#c1622c">EXPLORE</a>
+        <a href="#" onClick="{{ goDetail }}" style="text-decoration:none;color:rgba(244,239,228,0.75);font:600 13px 'Public Sans';letter-spacing:.03em;padding-bottom:4px;border-bottom:1px solid transparent;transition:color .15s,border-color .15s" style-hover="color:#f4efe4;border-bottom-color:#c1622c">OPPORTUNITIES</a>
+        <a href="#" style="text-decoration:none;color:rgba(244,239,228,0.75);font:600 13px 'Public Sans';letter-spacing:.03em;padding-bottom:4px;border-bottom:1px solid transparent;transition:color .15s,border-color .15s" style-hover="color:#f4efe4;border-bottom-color:#c1622c">ABOUT</a>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <button style="{{ langBtnStyle }}" style-hover="border-color:rgba(244,239,228,0.6);color:#f4efe4" onClick="{{ toggleLang }}">{{ langLabel }}</button>
+        <button style="{{ enquireBtnStyle }}" style-hover="background:#c1622c;color:#14120f" onClick="{{ goDetail }}">ENQUIRE</button>
+        <button style="{{ burgerStyle }}" onClick="{{ toggleMenu }}" aria-label="Menu">
+          <div style="{{ burgerLine1 }}"></div>
+          <div style="{{ burgerLine2 }}"></div>
+        </button>
+      </div>
+    </div>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="{{ mobileMenuStyle }}">
+        <a href="#" onClick="{{ goHome }}" style="text-decoration:none;color:#f4efe4;font:700 18px 'Archivo';padding:14px 0;border-bottom:1px solid rgba(244,239,228,0.08)">Home</a>
+        <a href="#" onClick="{{ goExplore }}" style="text-decoration:none;color:#f4efe4;font:700 18px 'Archivo';padding:14px 0;border-bottom:1px solid rgba(244,239,228,0.08)">Explore map</a>
+        <a href="#" onClick="{{ goDetail }}" style="text-decoration:none;color:#f4efe4;font:700 18px 'Archivo';padding:14px 0;border-bottom:1px solid rgba(244,239,228,0.08)">Opportunities</a>
+        <a href="#" style="text-decoration:none;color:#f4efe4;font:700 18px 'Archivo';padding:14px 0">About Uniti</a>
+      </div>
+    </sc-if>
+
+    <!-- ============ HOME ============ -->
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <div>
+        <div style="{{ heroStyle }}">
+          <video ref="{{ setVidA }}" src="assets/heroVideo.mp4" muted playsinline preload="auto" style="{{ heroVideoStyleA }}"></video>
+          <video ref="{{ setVidB }}" src="assets/heroVideo.mp4" muted playsinline preload="auto" style="{{ heroVideoStyleB }}"></video>
+          <div style="{{ heroOverlayStyle }}"></div>
+          <div style="{{ heroContentStyle }}">
+            <div style="font:600 12px 'Public Sans';letter-spacing:.22em;color:#c1622c;margin-bottom:18px">CURATED LAND &amp; BUILDING INVESTMENTS &middot; MALAYSIA</div>
+            <div style="{{ heroHeadlineStyle }}">SECURE YOUR<br>NEXT INVESTMENT</div>
+            <div style="font:400 16px/1.6 'Public Sans';color:rgba(244,239,228,0.72);max-width:520px;margin-top:22px">Uniti presents a curated portfolio of seaside land and buildings across Malaysia &mdash; open for institutional, developer and joint-venture investment.</div>
+            <div style="font:400 13px/1.6 'Public Sans';color:rgba(244,239,228,0.45);max-width:520px;margin-top:6px">Portfolio tanah dan bangunan pilihan Uniti &mdash; terbuka untuk pelaburan institusi, pemaju dan usahasama.</div>
+            <div style="display:flex;gap:14px;margin-top:32px;flex-wrap:wrap">
+              <button onClick="{{ goExplore }}" style="background:#c1622c;color:#14120f;border:none;padding:16px 28px;font:700 13px 'Public Sans';letter-spacing:.05em;border-radius:2px;cursor:pointer;transition:background .15s,transform .15s" style-hover="background:#d97b45;transform:translateY(-1px)">EXPLORE THE MAP</button>
+              <button onClick="{{ goDetail }}" style="background:transparent;color:#f4efe4;border:1px solid rgba(244,239,228,0.35);padding:16px 28px;font:700 13px 'Public Sans';letter-spacing:.05em;border-radius:2px;cursor:pointer;transition:border-color .15s,background .15s" style-hover="border-color:#f4efe4;background:rgba(244,239,228,0.06)">VIEW FEATURED OPPORTUNITY</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="{{ sectionPadStyle }}">
+          <div style="{{ eyebrowStyle }}">INVEST BY PURPOSE</div>
+          <div style="{{ h2Style }}">Choose your angle of interest</div>
+          <div style="{{ cardGridStyle }}">
+            <sc-for list="{{ buyerTypes }}" as="bt" hint-placeholder-count="4">
+              <div style="{{ bt.cardStyle }}" style-hover="border-color:rgba(193,98,44,0.6);transform:translateY(-3px)" onClick="{{ bt.onSelect }}">
+                <div style="font:700 13px 'Public Sans';letter-spacing:.03em;color:#c1622c;margin-bottom:10px">{{ bt.tag }}</div>
+                <div style="font:700 19px/1.25 'Archivo';color:#f4efe4;margin-bottom:8px">{{ bt.title }}</div>
+                <div style="font:400 13px/1.5 'Public Sans';color:rgba(244,239,228,0.6)">{{ bt.desc }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="{{ trustBandStyle }}">
+          <div style="{{ trustCopyStyle }}">
+            <div style="font:600 11px 'Public Sans';letter-spacing:.18em;color:#c1622c">ABOUT UNITI</div>
+            <div style="font:800 28px/1.2 'Archivo';color:#f4efe4;margin-top:12px;max-width:520px">Two decades of institutional land development on Malaysia's coast.</div>
+            <div style="font:400 15px/1.6 'Public Sans';color:rgba(244,239,228,0.65);margin-top:14px;max-width:560px">Uniti Sdn Bhd develops and stewards seaside land for education, hospitality and marine industry. Every opportunity on this platform comes directly from our own portfolio &mdash; verified titles, clear zoning, no intermediaries.</div>
+          </div>
+          <div style="{{ trustStatsStyle }}">
+            <sc-for list="{{ trustStats }}" as="ts" hint-placeholder-count="3">
+              <div>
+                <div style="font:800 32px 'Archivo';color:#f4efe4">{{ ts.value }}</div>
+                <div style="font:600 11px 'Public Sans';letter-spacing:.04em;color:rgba(244,239,228,0.5);margin-top:4px">{{ ts.label }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="{{ sectionPadStyle }}">
+          <div style="{{ eyebrowStyle }}">HOW IT WORKS</div>
+          <div style="{{ h2Style }}">From enquiry to agreement</div>
+          <div style="{{ stepGridStyle }}">
+            <sc-for list="{{ steps }}" as="stp" hint-placeholder-count="3">
+              <div>
+                <div style="font:800 34px 'Archivo';color:#c1622c">{{ stp.n }}</div>
+                <div style="font:700 16px 'Archivo';color:#f4efe4;margin-top:10px">{{ stp.title }}</div>
+                <div style="font:400 13.5px/1.55 'Public Sans';color:rgba(244,239,228,0.55);margin-top:6px">{{ stp.desc }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="{{ sectionPadStyle }}">
+          <div style="{{ eyebrowStyle }}">FEATURED OPPORTUNITY</div>
+          <div style="{{ h2Style }}">Tanjung Agas, Port Dickson</div>
+          <div style="{{ featureRowStyle }}">
+            <div style="{{ featureImgWrapStyle }}" onClick="{{ goDetail }}">
+              <img src="assets/satMap_3D_detailed.png" alt="3D render of the Tanjung Agas coastal site" style="width:100%;height:100%;object-fit:cover;display:block">
+            </div>
+            <div style="{{ featureCopyStyle }}">
+              <div style="font:400 15px/1.7 'Public Sans';color:rgba(244,239,228,0.75)">A multi-zone coastal site bordering the beach at Tanjung Agas &mdash; comprising education, marine resort, nature tourism and marine engineering zones, each open for investment or joint-venture.</div>
+              <div style="display:flex;gap:28px;margin-top:24px;flex-wrap:wrap">
+                <div><div style="font:700 22px 'Archivo';color:#f4efe4">5</div><div style="font:500 11px 'Public Sans';letter-spacing:.03em;color:rgba(244,239,228,0.5);margin-top:2px">INVESTABLE ZONES</div></div>
+                <div><div style="font:700 22px 'Archivo';color:#f4efe4">Freehold</div><div style="font:500 11px 'Public Sans';letter-spacing:.03em;color:rgba(244,239,228,0.5);margin-top:2px">TENURE</div></div>
+                <div><div style="font:700 22px 'Archivo';color:#f4efe4">Beachfront</div><div style="font:500 11px 'Public Sans';letter-spacing:.03em;color:rgba(244,239,228,0.5);margin-top:2px">LOCATION</div></div>
+              </div>
+              <button onClick="{{ goDetail }}" style="margin-top:26px;background:transparent;color:#c1622c;border:1px solid rgba(193,98,44,0.5);padding:13px 22px;font:700 12px 'Public Sans';letter-spacing:.04em;border-radius:2px;cursor:pointer;width:fit-content;transition:background .15s,color .15s" style-hover="background:#c1622c;color:#14120f">VIEW OPPORTUNITY &rarr;</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="{{ footerStyle }}">
+          <div style="{{ footerTopStyle }}">
+            <div style="max-width:280px">
+              <div style="font:800 15px 'Archivo';letter-spacing:.06em;color:#f4efe4">UNITI<span style="color:#c1622c">PROPERTY</span></div>
+              <div style="font:400 13px/1.6 'Public Sans';color:rgba(244,239,228,0.45);margin-top:12px">A curated portfolio of investment-grade land and buildings from Uniti Sdn Bhd.</div>
+            </div>
+            <div>
+              <div style="font:700 11px 'Public Sans';letter-spacing:.06em;color:rgba(244,239,228,0.4);margin-bottom:12px">CONTACT</div>
+              <div style="font:400 13px/1.8 'Public Sans';color:rgba(244,239,228,0.7)">invest@unitiproperty.com<br>+60 3&#8209;0000&#8209;0000</div>
+            </div>
+            <div>
+              <div style="font:700 11px 'Public Sans';letter-spacing:.06em;color:rgba(244,239,228,0.4);margin-bottom:12px">PLATFORM</div>
+              <div style="font:400 13px/1.8 'Public Sans';color:rgba(244,239,228,0.7)">Explore Map<br>Opportunities<br>About Uniti</div>
+            </div>
+          </div>
+          <div style="{{ footerBottomStyle }}">
+            <div style="font:400 12px 'Public Sans';color:rgba(244,239,228,0.4)">&copy; 2026 Uniti Sdn Bhd. All investments subject to due diligence.</div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ EXPLORE ============ -->
+    <sc-if value="{{ isExplore }}" hint-placeholder-val="{{ false }}">
+      <div style="{{ exploreWrapStyle }}">
+        <div style="{{ filterBarStyle }}">
+          <sc-for list="{{ filterChips }}" as="chip" hint-placeholder-count="4">
+            <div style="{{ chip.style }}" style-hover="border-color:rgba(244,239,228,0.4)" onClick="{{ chip.onSelect }}">{{ chip.label }}</div>
+          </sc-for>
+        </div>
+        <div style="{{ exploreBodyStyle }}">
+          <div style="{{ mapAreaStyle }}">
+            <img src="assets/boundMap.png" alt="Cadastral map of investable zones at Tanjung Agas" style="{{ mapImgStyle }}">
+            <sc-for list="{{ visibleZones }}" as="z" hint-placeholder-count="5">
+              <div style="{{ z.dotStyle }}" onClick="{{ z.onSelect }}" onMouseEnter="{{ z.onSelect }}">
+                <div style="{{ z.pulseStyle }}"></div>
+              </div>
+            </sc-for>
+            <div style="{{ hoverCardStyle }}">
+              <div style="font:600 10px 'Public Sans';letter-spacing:.08em;color:#c1622c">{{ activeZone.tag }}</div>
+              <div style="font:700 17px 'Archivo';color:#f4efe4;margin-top:4px">{{ activeZone.name }}</div>
+              <div style="font:400 12px/1.5 'Public Sans';color:rgba(244,239,228,0.6);margin-top:6px">{{ activeZone.desc }}</div>
+              <button onClick="{{ goDetail }}" style="margin-top:12px;background:#c1622c;color:#14120f;border:none;padding:9px 14px;font:700 11px 'Public Sans';letter-spacing:.03em;border-radius:2px;cursor:pointer;transition:background .15s" style-hover="background:#d97b45">VIEW DETAILS</button>
+            </div>
+          </div>
+          <div style="{{ listDrawerStyle }}">
+            <div style="font:700 11px 'Public Sans';letter-spacing:.08em;color:rgba(244,239,228,0.45);padding:16px 18px 8px">{{ zoneCountLabel }}</div>
+            <sc-for list="{{ visibleZones }}" as="z2" hint-placeholder-count="5">
+              <div style="{{ z2.rowStyle }}" style-hover="background:rgba(244,239,228,0.05)" onClick="{{ z2.onSelect }}">
+                <div style="{{ z2.swatchStyle }}"></div>
+                <div style="flex:1;min-width:0">
+                  <div style="font:600 13px 'Public Sans';color:#f4efe4">{{ z2.name }}</div>
+                  <div style="font:400 11px 'Public Sans';color:rgba(244,239,228,0.5)">{{ z2.tag }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ OPPORTUNITY DETAIL ============ -->
+    <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div style="{{ detailHeroStyle }}">
+          <img src="{{ detailHeroImg }}" alt="Site view of the featured opportunity" style="{{ detailHeroImgStyle }}">
+          <div style="{{ heroTabsStyle }}">
+            <sc-for list="{{ heroTabs }}" as="ht" hint-placeholder-count="3">
+              <button style="{{ ht.style }}" onClick="{{ ht.onSelect }}">{{ ht.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="{{ sectionPadStyle }}">
+          <div style="display:flex;align-items:center;gap:8px;font:500 12px 'Public Sans';color:rgba(244,239,228,0.45);margin-bottom:20px;flex-wrap:wrap">
+            <a href="#" onClick="{{ goExplore }}" style="color:rgba(244,239,228,0.6);text-decoration:none" style-hover="color:#c1622c">&larr; Explore map</a>
+            <span>/</span><span>Tanjung Agas</span><span>/</span><span style="color:#f4efe4">{{ activeZone.name }}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap">
+            <div>
+              <div style="{{ eyebrowStyle }}">RAW LAND &middot; {{ activeZone.tag }}</div>
+              <div style="{{ detailTitleStyle }}">{{ activeZone.name }} &mdash; Tanjung Agas</div>
+              <div style="font:400 14px 'Public Sans';color:rgba(244,239,228,0.5);margin-top:6px">Port Dickson, Negeri Sembilan, Malaysia</div>
+            </div>
+            <button onClick="{{ scrollToForm }}" style="background:#c1622c;color:#14120f;border:none;padding:14px 22px;font:700 12px 'Public Sans';letter-spacing:.04em;border-radius:2px;cursor:pointer;white-space:nowrap;transition:background .15s" style-hover="background:#d97b45">REQUEST INVESTMENT DETAILS</button>
+          </div>
+          <div style="{{ sectionNavStyle }}">
+            <sc-for list="{{ sectionLinks }}" as="sl" hint-placeholder-count="4">
+              <button style="background:transparent;border:none;padding:14px 0;font:600 12px 'Public Sans';letter-spacing:.06em;color:rgba(244,239,228,0.55);cursor:pointer;border-bottom:2px solid transparent;transition:color .15s,border-color .15s" style-hover="color:#f4efe4;border-bottom-color:#c1622c" onClick="{{ sl.onSelect }}">{{ sl.label }}</button>
+            </sc-for>
+          </div>
+
+          <div style="{{ factsStripStyle }}">
+            <sc-for list="{{ facts }}" as="f" hint-placeholder-count="6">
+              <div style="{{ f.style }}">
+                <div style="font:500 11px 'Public Sans';letter-spacing:.04em;color:rgba(244,239,228,0.45)">{{ f.label }}</div>
+                <div style="font:700 16px 'Archivo';color:#f4efe4;margin-top:6px">{{ f.value }}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="font:400 11px 'Public Sans';color:rgba(244,239,228,0.35);margin-top:-46px;margin-bottom:36px">*Convertible to institutional/commercial title subject to approval.</div>
+
+          <div style="{{ twoColStyle }}">
+            <div style="{{ colMainStyle }}">
+              <div id="sec-highlights" style="{{ h2FlushStyle }}">Investment highlights</div>
+              <sc-for list="{{ highlights }}" as="hl" hint-placeholder-count="4">
+                <div style="display:flex;gap:14px;padding:16px 0;border-top:1px solid rgba(244,239,228,0.09)">
+                  <div style="width:6px;height:6px;border-radius:50%;background:#c1622c;margin-top:8px;flex:none"></div>
+                  <div>
+                    <div style="font:400 15px/1.55 'Public Sans';color:rgba(244,239,228,0.85)">{{ hl.en }}</div>
+                    <div style="font:400 13px/1.5 'Public Sans';color:rgba(244,239,228,0.42);margin-top:2px">{{ hl.bm }}</div>
+                  </div>
+                </div>
+              </sc-for>
+
+              <div id="sec-landmarks" style="{{ h2Style }}">Nearby landmarks</div>
+              <div style="{{ landmarkGridStyle }}">
+                <sc-for list="{{ landmarks }}" as="lm" hint-placeholder-count="6">
+                  <div style="{{ lm.style }}">{{ lm.label }}</div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="{{ colSideStyle }}">
+              <div id="sec-legend" style="{{ legendCardStyle }}">
+                <div style="font:700 12px 'Public Sans';letter-spacing:.04em;color:rgba(244,239,228,0.5);margin-bottom:14px">SITE ZONE LEGEND</div>
+                <sc-for list="{{ zones }}" as="zl" hint-placeholder-count="5">
+                  <div style="{{ zl.legendRowStyle }}" style-hover="background:rgba(244,239,228,0.05)" onClick="{{ zl.onSelect }}">
+                    <div style="{{ zl.swatchStyle }}"></div>
+                    <div style="font:500 13px 'Public Sans';color:rgba(244,239,228,0.8)">{{ zl.name }}</div>
+                  </div>
+                </sc-for>
+              </div>
+
+              <div id="sec-enquire" style="{{ formCardStyle }}">
+                <sc-if value="{{ formSent }}" hint-placeholder-val="{{ false }}">
+                  <div style="padding:12px 0">
+                    <div style="width:40px;height:40px;border-radius:50%;background:#c1622c;display:flex;align-items:center;justify-content:center;font:800 18px 'Archivo';color:#14120f;margin-bottom:16px">&#10003;</div>
+                    <div style="font:700 18px 'Archivo';color:#f4efe4">Request received</div>
+                    <div style="font:400 13px/1.6 'Public Sans';color:rgba(244,239,228,0.6);margin-top:8px">Our investment team will contact you within 2 business days with title, zoning and site documentation.</div>
+                    <button onClick="{{ resetForm }}" style="margin-top:18px;background:transparent;color:rgba(244,239,228,0.6);border:1px solid rgba(244,239,228,0.2);padding:10px 14px;font:600 11px 'Public Sans';letter-spacing:.04em;border-radius:2px;cursor:pointer">SEND ANOTHER</button>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ formNotSent }}" hint-placeholder-val="{{ true }}">
+                <div>
+                <div style="font:700 16px 'Archivo';color:#f4efe4;margin-bottom:4px">Request investment details</div>
+                <div style="font:400 12px 'Public Sans';color:rgba(244,239,228,0.5);margin-bottom:18px">Our team will follow up within 2 business days.</div>
+                <input style="{{ inputStyle }}" style-focus="border-color:#c1622c;outline:none" placeholder="Full name" />
+                <input style="{{ inputStyle }}" style-focus="border-color:#c1622c;outline:none" placeholder="Company" />
+                <input style="{{ inputStyle }}" style-focus="border-color:#c1622c;outline:none" placeholder="Email address" />
+                <input style="{{ inputStyle }}" style-focus="border-color:#c1622c;outline:none" placeholder="Phone number" />
+                <textarea style="{{ textareaStyle }}" style-focus="border-color:#c1622c;outline:none" placeholder="Tell us about your investment interest"></textarea>
+                <button onClick="{{ submitForm }}" style="width:100%;background:#c1622c;color:#14120f;border:none;padding:15px;font:700 12px 'Public Sans';letter-spacing:.04em;border-radius:2px;cursor:pointer;margin-top:6px;transition:background .15s" style-hover="background:#d97b45">SUBMIT REQUEST</button>
+                </div>
+                </sc-if>
+              </div>
+            </div>
+          </div>
+
+          <div style="{{ h2Style }}">Related opportunities</div>
+          <div style="{{ relatedGridStyle }}">
+            <sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
+              <div style="{{ r.style }}" style-hover="border-color:rgba(193,98,44,0.6);transform:translateY(-3px)" onClick="{{ r.onOpen }}">
+                <div style="{{ r.swatchStyle }}"></div>
+                <div style="padding:16px">
+                  <div style="font:600 11px 'Public Sans';letter-spacing:.03em;color:#c1622c">{{ r.tag }}</div>
+                  <div style="font:700 16px 'Archivo';color:#f4efe4;margin-top:5px">{{ r.name }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="{{ footerStyle }}">
+          <div style="{{ footerTopStyle }}">
+            <div style="max-width:280px">
+              <div style="font:800 15px 'Archivo';letter-spacing:.06em;color:#f4efe4">UNITI<span style="color:#c1622c">PROPERTY</span></div>
+              <div style="font:400 13px/1.6 'Public Sans';color:rgba(244,239,228,0.45);margin-top:12px">A curated portfolio of investment-grade land and buildings from Uniti Sdn Bhd.</div>
+            </div>
+            <div>
+              <div style="font:700 11px 'Public Sans';letter-spacing:.06em;color:rgba(244,239,228,0.4);margin-bottom:12px">CONTACT</div>
+              <div style="font:400 13px/1.8 'Public Sans';color:rgba(244,239,228,0.7)">invest@unitiproperty.com<br>+60 3&#8209;0000&#8209;0000</div>
+            </div>
+            <div>
+              <div style="font:700 11px 'Public Sans';letter-spacing:.06em;color:rgba(244,239,228,0.4);margin-bottom:12px">PLATFORM</div>
+              <div style="font:400 13px/1.8 'Public Sans';color:rgba(244,239,228,0.7)">Explore Map<br>Opportunities<br>About Uniti</div>
+            </div>
+          </div>
+          <div style="{{ footerBottomStyle }}">
+            <div style="font:400 12px 'Public Sans';color:rgba(244,239,228,0.4)">&copy; 2026 Uniti Sdn Bhd. All investments subject to due diligence.</div>
+          </div>
+        </div>
+        <sc-if value="{{ showStickyCta }}" hint-placeholder-val="{{ false }}">
+          <div style="position:sticky;bottom:0;z-index:20;padding:12px 16px;background:rgba(20,18,15,0.92);backdrop-filter:blur(10px);border-top:1px solid rgba(244,239,228,0.12);display:flex;gap:10px;align-items:center">
+            <div style="flex:1;min-width:0"><div style="font:700 13px 'Archivo';color:#f4efe4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ activeZone.name }}</div><div style="font:400 11px 'Public Sans';color:rgba(244,239,228,0.5)">Price on request</div></div>
+            <button onClick="{{ scrollToForm }}" style="background:#c1622c;color:#14120f;border:none;padding:13px 18px;font:700 12px 'Public Sans';letter-spacing:.04em;border-radius:2px;cursor:pointer;white-space:nowrap">REQUEST DETAILS</button>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+  </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  state = {
+    screen: 'home',
+    device: 'desktop',
+    lang: 'EN',
+    activeZoneId: 'uniti',
+    heroTab: '3d',
+    activeVideo: 'a',
+    menuOpen: false,
+    filter: 'All types',
+    formSent: false
+  };
+
+  toggleMenu = () => this.setState(s => ({ menuOpen: !s.menuOpen }));
+  submitForm = () => this.setState({ formSent: true });
+  resetForm = () => this.setState({ formSent: false });
+  scrollToId = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY - 130;
+    window.scrollTo({ top, behavior: 'smooth' });
+  };
+  scrollToForm = () => this.scrollToId('sec-enquire');
+
+  CROSSFADE = 0.5;
+
+  setVidA = (el) => { this.vidA = el; this.tryStart(); };
+  setVidB = (el) => { this.vidB = el; this.tryStart(); };
+
+  tryStart() {
+    if (this._started || !this.vidA || !this.vidB) return;
+    this._started = true;
+    this.vidA.muted = true; this.vidB.muted = true;
+    this.vidB.currentTime = 0;
+    const playSafe = (v) => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+    this.vidA.playbackRate = 0.8; this.vidB.playbackRate = 0.8;
+    playSafe(this.vidA);
+    this.vidA.addEventListener('timeupdate', () => this.onTick(this.vidA, this.vidB, 'a'));
+    this.vidB.addEventListener('timeupdate', () => this.onTick(this.vidB, this.vidA, 'b'));
+  }
+
+  onTick(current, next, id) {
+    if (this.state.activeVideo !== id || !current.duration) return;
+    const remaining = current.duration - current.currentTime;
+    if (remaining <= this.CROSSFADE && !this._swapping) {
+      this._swapping = true;
+      next.currentTime = 0; next.playbackRate = 0.8;
+      const p = next.play(); if (p && p.catch) p.catch(() => {});
+      this.setState({ activeVideo: id === 'a' ? 'b' : 'a' });
+      setTimeout(() => { this._swapping = false; }, this.CROSSFADE * 1000 + 100);
+    }
+  }
+
+  zoneData = [
+    { id: 'uniti', cat: 'Institutional', name: 'Uniti Sdn Bhd', tag: 'EDUCATION & TRAINING', desc: 'Institutional land bordering the beach, ideal for a training centre or campus expansion.', color: '#7a2f34', left: '46%', top: '30%' },
+    { id: 'marina', cat: 'Hospitality', name: 'Sembilan Marine Resort', tag: 'HOSPITALITY & TOURISM', desc: 'Resort-designated land with direct beach frontage and marina access.', color: '#6f8f5c', left: '27%', top: '46%' },
+    { id: 'nature', cat: 'Hospitality', name: 'Nature Tourism (Dynac)', tag: 'ECO-TOURISM', desc: 'Riverine forest zone suited to eco-lodges and nature-based tourism.', color: '#3d5a99', left: '55%', top: '82%' },
+    { id: 'shipyard', cat: 'Marine industrial', name: 'Sembilan Shipyard Engineering', tag: 'MARINE INDUSTRIAL', desc: 'Riverfront industrial land for marine engineering and shipyard operations.', color: '#c1622c', left: '73%', top: '80%' },
+    { id: 'walit', cat: 'Joint venture', name: 'Walit', tag: 'JOINT VENTURE', desc: 'Compact riverfront parcel open for joint-venture development.', color: '#9c4f8f', left: '63%', top: '76%' }
+  ];
+
+  goHome = () => { this.setState({ screen: 'home', menuOpen: false }); window.scrollTo({ top: 0 }); };
+  goExplore = () => { this.setState({ screen: 'explore', menuOpen: false }); window.scrollTo({ top: 0 }); };
+  goDetail = () => { this.setState({ screen: 'detail', menuOpen: false, formSent: false }); window.scrollTo({ top: 0 }); };
+  setDesktop = () => this.setState({ device: 'desktop' });
+  setMobile = () => this.setState({ device: 'mobile' });
+  toggleLang = () => this.setState(s => ({ lang: s.lang === 'EN' ? 'BM' : 'EN' }));
+
+  tabBtn(active) {
+    return {
+      background: active ? '#c1622c' : 'transparent',
+      color: active ? '#14120f' : 'rgba(244,239,228,0.6)',
+      border: 'none', padding: '7px 14px', font: "600 12px 'Public Sans'",
+      letterSpacing: '.03em', borderRadius: '999px', cursor: 'pointer'
+    };
+  }
+
+  renderVals() {
+    const mobile = this.state.device === 'mobile';
+    const bilingual = this.state.lang === 'BM';
+    const activeZone = this.zoneData.find(z => z.id === this.state.activeZoneId) || this.zoneData[0];
+
+    const zones = this.zoneData.map(z => ({
+      ...z,
+      onSelect: () => this.setState({ activeZoneId: z.id }),
+      dotStyle: {
+        position: 'absolute', left: z.left, top: z.top, width: '22px', height: '22px',
+        transform: 'translate(-50%,-50%)', cursor: 'pointer', display: 'flex',
+        alignItems: 'center', justifyContent: 'center'
+      },
+      pulseStyle: {
+        width: this.state.activeZoneId === z.id ? '14px' : '10px',
+        height: this.state.activeZoneId === z.id ? '14px' : '10px',
+        borderRadius: '50%', background: z.color,
+        border: '2px solid #f4efe4',
+        boxShadow: this.state.activeZoneId === z.id ? `0 0 0 6px ${z.color}55` : 'none',
+        transition: 'all .15s ease'
+      },
+      rowStyle: {
+        display: 'flex', alignItems: 'center', gap: '12px', padding: '12px 18px', cursor: 'pointer',
+        background: this.state.activeZoneId === z.id ? 'rgba(193,98,44,0.12)' : 'transparent',
+        borderLeft: this.state.activeZoneId === z.id ? '2px solid #c1622c' : '2px solid transparent'
+      },
+      swatchStyle: { width: '14px', height: '14px', borderRadius: '3px', background: z.color, flex: 'none' },
+      legendRowStyle: { display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 6px', margin: '0 -6px', borderRadius: '3px', cursor: 'pointer', background: this.state.activeZoneId === z.id ? 'rgba(193,98,44,0.12)' : 'transparent', transition: 'background .15s' }
+    }));
+    const visibleZones = this.state.filter === 'All types' ? zones : zones.filter(z => z.cat === this.state.filter);
+    const zoneCountLabel = visibleZones.length + (visibleZones.length === 1 ? ' OPPORTUNITY' : ' OPPORTUNITIES') + ' AT TANJUNG AGAS';
+
+    const buyerTypeDefs = [
+      ['TRAINING', 'Institutional / Training', 'Beachfront land suited to training centres, retreats and campuses.'],
+      ['HOSPITALITY', 'Resort & Tourism', 'Marina, resort and eco-tourism zones with waterfront access.'],
+      ['INDUSTRIAL', 'Marine Industrial', 'Riverfront land for shipyard and marine engineering use.'],
+      ['JV', 'Joint Venture', 'Structured partnerships for developers and investors.']
+    ];
+    const cardStyleBase = {
+      background: '#1c1a16', border: '1px solid rgba(244,239,228,0.08)', borderRadius: '2px',
+      padding: '26px 22px', cursor: 'pointer', minWidth: 0, transition: 'border-color .15s ease, transform .15s ease'
+    };
+    const buyerFilter = { TRAINING: 'Institutional', HOSPITALITY: 'Hospitality', INDUSTRIAL: 'Marine industrial', JV: 'Joint venture' };
+    const buyerTypes = buyerTypeDefs.map(([tag, title, desc]) => ({ tag, title, desc, cardStyle: cardStyleBase, onSelect: () => { this.setState({ filter: buyerFilter[tag] }); this.goExplore(); } }));
+
+    const trustStats = [['5', 'ZONES UNDER MANAGEMENT'], ['38 ac', 'BEACHFRONT LAND'], ['20+ yrs', 'IN COASTAL DEVELOPMENT']].map(([value, label]) => ({ value, label }));
+    const steps = [
+      ['01', 'Enquire', 'Tell us which opportunity and structure interests you.'],
+      ['02', 'Site & document review', 'We share title, zoning and 3D site documentation under NDA.'],
+      ['03', 'Agreement', 'We structure the outright sale or joint-venture with your counsel.']
+    ].map(([n, title, desc]) => ({ n, title, desc }));
+
+    const filterChipDefs = ['All types', 'Institutional', 'Hospitality', 'Marine industrial', 'Joint venture'];
+    const filterChips = filterChipDefs.map((label) => {
+      const on = this.state.filter === label;
+      return {
+        label,
+        onSelect: () => this.setState({ filter: label }),
+        style: {
+          padding: '9px 16px', borderRadius: '20px', font: "600 12px 'Public Sans'", letterSpacing: '.02em',
+          whiteSpace: 'nowrap', cursor: 'pointer', transition: 'all .15s',
+          background: on ? '#c1622c' : 'rgba(244,239,228,0.06)',
+          color: on ? '#14120f' : 'rgba(244,239,228,0.7)',
+          border: '1px solid ' + (on ? '#c1622c' : 'rgba(244,239,228,0.12)')
+        }
+      };
+    });
+
+    const factDefs = [
+      ['LOCATION', 'Tanjung Agas'], ['SIZE', '± 38 acres'], ['TENURE', 'Freehold'],
+      ['TITLE TYPE', 'Agricultural*'], ['ZONING', 'Institutional'], ['OPPORTUNITY', 'Outright / JV']
+    ];
+    const facts = factDefs.map(([label, value]) => ({
+      label, value,
+      style: { background: '#1c1a16', border: '1px solid rgba(244,239,228,0.08)', padding: '18px 20px', minWidth: 0 }
+    }));
+
+    const highlightDefs = [
+      ['Close proximity to the beach — ideal for outdoor and experiential learning programs.', 'Berhampiran pantai — sesuai untuk program pembelajaran luar dan pengalaman.'],
+      ['Surrounded by established outbound and team-building training facilities.', 'Dikelilingi kemudahan latihan outbound dan pembinaan pasukan yang sedia ada.'],
+      ['Peaceful, natural environment suitable for retreats, camps and corporate training.', 'Persekitaran semula jadi yang tenang, sesuai untuk retret, kem dan latihan korporat.'],
+      ['Easy accessibility from major roads (N143, M143) and nearby towns.', 'Mudah diakses dari jalan utama (N143, M143) dan bandar berdekatan.']
+    ];
+    const highlights = highlightDefs.map(([en, bm]) => ({ en, bm: bilingual ? bm : '' }));
+
+    const landmarkDefs = ['Kolej Uniti', 'Marina Club House', 'UTC', 'Petrol Station', 'Ixora Permai', 'Permai Villa'];
+    const landmarks = landmarkDefs.map(label => ({
+      label, style: { background: 'rgba(244,239,228,0.05)', border: '1px solid rgba(244,239,228,0.08)', padding: '12px 14px', font: "500 12.5px 'Public Sans'", color: 'rgba(244,239,228,0.7)' }
+    }));
+
+    const relatedDefs = zones.filter(z => z.id !== activeZone.id).slice(0, 3);
+    const related = relatedDefs.map(z => ({
+      ...z,
+      onOpen: () => { this.setState({ activeZoneId: z.id, formSent: false }); window.scrollTo({ top: 0, behavior: 'smooth' }); },
+      style: { background: '#1c1a16', border: '1px solid rgba(244,239,228,0.08)', cursor: 'pointer', overflow: 'hidden', minWidth: 0, transition: 'transform .15s ease', minHeight:0 },
+      swatchStyle: {
+        height: '130px',
+        backgroundImage: `linear-gradient(${z.color}77, ${z.color}55), url(assets/boundMap.png)`,
+        backgroundSize: 'cover, 260%',
+        backgroundPosition: `center, ${z.left} ${z.top}`
+      }
+    }));
+
+    const heroTabDefs = [['3d', '3D VIEW'], ['satellite', 'SATELLITE']];
+    const heroTabImgs = { '3d': 'assets/satMap_3D_detailed.png', satellite: 'assets/satMap.png' };
+    const heroTabs = heroTabDefs.map(([id, label]) => ({
+      label, onSelect: () => this.setState({ heroTab: id }),
+      style: {
+        background: this.state.heroTab === id ? '#f4efe4' : 'rgba(20,18,15,0.55)',
+        color: this.state.heroTab === id ? '#14120f' : '#f4efe4',
+        border: 'none', padding: '10px 16px', font: "700 11px 'Public Sans'", letterSpacing: '.05em', cursor: 'pointer'
+      }
+    }));
+
+    return {
+      isHome: this.state.screen === 'home', isExplore: this.state.screen === 'explore', isDetail: this.state.screen === 'detail',
+      tabStyle_home: this.tabBtn(this.state.screen === 'home'), tabStyle_explore: this.tabBtn(this.state.screen === 'explore'), tabStyle_detail: this.tabBtn(this.state.screen === 'detail'),
+      devStyle_desktop: this.tabBtn(this.state.device === 'desktop'), devStyle_mobile: this.tabBtn(this.state.device === 'mobile'),
+      goHome: this.goHome, goExplore: this.goExplore, goDetail: this.goDetail, setDesktop: this.setDesktop, setMobile: this.setMobile,
+      setVidA: this.setVidA, setVidB: this.setVidB,
+      menuOpen: this.state.menuOpen, toggleMenu: this.toggleMenu,
+      burgerStyle: { display: mobile ? 'flex' : 'none', flexDirection: 'column', gap: '5px', justifyContent: 'center', width: '40px', height: '40px', background: 'transparent', border: 'none', cursor: 'pointer', padding: '0 8px' },
+      burgerLine1: { height: '2px', background: '#f4efe4', transition: 'transform .2s', transform: this.state.menuOpen ? 'translateY(3.5px) rotate(45deg)' : 'none' },
+      burgerLine2: { height: '2px', background: '#f4efe4', transition: 'transform .2s', transform: this.state.menuOpen ? 'translateY(-3.5px) rotate(-45deg)' : 'none' },
+      mobileMenuStyle: { display: 'flex', flexDirection: 'column', padding: '8px 20px 20px', background: '#0c0b09', borderBottom: '1px solid rgba(244,239,228,0.08)' },
+      enquireBtnStyle: { display: mobile ? 'none' : 'inline-block', background: 'transparent', color: '#c1622c', border: '1px solid #c1622c', padding: '10px 18px', font: "700 12px 'Public Sans'", letterSpacing: '.04em', borderRadius: '2px', cursor: 'pointer', whiteSpace: 'nowrap', transition: 'background .15s, color .15s' },
+      visibleZones, zoneCountLabel,
+      formSent: this.state.formSent, formNotSent: !this.state.formSent, submitForm: this.submitForm, resetForm: this.resetForm,
+      scrollToForm: this.scrollToForm,
+      showStickyCta: mobile,
+      sectionNavStyle: { display: 'flex', gap: '28px', overflowX: 'auto', borderBottom: '1px solid rgba(244,239,228,0.08)', marginTop: '28px', position: 'sticky', top: mobile ? '65px' : '73px', background: '#14120f', zIndex: 5 },
+      sectionLinks: [['HIGHLIGHTS', 'sec-highlights'], ['LANDMARKS', 'sec-landmarks'], ['ZONES', 'sec-legend'], ['ENQUIRE', 'sec-enquire']].map(([label, id]) => ({ label, onSelect: () => this.scrollToId(id) })),
+      langLabel: this.state.lang + ' / ' + (this.state.lang === 'EN' ? 'BM' : 'EN'), toggleLang: this.toggleLang,
+      langBtnStyle: { background: 'transparent', border: '1px solid rgba(244,239,228,0.25)', color: 'rgba(244,239,228,0.7)', padding: '9px 12px', font: "600 11px 'Public Sans'", borderRadius: '2px', cursor: 'pointer', transition: 'border-color .15s, color .15s' },
+
+      rootStyle: { background: '#14120f', minHeight: '100%' },
+      canvasWrapStyle: { display: 'flex', justifyContent: 'center', padding: mobile ? '28px 12px' : '0' },
+      canvasStyle: {
+        width: mobile ? '390px' : '100%', maxWidth: mobile ? '390px' : '1440px', margin: '0 auto',
+        background: '#14120f', boxShadow: mobile ? '0 30px 60px rgba(0,0,0,0.5)' : 'none',
+        borderRadius: mobile ? '28px' : '0', overflow: 'clip', border: mobile ? '1px solid rgba(244,239,228,0.1)' : 'none'
+      },
+
+      navStyle: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px', padding: mobile ? '12px 16px 12px 20px' : '18px 48px', borderBottom: '1px solid rgba(244,239,228,0.08)', flexWrap: 'nowrap', position: 'sticky', top: '0', zIndex: 30, background: 'rgba(20,18,15,0.82)', backdropFilter: 'blur(14px)' },
+      navLinksStyle: { display: mobile ? 'none' : 'flex', gap: '28px' },
+
+      heroStyle: { position: 'relative', minHeight: mobile ? '480px' : '640px', display: 'flex', alignItems: 'center', overflow: 'hidden', background: '#0c0b09' },
+      heroVideoStyleA: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: this.state.activeVideo === 'a' ? 1 : 0, transition: `opacity ${this.CROSSFADE}s linear`, willChange: 'opacity', transform: 'translateZ(0)' },
+      heroVideoStyleB: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: this.state.activeVideo === 'b' ? 1 : 0, transition: `opacity ${this.CROSSFADE}s linear`, willChange: 'opacity', transform: 'translateZ(0)' },
+      heroOverlayStyle: { position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(20,18,15,0.55) 0%, rgba(20,18,15,0.25) 40%, rgba(20,18,15,0.6) 100%), linear-gradient(90deg, rgba(20,18,15,0.55) 0%, rgba(20,18,15,0.15) 60%, rgba(20,18,15,0) 100%)' },
+      heroContentStyle: { position: 'relative', zIndex: 1, padding: mobile ? '0 24px' : '0 48px', textShadow: '0 2px 24px rgba(0,0,0,0.5)' },
+      heroHeadlineStyle: { font: (mobile ? "800 36px" : "800 clamp(40px,6vw,72px)") + "/1.04 'Archivo'", letterSpacing: '.01em', color: '#f4efe4', maxWidth: '820px' },
+      detailTitleStyle: { font: (mobile ? "800 28px" : "800 clamp(30px,4vw,42px)") + "/1.1 'Archivo'", color: '#f4efe4', marginTop: '8px' },
+
+      sectionPadStyle: { padding: mobile ? '48px 20px' : '80px 48px' },
+      eyebrowStyle: { font: "600 11px 'Public Sans'", letterSpacing: '.18em', color: '#c1622c' },
+      h2Style: { font: "700 26px 'Archivo'", color: '#f4efe4', marginTop: '10px', marginBottom: '24px' },
+      h2FlushStyle: { font: "700 26px 'Archivo'", color: '#f4efe4', marginTop: '0', marginBottom: '24px' },
+      cardGridStyle: { display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(4,minmax(0,1fr))', gap: '16px' },
+      buyerTypes,
+
+      trustBandStyle: { background: '#221f1a', borderTop: '1px solid rgba(244,239,228,0.08)', borderBottom: '1px solid rgba(244,239,228,0.08)', display: 'flex', gap: '48px', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', padding: mobile ? '48px 20px' : '72px 48px' },
+      trustCopyStyle: { flex: '2 1 400px', minWidth: 0 },
+      trustStatsStyle: { flex: '1 1 260px', minWidth: 0, display: 'flex', gap: mobile ? '28px' : '32px', flexWrap: 'wrap' },
+      trustStats,
+      stepGridStyle: { display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(3,minmax(0,1fr))', gap: '32px' },
+      steps,
+      featureRowStyle: { display: 'flex', gap: '32px', flexWrap: 'wrap', alignItems: 'stretch' },
+      featureImgWrapStyle: { flex: mobile ? '1 1 100%' : '1 1 480px', minWidth: 0, height: mobile ? '240px' : '400px', cursor: 'pointer', overflow: 'hidden' },
+      featureCopyStyle: { flex: '1 1 340px', minWidth: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center' },
+
+      footerStyle: { padding: mobile ? '40px 20px 24px' : '64px 48px 28px', borderTop: '1px solid rgba(244,239,228,0.08)' },
+      footerTopStyle: { display: 'flex', justifyContent: 'space-between', gap: '32px', flexWrap: 'wrap', paddingBottom: '32px' },
+      footerBottomStyle: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '20px', borderTop: '1px solid rgba(244,239,228,0.06)', flexWrap: 'wrap', gap: '10px' },
+
+      exploreWrapStyle: { display: 'flex', flexDirection: 'column', minHeight: mobile ? '600px' : '760px' },
+      filterBarStyle: { display: 'flex', gap: '10px', padding: mobile ? '14px 20px' : '18px 48px', overflowX: 'auto', borderBottom: '1px solid rgba(244,239,228,0.08)' },
+      filterChips,
+      exploreBodyStyle: { display: 'flex', flex: 1, position: 'relative', flexDirection: mobile ? 'column' : 'row' },
+      mapAreaStyle: { position: 'relative', flex: mobile ? 'none' : '1 1 auto', minWidth: 0, height: mobile ? '420px' : 'auto', overflow: 'hidden', background: '#0c0b09' },
+      mapImgStyle: { width: '100%', height: '100%', objectFit: 'cover', objectPosition: '52% 38%', display: 'block', opacity: 0.94 },
+      zones,
+      hoverCardStyle: {
+        position: 'absolute', left: mobile ? '12px' : '24px', bottom: mobile ? '12px' : '24px', width: mobile ? 'calc(100% - 24px)' : '300px',
+        background: 'rgba(20,18,15,0.92)', border: '1px solid rgba(244,239,228,0.15)', padding: '18px', backdropFilter: 'blur(6px)', boxSizing: 'border-box'
+      },
+      activeZone,
+      listDrawerStyle: { flex: mobile ? 'none' : '0 0 300px', borderLeft: mobile ? 'none' : '1px solid rgba(244,239,228,0.08)', borderTop: mobile ? '1px solid rgba(244,239,228,0.08)' : 'none', overflowY: 'auto', maxHeight: mobile ? '260px' : 'none' },
+
+      detailHeroStyle: { position: 'relative', height: mobile ? '320px' : '560px', background: '#0c0b09', overflow: 'hidden' },
+      detailHeroImg: heroTabImgs[this.state.heroTab],
+      detailHeroImgStyle: { width: '100%', height: '100%', objectFit: 'cover', display: 'block' },
+      heroTabsStyle: { position: 'absolute', top: mobile ? '14px' : '24px', left: mobile ? '14px' : '24px', display: 'flex', gap: '2px' },
+      heroTabs,
+
+      factsStripStyle: { display: 'grid', gridTemplateColumns: mobile ? 'repeat(2,minmax(0,1fr))' : 'repeat(6,minmax(0,1fr))', gap: '1px', marginTop: '36px', marginBottom: '56px' },
+      facts,
+
+      highlights,
+      twoColStyle: { display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'minmax(0,1fr) 340px', gap: '48px', alignItems: 'start' },
+      colMainStyle: { minWidth: 0 },
+      colSideStyle: { display: 'flex', flexDirection: 'column', gap: '24px', minWidth: 0 },
+      landmarkGridStyle: { display: 'grid', gridTemplateColumns: mobile ? 'repeat(2,minmax(0,1fr))' : 'repeat(3,minmax(0,1fr))', gap: '10px', marginTop: '4px' },
+      landmarks,
+
+      legendCardStyle: { background: '#1c1a16', border: '1px solid rgba(244,239,228,0.08)', padding: '20px' },
+      formCardStyle: { background: '#1c1a16', border: '1px solid rgba(244,239,228,0.08)', padding: '24px' },
+      inputStyle: { width: '100%', boxSizing: 'border-box', background: '#14120f', border: '1px solid rgba(244,239,228,0.15)', color: '#f4efe4', padding: '12px 14px', font: "400 13px 'Public Sans'", marginBottom: '10px', borderRadius: '2px' },
+      textareaStyle: { width: '100%', boxSizing: 'border-box', background: '#14120f', border: '1px solid rgba(244,239,228,0.15)', color: '#f4efe4', padding: '12px 14px', font: "400 13px 'Public Sans'", marginBottom: '10px', borderRadius: '2px', minHeight: '80px', resize: 'vertical' },
+
+      relatedGridStyle: { display: 'grid', gridTemplateColumns: mobile ? '1fr' : 'repeat(3,minmax(0,1fr))', gap: '16px', marginTop: '4px' },
+      related
+    };
+  }
+}
+
+</script>
+</body>
+</html>
