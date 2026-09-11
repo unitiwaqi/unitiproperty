@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vendored maplibre-gl worker bundle (see components/explore/GeoMap.tsx) — minified
+    // third-party output, not source we maintain.
+    "public/maplibre-gl-*.mjs",
   ]),
 ]);
 

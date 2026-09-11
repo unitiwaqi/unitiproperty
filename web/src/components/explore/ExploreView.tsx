@@ -1,9 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import dynamic from "next/dynamic";
 import { useMemo, useState } from "react";
 import { filterOptions, zones, type FilterOption, type Zone } from "@/lib/zones";
+
+// maplibre-gl touches `window` at module load — load client-only, no SSR.
+const GeoMap = dynamic(() => import("./GeoMap").then((m) => m.GeoMap), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-full w-full items-center justify-center bg-bg-deep text-[12px] text-ink/40">
+      Loading map…
+    </div>
+  ),
+});
 
 export function ExploreView({ initialFilter }: { initialFilter: FilterOption }) {
   const [filter, setFilter] = useState<FilterOption>(initialFilter);
@@ -48,40 +58,11 @@ export function ExploreView({ initialFilter }: { initialFilter: FilterOption }) 
       <div className="relative flex flex-1 flex-col md:flex-row">
         {/* Map */}
         <div className="relative h-[420px] min-w-0 flex-none overflow-hidden bg-bg-deep md:h-auto md:flex-1">
-          <Image
-            src="/assets/boundMap.png"
-            alt="Cadastral zone map of Tanjung Agas"
-            fill
-            sizes="100vw"
-            className="object-cover opacity-[0.94]"
-            style={{ objectPosition: "52% 38%" }}
+          <GeoMap
+            visibleZoneIds={visibleZones.map((z) => z.id)}
+            activeZoneId={activeZoneId}
+            onSelectZone={setActiveZoneId}
           />
-
-          {visibleZones.map((zone) => {
-            const active = zone.id === activeZoneId;
-            return (
-              <button
-                key={zone.id}
-                type="button"
-                onClick={() => setActiveZoneId(zone.id)}
-                onMouseEnter={() => setActiveZoneId(zone.id)}
-                aria-label={zone.name}
-                className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center justify-center"
-                style={{ left: zone.left, top: zone.top, width: 22, height: 22 }}
-              >
-                <span
-                  className="rounded-full border-2 transition-all duration-150"
-                  style={{
-                    width: active ? 14 : 10,
-                    height: active ? 14 : 10,
-                    background: zone.color,
-                    borderColor: "#f4efe4",
-                    boxShadow: active ? `0 0 0 6px ${zone.color}55` : "none",
-                  }}
-                />
-              </button>
-            );
-          })}
 
           {/* Hover / selection card */}
           {activeZone && (
