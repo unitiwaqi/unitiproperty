@@ -10,7 +10,6 @@ import {
 } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import siteGeo from "@/lib/site-geo.json";
-import { zones } from "@/lib/zones";
 
 // Turbopack doesn't reliably resolve maplibre-gl's internal `new Worker(import.meta.url...)`
 // call for its GeoJSON-tiling web worker (symptom: raster tiles render fine since they don't
@@ -38,13 +37,6 @@ const SITE_BOUNDS: LngLatBoundsLike = (() => {
     [Math.max(...lons), Math.max(...lats)],
   ];
 })();
-
-const ZONE_COLOR_MATCH: ExpressionSpecification = [
-  "match",
-  ["get", "id"],
-  ...(zones.flatMap((z) => [z.id, z.color]) as string[]),
-  "#c1622c",
-] as unknown as ExpressionSpecification;
 
 export function GeoMap({
   visibleZoneIds,
@@ -94,31 +86,22 @@ export function GeoMap({
             filter: ["==", ["get", "id"], "site-boundary"],
             paint: { "line-color": "#f4efe4", "line-width": 1.5, "line-opacity": 0.8 },
           },
+          // All 5 investable zones now carry real traced polygons (see
+          // output/apply_parcel_polygons.py) — one generic fill/outline pair driven by each
+          // feature's own `color` property, rather than a special case for one zone.
           {
-            id: "uniti-fill",
+            id: "zone-fill",
             type: "fill",
             source: "site",
-            filter: ["==", ["get", "id"], "uniti"],
-            paint: { "fill-color": zones.find((z) => z.id === "uniti")!.color, "fill-opacity": 0.45 },
+            filter: ["==", ["get", "kind"], "zone-polygon"],
+            paint: { "fill-color": ["get", "color"], "fill-opacity": 0.45 },
           },
           {
-            id: "uniti-outline",
+            id: "zone-outline",
             type: "line",
             source: "site",
-            filter: ["==", ["get", "id"], "uniti"],
+            filter: ["==", ["get", "kind"], "zone-polygon"],
             paint: { "line-color": "#f4efe4", "line-width": 1.5 },
-          },
-          {
-            id: "zone-points",
-            type: "circle",
-            source: "site",
-            filter: ["==", ["get", "kind"], "zone-point"],
-            paint: {
-              "circle-radius": 8,
-              "circle-color": ZONE_COLOR_MATCH,
-              "circle-stroke-width": 2,
-              "circle-stroke-color": "#f4efe4",
-            },
           },
         ],
       },
@@ -128,21 +111,14 @@ export function GeoMap({
 
     // Layer-scoped handlers resolve the layer at event time, not registration time — safe
     // to attach immediately, no "load" wait needed.
-    map.on("mouseenter", "zone-points", () => {
-      map.getCanvas().style.cursor = "pointer";
-    });
-    map.on("mouseleave", "zone-points", () => {
-      map.getCanvas().style.cursor = "";
-    });
-    map.on("click", "zone-points", (e) => {
+    map.on("click", "zone-fill", (e) => {
       const id = e.features?.[0]?.properties?.id as string | undefined;
       if (id) onSelectZoneRef.current(id);
     });
-    map.on("click", "uniti-fill", () => onSelectZoneRef.current("uniti"));
-    map.on("mouseenter", "uniti-fill", () => {
+    map.on("mouseenter", "zone-fill", () => {
       map.getCanvas().style.cursor = "pointer";
     });
-    map.on("mouseleave", "uniti-fill", () => {
+    map.on("mouseleave", "zone-fill", () => {
       map.getCanvas().style.cursor = "";
     });
 
@@ -152,51 +128,29 @@ export function GeoMap({
     };
   }, []);
 
-  // Keep active-zone-dependent paint in sync without re-creating the map. Each layer
-  // guarded individually — see the comment on the filter-visibility effect below.
+  // Keep active-zone-dependent paint in sync without re-creating the map.
   useEffect(() => {
     const map = mapRef.current;
-    if (!map) return;
-    if (map.getLayer("uniti-fill")) {
-      map.setPaintProperty("uniti-fill", "fill-opacity", [
-        "case",
-        ["==", ["literal", "uniti"], activeZoneId],
-        0.7,
-        0.45,
-      ]);
-    }
-    if (map.getLayer("zone-points")) {
-      map.setPaintProperty("zone-points", "circle-radius", [
-        "case",
-        ["==", ["get", "id"], activeZoneId],
-        11,
-        8,
-      ]);
-    }
+    if (!map || !map.getLayer("zone-fill")) return;
+    map.setPaintProperty("zone-fill", "fill-opacity", [
+      "case",
+      ["==", ["get", "id"], activeZoneId],
+      0.7,
+      0.45,
+    ]);
   }, [activeZoneId]);
 
-  // Filter visibility. Each layer is guarded individually — MapLibre's GeoJSON source
-  // finishes wiring its internal tile manager a tick after the style is set, so layers can
-  // exist at slightly different times even though they're all declared synchronously up
-  // front; touching one without checking it specifically throws "layer does not exist".
+  // Filter visibility.
   useEffect(() => {
     const map = mapRef.current;
-    if (!map) return;
-    const visibleIn: ExpressionSpecification = ["in", ["get", "id"], ["literal", visibleZoneIds]];
-    for (const layer of ["uniti-fill", "uniti-outline"]) {
-      if (!map.getLayer(layer)) continue;
-      const show: ExpressionSpecification = visibleZoneIds.includes("uniti")
-        ? ["==", ["get", "id"], "uniti"]
-        : ["==", ["literal", true], false];
-      map.setFilter(layer, show);
-    }
-    if (map.getLayer("zone-points")) {
-      map.setFilter("zone-points", [
-        "all",
-        ["==", ["get", "kind"], "zone-point"],
-        visibleIn,
-      ] as ExpressionSpecification);
-    }
+    if (!map || !map.getLayer("zone-fill")) return;
+    const visible: ExpressionSpecification = [
+      "all",
+      ["==", ["get", "kind"], "zone-polygon"],
+      ["in", ["get", "id"], ["literal", visibleZoneIds]],
+    ];
+    map.setFilter("zone-fill", visible);
+    if (map.getLayer("zone-outline")) map.setFilter("zone-outline", visible);
   }, [visibleZoneIds]);
 
   return (

@@ -1,0 +1,64 @@
+{
+  "parcels": [
+    {
+      "id": "uniti",
+      "source_valid": true,
+      "satellite_valid": true,
+      "clipped_area_px2": 218.85,
+      "area_px2": 23060.9
+    },
+    {
+      "id": "marina",
+      "source_valid": true,
+      "satellite_valid": true,
+      "clipped_area_px2": 58.02,
+      "area_px2": 15689.76
+    },
+    {
+      "id": "tnb-reserve",
+      "source_valid": true,
+      "satellite_valid": true,
+      "clipped_area_px2": 35.47,
+      "area_px2": 6276.06
+    },
+    {
+      "id": "lrk",
+      "source_valid": true,
+      "satellite_valid": true,
+      "clipped_area_px2": -0.0,
+      "area_px2": 974.49
+    },
+    {
+      "id": "walit",
+      "source_valid": true,
+      "satellite_valid": true,
+      "clipped_area_px2": 0.0,
+      "area_px2": 4243.4
+    },
+    {
+      "id": "nature",
+      "source_valid": true,
+      "satellite_valid": true,
+      "clipped_area_px2": 48.0,
+      "area_px2": 5394.79
+    },
+    {
+      "id": "shipyard",
+      "source_valid": true,
+      "satellite_valid": true,
+      "clipped_area_px2": 5.55,
+      "area_px2": 9469.02
+    },
+    {
+      "id": "pe",
+      "source_valid": true,
+      "satellite_valid": true,
+      "clipped_area_px2": 0.0,
+      "area_px2": 1029.01
+    }
+  ],
+  "source_overlap_pairs": [],
+  "satellite_overlap_pairs": [],
+  "registration_folds": 0,
+  "note": "Topology tests do not establish surveyed accuracy."
+}
