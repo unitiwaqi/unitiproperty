@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+/*
+ * UnitiProperty design tokens.
+ * Source: design_handoff_unitiproperty/README.md (§ Design Tokens).
+ * This design is committed dark in both light and dark OS modes — there is
+ * no light variant, so no prefers-color-scheme override here.
+ */
+:root {
+  --color-bg-base: #14120f;
+  --color-bg-deep: #0c0b09;
+  --color-bg-panel: #1c1a16;
+  --color-bg-band: #221f1a;
+
+  --color-ink: #f4efe4;
+  /* alpha ramp (ink-75/60/45/35) expressed via Tailwind's text-ink/NN, border-ink/NN, bg-ink/NN modifiers */
+
+  --color-hairline: #f4efe4; /* used as border-hairline/8, border-hairline/15 */
+
+  --color-accent: #c1622c;
+  --color-accent-hover: #d97b45;
+  /* accent-tint expressed as bg-accent/12 */
+}
+
+@theme inline {
+  --color-bg-base: var(--color-bg-base);
+  --color-bg-deep: var(--color-bg-deep);
+  --color-bg-panel: var(--color-bg-panel);
+  --color-bg-band: var(--color-bg-band);
+  --color-ink: var(--color-ink);
+  --color-hairline: var(--color-hairline);
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+
+  --font-heading: var(--font-archivo);
+  --font-body: var(--font-public-sans);
+}
+
+body {
+  background: var(--color-bg-base);
+  color: var(--color-ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
