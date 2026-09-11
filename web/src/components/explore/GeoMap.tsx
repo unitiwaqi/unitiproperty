@@ -79,29 +79,41 @@ export function GeoMap({
         },
         layers: [
           { id: "esri", type: "raster", source: "esri" },
-          {
-            id: "site-boundary-line",
-            type: "line",
-            source: "site",
-            filter: ["==", ["get", "id"], "site-boundary"],
-            paint: { "line-color": "#f4efe4", "line-width": 1.5, "line-opacity": 0.8 },
-          },
-          // All 5 investable zones now carry real traced polygons (see
-          // output/apply_parcel_polygons.py) — one generic fill/outline pair driven by each
-          // feature's own `color` property, rather than a special case for one zone.
+          // Layer order matters here. Zone fills sit lowest; the site boundary draws over
+          // them but *under* the zone outlines, so at edges where a parcel was clipped to
+          // the site boundary (all of them touch it) you see one crisp parcel edge rather
+          // than two coincident identical strokes — and the dashes only show through in the
+          // access-corridor gaps between parcels, which is exactly where the site extent is
+          // the only thing being described.
           {
             id: "zone-fill",
             type: "fill",
             source: "site",
             filter: ["==", ["get", "kind"], "zone-polygon"],
-            paint: { "fill-color": ["get", "color"], "fill-opacity": 0.45 },
+            paint: { "fill-color": ["get", "color"], "fill-opacity": 0.55 },
           },
           {
+            // Dashed, dimmer, thinner — reads as "extent of the wider site", visually
+            // subordinate to the parcels. Also faithful to the source: the boundary on
+            // satMap.png is itself a white dashed line.
+            id: "site-boundary-line",
+            type: "line",
+            source: "site",
+            filter: ["==", ["get", "id"], "site-boundary"],
+            paint: {
+              "line-color": "#f4efe4",
+              "line-width": 1,
+              "line-opacity": 0.5,
+              "line-dasharray": [4, 3],
+            },
+          },
+          {
+            // Solid and heavier than the site boundary so a parcel edge is unambiguous.
             id: "zone-outline",
             type: "line",
             source: "site",
             filter: ["==", ["get", "kind"], "zone-polygon"],
-            paint: { "line-color": "#f4efe4", "line-width": 1.5 },
+            paint: { "line-color": "#f4efe4", "line-width": 2, "line-opacity": 0.95 },
           },
         ],
       },
@@ -135,9 +147,17 @@ export function GeoMap({
     map.setPaintProperty("zone-fill", "fill-opacity", [
       "case",
       ["==", ["get", "id"], activeZoneId],
-      0.7,
-      0.45,
+      0.78,
+      0.55,
     ]);
+    if (map.getLayer("zone-outline")) {
+      map.setPaintProperty("zone-outline", "line-width", [
+        "case",
+        ["==", ["get", "id"], activeZoneId],
+        3,
+        2,
+      ]);
+    }
   }, [activeZoneId]);
 
   // Filter visibility.
