@@ -5,26 +5,26 @@ import { HeroVideo } from "@/components/HeroVideo";
 const PURPOSE_CARDS = [
   {
     tag: "TRAINING",
-    title: "Institutional & Training",
-    desc: "Purpose-built campuses and training facilities on freehold coastal land.",
+    title: "Institutional / Training",
+    desc: "Beachfront land suited to training centres, retreats and campuses.",
     filter: "Institutional",
   },
   {
     tag: "HOSPITALITY",
     title: "Resort & Tourism",
-    desc: "Beachfront hospitality and eco-tourism development opportunities.",
+    desc: "Marina, resort and eco-tourism zones with waterfront access.",
     filter: "Hospitality",
   },
   {
     tag: "INDUSTRIAL",
     title: "Marine Industrial",
-    desc: "Marine-adjacent industrial and engineering land parcels.",
+    desc: "Riverfront land for shipyard and marine engineering use.",
     filter: "Marine industrial",
   },
   {
     tag: "JV",
     title: "Joint Venture",
-    desc: "Structured partnership opportunities across the portfolio.",
+    desc: "Structured partnerships for developers and investors.",
     filter: "Joint venture",
   },
 ];
@@ -33,17 +33,17 @@ const HOW_IT_WORKS = [
   {
     number: "01",
     title: "Enquire",
-    desc: "Tell us which opportunity and how you intend to invest.",
+    desc: "Tell us which opportunity and structure interests you.",
   },
   {
     number: "02",
     title: "Site & document review",
-    desc: "We share title, zoning and site documentation for review.",
+    desc: "We share title, zoning and 3D site documentation under NDA.",
   },
   {
     number: "03",
     title: "Agreement",
-    desc: "Terms are structured and formalised directly with Uniti.",
+    desc: "We structure the outright sale or joint-venture with your counsel.",
   },
 ];
 
@@ -73,11 +73,13 @@ export default function Home() {
             NEXT INVESTMENT
           </h1>
           <p className="mt-4 max-w-[520px] text-[16px] leading-[1.6] text-ink/72">
-            Institutional, developer and JV opportunities across Uniti&apos;s
-            coastal land and buildings at Tanjung Agas, Port Dickson.
+            Uniti presents a curated portfolio of seaside land and buildings
+            across Malaysia — open for institutional, developer and
+            joint-venture investment.
           </p>
-          <p className="mt-1 text-[13px] text-ink/45">
-            Peluang pelaburan tanah &amp; bangunan terpilih di Tanjung Agas.
+          <p className="mt-1 max-w-[520px] text-[13px] leading-[1.6] text-ink/45">
+            Portfolio tanah dan bangunan pilihan Uniti — terbuka untuk
+            pelaburan institusi, pemaju dan usahasama.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
@@ -130,13 +132,15 @@ export default function Home() {
           <p className="text-[11px] font-semibold tracking-[.18em] text-accent">
             ABOUT UNITI
           </p>
-          <h2 className="mt-3 font-heading text-[28px] font-bold">
-            A coastal portfolio, developed and held by Uniti Sdn Bhd
+          <h2 className="mt-3 font-heading text-[28px] font-bold leading-[1.2]">
+            Two decades of institutional land development on Malaysia&apos;s
+            coast.
           </h2>
-          <p className="mt-4 text-[15px] leading-[1.6] text-ink/70">
-            Uniti curates and manages its own land and buildings at Tanjung
-            Agas, Port Dickson — presenting each zone directly to investors
-            rather than through third-party listings.
+          <p className="mt-4 max-w-[560px] text-[15px] leading-[1.6] text-ink/65">
+            Uniti Sdn Bhd develops and stewards seaside land for education,
+            hospitality and marine industry. Every opportunity on this
+            platform comes directly from our own portfolio — verified
+            titles, clear zoning, no intermediaries.
           </p>
         </div>
         <div className="flex gap-8">
@@ -193,6 +197,11 @@ export default function Home() {
             />
           </div>
           <div className="flex flex-[1_1_340px] flex-col justify-center gap-4">
+            <p className="text-[15px] leading-[1.7] text-ink/75">
+              A multi-zone coastal site bordering the beach at Tanjung Agas —
+              comprising education, marine resort, nature tourism and marine
+              engineering zones, each open for investment or joint-venture.
+            </p>
             <div className="flex gap-6 text-[13px] text-ink/70">
               <span>5 INVESTABLE ZONES</span>
               <span>Freehold TENURE</span>

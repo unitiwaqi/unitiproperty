@@ -54,7 +54,7 @@ export function SiteNav() {
           </button>
 
           <Link
-            href="/explore#enquire"
+            href="/opportunity/uniti#enquire"
             className="hidden rounded-[2px] border border-accent px-[18px] py-[10px] text-[12px] font-bold tracking-[.05em] text-accent transition-colors duration-150 hover:bg-accent hover:text-bg-base md:inline-block"
           >
             ENQUIRE
