@@ -3,6 +3,7 @@ import { Archivo, Public_Sans } from "next/font/google";
 import "./globals.css";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
+import { LangProvider } from "@/lib/LangContext";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -30,9 +31,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${archivo.variable} ${publicSans.variable}`}>
       <body>
-        <SiteNav />
-        {children}
-        <SiteFooter />
+        <LangProvider>
+          <SiteNav />
+          {children}
+          <SiteFooter />
+        </LangProvider>
       </body>
     </html>
   );

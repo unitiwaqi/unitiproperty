@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useLang } from "@/lib/LangContext";
 
 const NAV_LINKS = [
   { label: "HOME", href: "/" },
@@ -19,7 +20,7 @@ const MOBILE_LINKS = [
 
 export function SiteNav() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [lang, setLang] = useState<"EN" | "BM">("EN");
+  const { lang, toggleLang } = useLang();
 
   return (
     <header className="sticky top-0 z-30 border-b border-hairline/8 bg-bg-base/82 backdrop-blur-[14px]">
@@ -46,7 +47,7 @@ export function SiteNav() {
         <div className="flex items-center gap-3">
           <button
             type="button"
-            onClick={() => setLang(lang === "EN" ? "BM" : "EN")}
+            onClick={toggleLang}
             className="rounded-[999px] border border-hairline/15 px-3 py-[9px] text-[11px] font-semibold transition-colors duration-150 hover:border-hairline/30"
             aria-label="Toggle language"
           >
