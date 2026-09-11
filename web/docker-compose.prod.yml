@@ -1,0 +1,16 @@
+# Production on shared nginx VPS (178.128.123.109) — image built locally (linux/amd64),
+# loaded on server. Same pattern as the other sites on this box (see e.g. YayasanUniti).
+#
+# Usage (on VPS): docker compose -f docker-compose.prod.yml up -d
+
+services:
+  web:
+    image: unitiproperty-web:latest
+    container_name: unitiproperty-web
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    ports:
+      - "127.0.0.1:3004:3000"
+    environment:
+      NODE_ENV: production
