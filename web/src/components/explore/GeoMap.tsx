@@ -10,6 +10,7 @@ import {
 } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import siteGeo from "@/lib/site-geo.json";
+import buildingGeo from "@/lib/building-geo.json";
 
 // Turbopack doesn't reliably resolve maplibre-gl's internal `new Worker(import.meta.url...)`
 // call for its GeoJSON-tiling web worker (symptom: raster tiles render fine since they don't
@@ -76,6 +77,7 @@ export function GeoMap({
               "Imagery &copy; Esri, Maxar, Earthstar Geographics, and the GIS User Community",
           },
           site: { type: "geojson", data: geo },
+          buildings: { type: "geojson", data: buildingGeo as GeoJSON.FeatureCollection },
         },
         layers: [
           { id: "esri", type: "raster", source: "esri" },
@@ -90,7 +92,7 @@ export function GeoMap({
             type: "fill",
             source: "site",
             filter: ["==", ["get", "kind"], "zone-polygon"],
-            paint: { "fill-color": ["get", "color"], "fill-opacity": 0.55 },
+            paint: { "fill-color": ["get", "color"], "fill-opacity": 0.25 },
           },
           {
             // Dashed, dimmer, thinner — reads as "extent of the wider site", visually
@@ -114,6 +116,13 @@ export function GeoMap({
             source: "site",
             filter: ["==", ["get", "kind"], "zone-polygon"],
             paint: { "line-color": "#f4efe4", "line-width": 2, "line-opacity": 0.95 },
+          },
+          {
+            id: "building-roof-outlines",
+            type: "line",
+            source: "buildings",
+            minzoom: 16,
+            paint: { "line-color": "#ffd45a", "line-width": 1.5, "line-opacity": 0.95 },
           },
         ],
       },
@@ -147,8 +156,8 @@ export function GeoMap({
     map.setPaintProperty("zone-fill", "fill-opacity", [
       "case",
       ["==", ["get", "id"], activeZoneId],
-      0.78,
-      0.55,
+      0.4,
+      0.25,
     ]);
     if (map.getLayer("zone-outline")) {
       map.setPaintProperty("zone-outline", "line-width", [
@@ -176,12 +185,9 @@ export function GeoMap({
   return (
     <div className="relative h-full w-full">
       <div ref={containerRef} className="h-full w-full" />
-      <div className="pointer-events-none absolute left-3 top-3 max-w-[270px] border border-hairline/20 bg-bg-base/85 px-3 py-2 text-[10.5px] leading-[1.4] text-ink/70 backdrop-blur-[4px]">
-        <strong className="text-ink">Approximate boundaries.</strong> Traced from Uniti&apos;s
-        cadastral plan, indicative only — not survey-accurate, not for legal or transactional
-        use (registration residual ~30–60m against real satellite/OSM data). The outline
-        shown is the broader site context, not the ± 38 acre investable parcel quoted
-        elsewhere.
+      <div className="pointer-events-none absolute left-3 top-3 max-w-[230px] rounded-soft-sm border border-hair bg-glass px-3 py-2 text-[10.5px] leading-[1.4] text-ink-70 backdrop-blur-[4px]">
+        <strong className="text-ink">Approximate boundaries.</strong> Not survey-accurate — for
+        visual reference only.
       </div>
     </div>
   );

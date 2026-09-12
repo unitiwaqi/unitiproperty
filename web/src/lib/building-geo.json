@@ -1,0 +1,1337 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "C01",
+        "group": "campus",
+        "roof_color": "red",
+        "height_m": 8,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96717977523804,
+              2.4069337552831134
+            ],
+            [
+              101.96762502193451,
+              2.4067997631440416
+            ],
+            [
+              101.96771085262299,
+              2.4070784667785174
+            ],
+            [
+              101.96727633476257,
+              2.4072070992059778
+            ],
+            [
+              101.96717977523804,
+              2.4069337552831134
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "C02",
+        "group": "campus",
+        "roof_color": "red",
+        "height_m": 8,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96771621704102,
+              2.4066496919326443
+            ],
+            [
+              101.96789860725403,
+              2.406558577260522
+            ],
+            [
+              101.96811318397522,
+              2.4069498343389166
+            ],
+            [
+              101.96793615818024,
+              2.407040948984888
+            ],
+            [
+              101.96771621704102,
+              2.4066496919326443
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "C03",
+        "group": "campus",
+        "roof_color": "red",
+        "height_m": 14,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96829557418823,
+              2.406901597170938
+            ],
+            [
+              101.96896076202393,
+              2.406719367854276
+            ],
+            [
+              101.96901440620422,
+              2.4069391149684027
+            ],
+            [
+              101.96835458278656,
+              2.4071213442556867
+            ],
+            [
+              101.96829557418823,
+              2.406901597170938
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "C04",
+        "group": "campus",
+        "roof_color": "red",
+        "height_m": 14,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.9680005311966,
+              2.406462102895167
+            ],
+            [
+              101.96817755699158,
+              2.406344189772684
+            ],
+            [
+              101.96840822696686,
+              2.4067086484819495
+            ],
+            [
+              101.96823120117188,
+              2.4068265615729096
+            ],
+            [
+              101.9680005311966,
+              2.406462102895167
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "C05",
+        "group": "campus",
+        "roof_color": "red",
+        "height_m": 14,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96828484535217,
+              2.4062155572638004
+            ],
+            [
+              101.96845650672913,
+              2.4060815650541416
+            ],
+            [
+              101.96885883808136,
+              2.4064889013306723
+            ],
+            [
+              101.96868181228638,
+              2.4066175338137676
+            ],
+            [
+              101.96828484535217,
+              2.4062155572638004
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "C06",
+        "group": "campus",
+        "roof_color": "white",
+        "height_m": 6,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96627855300903,
+              2.406885518114565
+            ],
+            [
+              101.96609616279602,
+              2.406992711820133
+            ],
+            [
+              101.96602642536163,
+              2.406874798743545
+            ],
+            [
+              101.96684718132019,
+              2.4064567432080026
+            ],
+            [
+              101.96694374084473,
+              2.4066496919326443
+            ],
+            [
+              101.96651458740234,
+              2.406885518114565
+            ],
+            [
+              101.96654140949249,
+              2.4069337552831134
+            ],
+            [
+              101.96642339229584,
+              2.4070087908752407
+            ],
+            [
+              101.96637511253357,
+              2.406976632764835
+            ],
+            [
+              101.96627855300903,
+              2.406885518114565
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "C07",
+        "group": "campus",
+        "roof_color": "brown",
+        "height_m": 5,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96595668792725,
+              2.406719367854276
+            ],
+            [
+              101.96653604507446,
+              2.4063977866478043
+            ],
+            [
+              101.96661651134491,
+              2.406547857886931
+            ],
+            [
+              101.96604251861572,
+              2.4068587196868556
+            ],
+            [
+              101.96595668792725,
+              2.406719367854276
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "C08",
+        "group": "campus",
+        "roof_color": "blue",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96788787841797,
+              2.407089186147936
+            ],
+            [
+              101.9680005311966,
+              2.407040948984888
+            ],
+            [
+              101.96807026863098,
+              2.4072070992059778
+            ],
+            [
+              101.96795761585236,
+              2.4072446169950337
+            ],
+            [
+              101.96788787841797,
+              2.407089186147936
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "C09",
+        "group": "campus",
+        "roof_color": "blue",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96801126003265,
+              2.407051668354601
+            ],
+            [
+              101.96820437908173,
+              2.406976632764835
+            ],
+            [
+              101.96826875209808,
+              2.407132063624768
+            ],
+            [
+              101.96808099746704,
+              2.4072070992059778
+            ],
+            [
+              101.96801126003265,
+              2.407051668354601
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "C10",
+        "group": "campus",
+        "roof_color": "blue",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.969153881073,
+              2.4056367108236576
+            ],
+            [
+              101.96927189826965,
+              2.4057385449374187
+            ],
+            [
+              101.96918070316315,
+              2.405840379043576
+            ],
+            [
+              101.96906268596649,
+              2.4057439046274065
+            ],
+            [
+              101.969153881073,
+              2.4056367108236576
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "N01",
+        "group": "inland",
+        "roof_color": "brown",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96457803249359,
+              2.4086917309274325
+            ],
+            [
+              101.96474432945251,
+              2.4085738179978677
+            ],
+            [
+              101.96479260921478,
+              2.4086488534996806
+            ],
+            [
+              101.96463704109192,
+              2.4087721261008284
+            ],
+            [
+              101.96457803249359,
+              2.4086917309274325
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "N02",
+        "group": "inland",
+        "roof_color": "brown",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96478188037872,
+              2.408541659924397
+            ],
+            [
+              101.96493208408356,
+              2.4084344663406787
+            ],
+            [
+              101.96498572826385,
+              2.408509501850167
+            ],
+            [
+              101.96483552455902,
+              2.4086220551066506
+            ],
+            [
+              101.96478188037872,
+              2.408541659924397
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "N03",
+        "group": "inland",
+        "roof_color": "brown",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96439027786255,
+              2.4084344663406787
+            ],
+            [
+              101.96455657482147,
+              2.408311193708974
+            ],
+            [
+              101.96461021900177,
+              2.4083915889048293
+            ],
+            [
+              101.96444392204285,
+              2.408509501850167
+            ],
+            [
+              101.96439027786255,
+              2.4084344663406787
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "N04",
+        "group": "inland",
+        "roof_color": "brown",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96506083011627,
+              2.4082307985083746
+            ],
+            [
+              101.96518957614899,
+              2.4081504033030305
+            ],
+            [
+              101.96523785591125,
+              2.4082200791479362
+            ],
+            [
+              101.96510910987854,
+              2.4082951146692335
+            ],
+            [
+              101.96506083011627,
+              2.4082307985083746
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "N05",
+        "group": "inland",
+        "roof_color": "brown",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96521639823914,
+              2.4080485693694516
+            ],
+            [
+              101.96538269519806,
+              2.4079306563842198
+            ],
+            [
+              101.96543633937836,
+              2.4080217709646137
+            ],
+            [
+              101.96527004241943,
+              2.4081396839419598
+            ],
+            [
+              101.96521639823914,
+              2.4080485693694516
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "N06",
+        "group": "inland",
+        "roof_color": "brown",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96495354175568,
+              2.4080860871353402
+            ],
+            [
+              101.96512520313263,
+              2.407962814472113
+            ],
+            [
+              101.96517884731293,
+              2.4080432096885263
+            ],
+            [
+              101.96500718593597,
+              2.4081664823444795
+            ],
+            [
+              101.96495354175568,
+              2.4080860871353402
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "N07",
+        "group": "inland",
+        "roof_color": "brown",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96514129638672,
+              2.407893138614051
+            ],
+            [
+              101.96531295776367,
+              2.4077698659333673
+            ],
+            [
+              101.96536660194397,
+              2.40785562084285
+            ],
+            [
+              101.96519494056702,
+              2.4079735338345754
+            ],
+            [
+              101.96514129638672,
+              2.407893138614051
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "N08",
+        "group": "inland",
+        "roof_color": "brown",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96508765220642,
+              2.4077698659333673
+            ],
+            [
+              101.96525394916534,
+              2.407651952924017
+            ],
+            [
+              101.96530759334564,
+              2.4077430675230476
+            ],
+            [
+              101.96514129638672,
+              2.407860980524513
+            ],
+            [
+              101.96508765220642,
+              2.4077698659333673
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "N09",
+        "group": "inland",
+        "roof_color": "brown",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96501791477203,
+              2.4076680319713475
+            ],
+            [
+              101.96518421173096,
+              2.407550118953186
+            ],
+            [
+              101.96523785591125,
+              2.4076358738764974
+            ],
+            [
+              101.96507155895233,
+              2.407753786887239
+            ],
+            [
+              101.96501791477203,
+              2.4076680319713475
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "N10",
+        "group": "inland",
+        "roof_color": "brown",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.9653183221817,
+              2.4074429252914573
+            ],
+            [
+              101.96548998355865,
+              2.407325012253819
+            ],
+            [
+              101.96554899215698,
+              2.407410767191295
+            ],
+            [
+              101.965371966362,
+              2.407528680221515
+            ],
+            [
+              101.9653183221817,
+              2.4074429252914573
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "N11",
+        "group": "inland",
+        "roof_color": "brown",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.9652110338211,
+              2.4073410913050064
+            ],
+            [
+              101.96538269519806,
+              2.4072231782585565
+            ],
+            [
+              101.96543633937836,
+              2.4073035735186066
+            ],
+            [
+              101.9652646780014,
+              2.407426846241471
+            ],
+            [
+              101.9652110338211,
+              2.4073410913050064
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "B01",
+        "group": "blue-sheds",
+        "roof_color": "blue",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.9635158777237,
+              2.4072231782585565
+            ],
+            [
+              101.96382164955139,
+              2.407148142678232
+            ],
+            [
+              101.96385383605957,
+              2.4072499766791005
+            ],
+            [
+              101.96354806423187,
+              2.407325012253819
+            ],
+            [
+              101.9635158777237,
+              2.4072231782585565
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "B02",
+        "group": "blue-sheds",
+        "roof_color": "blue",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96403086185455,
+              2.406574656320751
+            ],
+            [
+              101.96429908275604,
+              2.4065049803917233
+            ],
+            [
+              101.96433126926422,
+              2.40660681444064
+            ],
+            [
+              101.96406304836273,
+              2.406676490364463
+            ],
+            [
+              101.96403086185455,
+              2.406574656320751
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "B03",
+        "group": "blue-sheds",
+        "roof_color": "blue",
+        "height_m": 5,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96436882019043,
+              2.4063977866478043
+            ],
+            [
+              101.96467995643616,
+              2.4063120316466007
+            ],
+            [
+              101.9647228717804,
+              2.4064513835208174
+            ],
+            [
+              101.96441173553467,
+              2.4065371385132552
+            ],
+            [
+              101.96436882019043,
+              2.4063977866478043
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "B04",
+        "group": "blue-sheds",
+        "roof_color": "blue",
+        "height_m": 5,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96361243724823,
+              2.4062530750801447
+            ],
+            [
+              101.96400940418243,
+              2.4061405216280134
+            ],
+            [
+              101.96405231952667,
+              2.406306671958846
+            ],
+            [
+              101.96365535259247,
+              2.406413865709929
+            ],
+            [
+              101.96361243724823,
+              2.4062530750801447
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "B05",
+        "group": "blue-sheds",
+        "roof_color": "blue",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.9636070728302,
+              2.4061083634971263
+            ],
+            [
+              101.9640040397644,
+              2.4059958100330503
+            ],
+            [
+              101.96402549743652,
+              2.406076205365481
+            ],
+            [
+              101.96362853050232,
+              2.4061887588229216
+            ],
+            [
+              101.9636070728302,
+              2.4061083634971263
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "B06",
+        "group": "blue-sheds",
+        "roof_color": "blue",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96407914161682,
+              2.406161960381517
+            ],
+            [
+              101.96432590484619,
+              2.406092284431399
+            ],
+            [
+              101.96435272693634,
+              2.4061887588229216
+            ],
+            [
+              101.96410596370697,
+              2.40625843476811
+            ],
+            [
+              101.96407914161682,
+              2.406161960381517
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "B07",
+        "group": "blue-sheds",
+        "roof_color": "blue",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.9640576839447,
+              2.406060126299374
+            ],
+            [
+              101.96430444717407,
+              2.405990450344053
+            ],
+            [
+              101.96433126926422,
+              2.406076205365481
+            ],
+            [
+              101.96408450603485,
+              2.406145881316421
+            ],
+            [
+              101.9640576839447,
+              2.406060126299374
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "B08",
+        "group": "blue-sheds",
+        "roof_color": "blue",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96402549743652,
+              2.405920774385171
+            ],
+            [
+              101.9644546508789,
+              2.405802861215877
+            ],
+            [
+              101.96448147296906,
+              2.405899335627876
+            ],
+            [
+              101.96405231952667,
+              2.4060118890999154
+            ],
+            [
+              101.96402549743652,
+              2.405920774385171
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "B09",
+        "group": "blue-sheds",
+        "roof_color": "white",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96454048156738,
+              2.406076205365481
+            ],
+            [
+              101.96479797363281,
+              2.4060065294109814
+            ],
+            [
+              101.96482479572296,
+              2.406092284431399
+            ],
+            [
+              101.96456730365753,
+              2.406161960381517
+            ],
+            [
+              101.96454048156738,
+              2.406076205365481
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "B10",
+        "group": "blue-sheds",
+        "roof_color": "white",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96450293064117,
+              2.405947572831316
+            ],
+            [
+              101.96475505828857,
+              2.405872537180783
+            ],
+            [
+              101.96478188037872,
+              2.4059636518987504
+            ],
+            [
+              101.96452975273132,
+              2.40603868754427
+            ],
+            [
+              101.96450293064117,
+              2.405947572831316
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "R01",
+        "group": "coastal-remnants",
+        "roof_color": "red",
+        "height_m": 4,
+        "height_status": "estimated from building type/drone views; not measured",
+        "geometry_status": "manually traced visible roof outline; ground footprint may differ due to roof overhang and image parallax",
+        "source": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
+        "imagery_zoom": 18,
+        "horizontal_accuracy": "not surveyed; approximately 1-3 image pixels tracing precision, imagery positional error unknown"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              101.96331739425659,
+              2.404634448350995
+            ],
+            [
+              101.96343541145325,
+              2.404596930490127
+            ],
+            [
+              101.9634997844696,
+              2.4048273973334484
+            ],
+            [
+              101.96338176727295,
+              2.4048595554945376
+            ],
+            [
+              101.96331739425659,
+              2.404634448350995
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

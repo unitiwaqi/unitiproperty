@@ -1,11 +1,11 @@
 "use client";
 
 import { createContext, useContext, useState, type ReactNode } from "react";
-
-type Lang = "EN" | "BM";
+import type { Lang } from "./parcels";
 
 const LangContext = createContext<{
   lang: Lang;
+  setLang: (lang: Lang) => void;
   toggleLang: () => void;
 } | null>(null);
 
@@ -13,7 +13,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>("EN");
   return (
     <LangContext.Provider
-      value={{ lang, toggleLang: () => setLang((l) => (l === "EN" ? "BM" : "EN")) }}
+      value={{ lang, setLang, toggleLang: () => setLang((l) => (l === "EN" ? "BM" : "EN")) }}
     >
       {children}
     </LangContext.Provider>

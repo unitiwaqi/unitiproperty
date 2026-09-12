@@ -1,65 +1,73 @@
-import Link from "next/link";
+"use client";
 
-const PLATFORM_LINKS = [
-  { label: "Explore Map", href: "/explore" },
-  { label: "Opportunities", href: "/explore" },
-  { label: "About Uniti", href: "/#about" },
-];
+// Source: handoff_unitiproperty_v2/UnitiProperty v2.dc.html <footer>.
+// Four columns on --bg-deep: wordmark + blurb, contact, navigate, notice.
+
+import Link from "next/link";
+import { useLang } from "@/lib/LangContext";
+import { T } from "@/lib/dict";
+import { EMAIL, PHONE_NUMBER } from "@/lib/parcels";
 
 export function SiteFooter() {
+  const { lang } = useLang();
+
   return (
-    <footer className="border-t border-hairline/8 px-5 py-10 md:px-12">
-      <div className="flex flex-wrap justify-between gap-8">
-        <div className="max-w-[280px]">
-          <p className="font-heading text-[16px] font-extrabold tracking-[.06em]">
-            UNITI<span className="text-accent">PROPERTY</span>
-          </p>
-          <p className="mt-3 text-[13px] text-ink/60">
-            Curated land &amp; building investment opportunities from Uniti
-            Sdn Bhd.
-          </p>
-        </div>
+    <footer className="border-t border-hair bg-bg-deep">
+      <div className="mx-auto max-w-[1280px] px-5 pb-9 pt-12">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-9">
+          <div className="max-w-[280px]">
+            <div className="flex items-baseline gap-[7px]">
+              <span className="font-sans text-[15px] font-bold tracking-[.14em]">UNITI</span>
+              <span className="font-sans text-[15px] font-normal tracking-[.14em] text-ink-55">
+                PROPERTY
+              </span>
+            </div>
+            <p className="mt-[14px] font-sans text-[14px] leading-relaxed text-ink-55">
+              {T.footerBlurb[lang]}
+            </p>
+          </div>
 
-        <div>
-          <h3 className="text-[11px] font-bold tracking-[.06em] text-ink/40">
-            CONTACT
-          </h3>
-          <ul className="mt-3 space-y-2 text-[13px] text-ink/60">
-            <li>
-              <a
-                href="mailto:invest@unitiproperty.com"
-                className="hover:text-ink"
-              >
-                invest@unitiproperty.com
+          <div>
+            <p className="font-sans text-[11px] font-semibold uppercase tracking-[.14em] text-ink-40">
+              {T.fcContact[lang]}
+            </p>
+            <div className="mt-[14px] flex flex-col gap-[9px]">
+              <a href={`mailto:${EMAIL}`} className="font-sans text-[14px] text-ink-70">
+                {EMAIL}
               </a>
-            </li>
-            <li>
-              <a href="tel:+60300000000" className="hover:text-ink">
-                +60 3-0000-0000
+              <a href={`tel:${PHONE_NUMBER.replace(/[^+\d]/g, "")}`} className="font-sans text-[14px] text-ink-70">
+                {PHONE_NUMBER}
               </a>
-            </li>
-          </ul>
+            </div>
+          </div>
+
+          <div>
+            <p className="font-sans text-[11px] font-semibold uppercase tracking-[.14em] text-ink-40">
+              {T.fcNav[lang]}
+            </p>
+            <div className="mt-[14px] flex flex-col items-start gap-[9px]">
+              <Link href="/explore" className="font-sans text-[14px] text-ink-70 hover:text-accent">
+                {T.mParcels[lang]}
+              </Link>
+              <Link href="/#about" className="font-sans text-[14px] text-ink-70 hover:text-accent">
+                {T.mAbout[lang]}
+              </Link>
+            </div>
+          </div>
+
+          <div>
+            <p className="font-sans text-[11px] font-semibold uppercase tracking-[.14em] text-ink-40">
+              {T.fcLegal[lang]}
+            </p>
+            <p className="mt-[14px] font-sans text-[13px] leading-relaxed text-ink-55">
+              {T.legalNote[lang]}
+            </p>
+          </div>
         </div>
 
-        <div>
-          <h3 className="text-[11px] font-bold tracking-[.06em] text-ink/40">
-            PLATFORM
-          </h3>
-          <ul className="mt-3 space-y-2 text-[13px] text-ink/60">
-            {PLATFORM_LINKS.map((link) => (
-              <li key={link.label}>
-                <Link href={link.href} className="hover:text-ink">
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div className="mt-8 border-t border-hairline/8 pt-6 text-[12px] text-ink/40">
-        © {new Date().getFullYear()} UnitiProperty. A curated platform by
-        Uniti Sdn Bhd.
+        <p className="mt-8 border-t border-hair pt-5 font-sans text-[12px] text-ink-40">
+          © 2026 Uniti Sdn Bhd. {T.rights[lang]}
+        </p>
       </div>
     </footer>
   );

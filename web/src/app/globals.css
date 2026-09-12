@@ -1,43 +1,204 @@
 @import "tailwindcss";
 
 /*
- * UnitiProperty design tokens.
- * Source: design_handoff_unitiproperty/README.md (§ Design Tokens).
- * This design is committed dark in both light and dark OS modes — there is
- * no light variant, so no prefers-color-scheme override here.
+ * UnitiProperty v2 design tokens.
+ * Source: handoff_unitiproperty_v2/README.md (§ Design tokens).
+ * This replaces v1's tokens entirely — v2 is a light "Cool paper" ground (client
+ * selection), not v1's fixed dark theme. Ground/accent/corner values are the
+ * client-selected defaults baked in statically; the handoff's runtime-switchable
+ * `ground`/`corners`/`accentColor` props were a stakeholder-comparison tool for the
+ * design review, not a feature this app needs to ship (README: "Ship the selected
+ * values; the alternatives don't need to survive into production").
  */
 :root {
-  --color-bg-base: #14120f;
-  --color-bg-deep: #0c0b09;
-  --color-bg-panel: #1c1a16;
-  --color-bg-band: #221f1a;
+  /* Ground: Cool paper (client selection) */
+  --bg: #f2f3f1;
+  --bg-deep: #e8eae7;
+  --panel: #fbfbfa;
+  --glass: rgba(242, 243, 241, 0.88);
 
-  --color-ink: #f4efe4;
-  /* alpha ramp (ink-75/60/45/35) expressed via Tailwind's text-ink/NN, border-ink/NN, bg-ink/NN modifiers */
+  /* Ink (light-ground ramp) */
+  --ink: #1a1611;
+  --ink-70: rgba(26, 22, 17, 0.78);
+  --ink-55: rgba(26, 22, 17, 0.64);
+  --ink-40: rgba(26, 22, 17, 0.54);
+  --hair: rgba(26, 22, 17, 0.13);
+  --hair-2: rgba(26, 22, 17, 0.24);
+  --on-accent: #fbf8f1;
 
-  --color-hairline: #f4efe4; /* used as border-hairline/8, border-hairline/15 */
+  /* Accent: base darkened 19% for light grounds (README §Accent — a single terracotta
+     can't clear 4.5:1 on both a near-black and a paper ground, so the light-ground
+     value is precomputed here rather than derived at runtime). */
+  --accent: #9e5023;
+  --accent-hover: #6c3718; /* base darkened 34% */
 
-  --color-accent: #c1622c;
-  --color-accent-hover: #d97b45;
-  /* accent-tint expressed as bg-accent/12 */
+  /* Proof band: Light sand (client selection) — the page's tonal counterpoint,
+     inverts to ink-dark on a paper ground. */
+  --sand: #ede7d9;
+  --sand-ink: #171310;
+  --sand-ink-2: #4a423a;
+  --sand-hair: rgba(23, 19, 16, 0.14);
+
+  /* Hero text sits over video/image footage regardless of ground theme, so it's
+     fixed light rather than theme-dependent. */
+  --hero-ink: #f5f1e7;
+  --hero-ink-70: rgba(245, 241, 231, 0.78);
+
+  /* WhatsApp green — the one borrowed colour, a channel signal. Do not reuse
+     elsewhere (README §WhatsApp green). */
+  --whatsapp: #1fa855;
+  --whatsapp-hover: #188f47;
+
+  /* Zone/parcel family — one hue family at matched lightness/chroma so no parcel
+     dominates and none collides with the accent. */
+  --zone-uniti: #9e7554;
+  --zone-marina: #7e8a63;
+  --zone-nature: #557c79;
+  --zone-shipyard: #6b7699;
+  --zone-walit: #8e6b85;
+
+  /* Shape: Soft (client selection) */
+  --r-sm: 8px;
+  --r-md: 10px;
+  --r-lg: 14px;
+
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans: "Public Sans", system-ui, sans-serif;
 }
 
 @theme inline {
-  --color-bg-base: var(--color-bg-base);
-  --color-bg-deep: var(--color-bg-deep);
-  --color-bg-panel: var(--color-bg-panel);
-  --color-bg-band: var(--color-bg-band);
-  --color-ink: var(--color-ink);
-  --color-hairline: var(--color-hairline);
-  --color-accent: var(--color-accent);
-  --color-accent-hover: var(--color-accent-hover);
+  --color-bg: var(--bg);
+  --color-bg-deep: var(--bg-deep);
+  --color-panel: var(--panel);
+  --color-glass: var(--glass);
 
-  --font-heading: var(--font-archivo);
-  --font-body: var(--font-public-sans);
+  --color-ink: var(--ink);
+  --color-ink-70: var(--ink-70);
+  --color-ink-55: var(--ink-55);
+  --color-ink-40: var(--ink-40);
+  --color-hair: var(--hair);
+  --color-hair-2: var(--hair-2);
+  --color-on-accent: var(--on-accent);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+
+  --color-sand: var(--sand);
+  --color-sand-ink: var(--sand-ink);
+  --color-sand-ink-2: var(--sand-ink-2);
+  --color-sand-hair: var(--sand-hair);
+
+  --color-hero-ink: var(--hero-ink);
+  --color-hero-ink-70: var(--hero-ink-70);
+
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-hover: var(--whatsapp-hover);
+
+  --color-zone-uniti: var(--zone-uniti);
+  --color-zone-marina: var(--zone-marina);
+  --color-zone-nature: var(--zone-nature);
+  --color-zone-shipyard: var(--zone-shipyard);
+  --color-zone-walit: var(--zone-walit);
+
+  /* Named "soft-*" rather than "r-*" to avoid colliding with Tailwind's built-in
+     directional rounded-r-* (right-side-only) utilities. */
+  --radius-soft-sm: var(--r-sm);
+  --radius-soft-md: var(--r-md);
+  --radius-soft-lg: var(--r-lg);
+
+  --font-serif: var(--font-newsreader), var(--serif);
+  --font-sans: var(--font-public-sans), var(--sans);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background: var(--color-bg-base);
-  color: var(--color-ink);
-  font-family: var(--font-body), system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--ink-40);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+[data-carousel]::-webkit-scrollbar,
+[data-gallery]::-webkit-scrollbar {
+  display: none;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] > summary {
+  color: var(--accent);
+}
+
+[data-carousel],
+[data-gallery] {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+/*
+ * Single breakpoint (860px), expressed here rather than via a JS-measured
+ * matchMedia state (README §Responsive: a one-shot matchMedia read in
+ * componentDidMount goes stale on resize and desktop content renders as mobile).
+ * `data-desk` / `data-mob-flex` / `data-grid` / `data-sticky` mirror the handoff's
+ * attribute names exactly.
+ */
+@media (max-width: 860px) {
+  [data-desk] {
+    display: none !important;
+  }
+  [data-mob-flex] {
+    display: flex !important;
+  }
+  [data-grid] {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  [data-sticky] {
+    position: static !important;
+  }
 }

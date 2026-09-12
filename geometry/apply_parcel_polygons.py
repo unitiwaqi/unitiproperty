@@ -123,6 +123,15 @@ def transform_ring(coords_px):
 
 
 def main():
+    hand_drawn = GEOMETRY / "hand-drawn-zones.geojson"
+    if hand_drawn.exists():
+        raise SystemExit(
+            f"{hand_drawn} exists -- the site is now using hand-traced geometry (see "
+            "apply_hand_drawn_zones.py), not this transform pipeline. Refusing to run so "
+            "a stray re-run of this script can't silently overwrite that work. Delete "
+            f"{hand_drawn.name} first if you genuinely want to go back to the transform."
+        )
+
     src = json.loads((GEOMETRY / "satmap-parcels.pixels.json").read_text())
     by_id = {f["properties"]["id"]: f for f in src["features"]}
 

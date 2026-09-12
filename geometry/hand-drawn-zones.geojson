@@ -7,8 +7,7 @@
         "id": "site-boundary",
         "kind": "site-boundary",
         "color": "#f4efe4",
-        "active": false,
-        "accuracy": "Boundary hand-traced against real Esri World Imagery satellite tiles (not the older cadastral-plan-plus-transform pipeline -- see geometry/apply_parcel_polygons.py for that superseded approach). Each vertex was placed by eye directly on the imagery, so accuracy follows visible land features (road edges, tree lines, cleared ground) at whatever the satellite tile resolution supports there -- typically single-digit to low-tens of metres, but not measured/validated the way the transform pipeline's residual was. Indicative only -- not survey-accurate, not for legal or transactional use. Not to be confused with the +/- 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the broader site context."
+        "active": false
       },
       "geometry": {
         "type": "Polygon",
@@ -180,8 +179,7 @@
         "id": "uniti",
         "kind": "zone-polygon",
         "color": "#7a2f34",
-        "active": false,
-        "accuracy": "Boundary hand-traced against real Esri World Imagery satellite tiles (not the older cadastral-plan-plus-transform pipeline -- see geometry/apply_parcel_polygons.py for that superseded approach). Each vertex was placed by eye directly on the imagery, so accuracy follows visible land features (road edges, tree lines, cleared ground) at whatever the satellite tile resolution supports there -- typically single-digit to low-tens of metres, but not measured/validated the way the transform pipeline's residual was. Indicative only -- not survey-accurate, not for legal or transactional use. Not to be confused with the +/- 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the broader site context."
+        "active": false
       },
       "geometry": {
         "type": "Polygon",
@@ -297,8 +295,7 @@
         "id": "marina",
         "kind": "zone-polygon",
         "color": "#6f8f5c",
-        "active": false,
-        "accuracy": "Boundary hand-traced against real Esri World Imagery satellite tiles (not the older cadastral-plan-plus-transform pipeline -- see geometry/apply_parcel_polygons.py for that superseded approach). Each vertex was placed by eye directly on the imagery, so accuracy follows visible land features (road edges, tree lines, cleared ground) at whatever the satellite tile resolution supports there -- typically single-digit to low-tens of metres, but not measured/validated the way the transform pipeline's residual was. Indicative only -- not survey-accurate, not for legal or transactional use. Not to be confused with the +/- 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the broader site context."
+        "active": false
       },
       "geometry": {
         "type": "Polygon",
@@ -370,8 +367,7 @@
         "id": "nature",
         "kind": "zone-polygon",
         "color": "#3d5a99",
-        "active": false,
-        "accuracy": "Boundary hand-traced against real Esri World Imagery satellite tiles (not the older cadastral-plan-plus-transform pipeline -- see geometry/apply_parcel_polygons.py for that superseded approach). Each vertex was placed by eye directly on the imagery, so accuracy follows visible land features (road edges, tree lines, cleared ground) at whatever the satellite tile resolution supports there -- typically single-digit to low-tens of metres, but not measured/validated the way the transform pipeline's residual was. Indicative only -- not survey-accurate, not for legal or transactional use. Not to be confused with the +/- 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the broader site context."
+        "active": false
       },
       "geometry": {
         "type": "Polygon",
@@ -451,8 +447,7 @@
         "id": "shipyard",
         "kind": "zone-polygon",
         "color": "#c1622c",
-        "active": false,
-        "accuracy": "Boundary hand-traced against real Esri World Imagery satellite tiles (not the older cadastral-plan-plus-transform pipeline -- see geometry/apply_parcel_polygons.py for that superseded approach). Each vertex was placed by eye directly on the imagery, so accuracy follows visible land features (road edges, tree lines, cleared ground) at whatever the satellite tile resolution supports there -- typically single-digit to low-tens of metres, but not measured/validated the way the transform pipeline's residual was. Indicative only -- not survey-accurate, not for legal or transactional use. Not to be confused with the +/- 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the broader site context."
+        "active": false
       },
       "geometry": {
         "type": "Polygon",
@@ -524,8 +519,7 @@
         "id": "walit",
         "kind": "zone-polygon",
         "color": "#9c4f8f",
-        "active": false,
-        "accuracy": "Boundary hand-traced against real Esri World Imagery satellite tiles (not the older cadastral-plan-plus-transform pipeline -- see geometry/apply_parcel_polygons.py for that superseded approach). Each vertex was placed by eye directly on the imagery, so accuracy follows visible land features (road edges, tree lines, cleared ground) at whatever the satellite tile resolution supports there -- typically single-digit to low-tens of metres, but not measured/validated the way the transform pipeline's residual was. Indicative only -- not survey-accurate, not for legal or transactional use. Not to be confused with the +/- 38 acre investable-parcel figure quoted elsewhere; the site-boundary outline is the broader site context."
+        "active": false
       },
       "geometry": {
         "type": "Polygon",

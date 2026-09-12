@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+:root{
+  --bg:#12100D; --bg-deep:#0B0A08; --panel:#1A1713;
+  --sand:#EDE7D9; --sand-ink:#171310; --sand-ink-2:#4A423A; --sand-hair:rgba(23,19,16,.14);
+  --ink:#F3EEE3;
+  --ink-70:rgba(243,238,227,.74);
+  --ink-55:rgba(243,238,227,.60);
+  --ink-40:rgba(243,238,227,.52);
+  --hair:rgba(243,238,227,.10);
+  --hair-2:rgba(243,238,227,.20);
+  --accent:#C2622B;
+  --accent-hover:color-mix(in oklab, var(--accent), #ffffff 20%);
+  --on-accent:#15120E;
+  --hero-ink:#F5F1E7;
+  --hero-ink-70:rgba(245,241,231,.78);
+  --glass:rgba(21,18,14,.86);
+  --r-sm:8px; --r-md:10px; --r-lg:14px;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --sans:'Public Sans',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--ink);text-decoration:none}
+a:hover{color:var(--accent-hover)}
+button,input,textarea,select{font-family:inherit}
+input::placeholder,textarea::placeholder{color:var(--ink-40)}
+::selection{background:var(--accent);color:var(--on-accent)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;transition-duration:.01ms !important}}
+[data-carousel]::-webkit-scrollbar,[data-gallery]::-webkit-scrollbar{display:none}
+details>summary::-webkit-details-marker{display:none}
+details[open]>summary{color:var(--accent)}
+/* Responsive behaviour lives here, not in JS state: a one-shot matchMedia
+   read in componentDidMount goes stale when the frame is resized. */
+[data-carousel]{scroll-behavior:smooth}
+[data-gallery]{scroll-behavior:smooth}
+@media (max-width:860px){
+  [data-desk]{display:none !important}
+  [data-mob-flex]{display:flex !important}
+  [data-grid]{grid-template-columns:minmax(0,1fr) !important}
+  [data-sticky]{position:static !important}
+}
+</style>
+</helmet>
+
+<div style="background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column">
+
+  <header style="position:sticky;top:0;z-index:40;background:var(--glass);backdrop-filter:blur(16px);border-bottom:1px solid var(--hair)">
+    <div style="max-width:1280px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:24px;height:68px">
+
+      <div onClick="{{ goHome }}" style="cursor:pointer;display:flex;align-items:baseline;gap:7px;flex:none">
+        <span style="font:700 17px/1 var(--sans);letter-spacing:.14em">UNITI</span>
+        <span style="font:400 17px/1 var(--sans);letter-spacing:.14em;color:var(--ink-55)">PROPERTY</span>
+      </div>
+
+      <nav data-desk="1" style="display:flex;align-items:center;gap:32px;flex:1;justify-content:center">
+        <sc-if value="{{ isEN }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;align-items:center;gap:32px">
+            <button type="button" onClick="{{ goHome }}" style="background:none;border:0;padding:0;cursor:pointer;font:500 14px/1 var(--sans);color:var(--ink-70);transition:color .15s" style-hover="color:var(--ink)">Overview</button>
+            <button type="button" onClick="{{ goSite }}" style="background:none;border:0;padding:0;cursor:pointer;font:500 14px/1 var(--sans);color:var(--ink-70);transition:color .15s" style-hover="color:var(--ink)">The site</button>
+            <button type="button" onClick="{{ goZones }}" style="background:none;border:0;padding:0;cursor:pointer;font:500 14px/1 var(--sans);color:var(--ink-70);transition:color .15s" style-hover="color:var(--ink)">Parcels</button>
+            <button type="button" onClick="{{ goAbout }}" style="background:none;border:0;padding:0;cursor:pointer;font:500 14px/1 var(--sans);color:var(--ink-70);transition:color .15s" style-hover="color:var(--ink)">Uniti</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ isBM }}">
+          <div style="display:flex;align-items:center;gap:32px">
+            <button type="button" onClick="{{ goHome }}" style="background:none;border:0;padding:0;cursor:pointer;font:500 14px/1 var(--sans);color:var(--ink-70);transition:color .15s" style-hover="color:var(--ink)">Gambaran</button>
+            <button type="button" onClick="{{ goSite }}" style="background:none;border:0;padding:0;cursor:pointer;font:500 14px/1 var(--sans);color:var(--ink-70);transition:color .15s" style-hover="color:var(--ink)">Tapak</button>
+            <button type="button" onClick="{{ goZones }}" style="background:none;border:0;padding:0;cursor:pointer;font:500 14px/1 var(--sans);color:var(--ink-70);transition:color .15s" style-hover="color:var(--ink)">Lot</button>
+            <button type="button" onClick="{{ goAbout }}" style="background:none;border:0;padding:0;cursor:pointer;font:500 14px/1 var(--sans);color:var(--ink-70);transition:color .15s" style-hover="color:var(--ink)">Uniti</button>
+          </div>
+        </sc-if>
+      </nav>
+
+      <div style="display:flex;align-items:center;gap:10px;flex:none">
+        <div style="display:flex;align-items:center;border:1px solid var(--hair-2);border-radius:999px;padding:2px">
+          <button type="button" onClick="{{ setEN }}" style="{{ enChipStyle }}">EN</button>
+          <button type="button" onClick="{{ setBM }}" style="{{ bmChipStyle }}">BM</button>
+        </div>
+        <button type="button" onClick="{{ goEnquire }}" data-desk="1" style="display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--hair-2);color:var(--ink);font:600 13px/1 var(--sans);padding:12px 18px;cursor:pointer;transition:border-color .15s;border-radius:var(--r-sm)" style-hover="border-color:var(--ink)">
+          <sc-if value="{{ isEN }}" hint-placeholder-val="{{ true }}"><span>Enquire</span></sc-if>
+          <sc-if value="{{ isBM }}"><span>Hubungi</span></sc-if>
+        </button>
+        <button type="button" onClick="{{ toggleMenu }}" aria-label="Menu" data-mob-flex="1" style="display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;align-items:center;background:none;border:0;cursor:pointer">
+          <span style="{{ burgerTopStyle }}"></span>
+          <span style="{{ burgerBotStyle }}"></span>
+        </button>
+      </div>
+    </div>
+
+    <sc-if value="{{ menuOpen }}">
+      <div style="background:var(--bg-deep);border-top:1px solid var(--hair)">
+        <div style="display:flex;flex-direction:column">
+          <button type="button" onClick="{{ goHome }}" style="text-align:left;background:none;border:0;border-bottom:1px solid var(--hair);padding:18px 20px;font:400 20px/1 var(--serif);color:var(--ink);cursor:pointer">{{ mHome }}</button>
+          <button type="button" onClick="{{ goSite }}" style="text-align:left;background:none;border:0;border-bottom:1px solid var(--hair);padding:18px 20px;font:400 20px/1 var(--serif);color:var(--ink);cursor:pointer">{{ mSite }}</button>
+          <button type="button" onClick="{{ goZones }}" style="text-align:left;background:none;border:0;border-bottom:1px solid var(--hair);padding:18px 20px;font:400 20px/1 var(--serif);color:var(--ink);cursor:pointer">{{ mParcels }}</button>
+          <button type="button" onClick="{{ goAbout }}" style="text-align:left;background:none;border:0;border-bottom:1px solid var(--hair);padding:18px 20px;font:400 20px/1 var(--serif);color:var(--ink);cursor:pointer">{{ mAbout }}</button>
+          <button type="button" onClick="{{ goEnquire }}" style="text-align:left;background:none;border:0;padding:18px 20px;font:400 20px/1 var(--serif);color:var(--accent);cursor:pointer">{{ mEnquire }}</button>
+        </div>
+      </div>
+    </sc-if>
+  </header>
+
+  <main style="flex:1">
+
+    <!-- ══════════════ OVERVIEW ══════════════ -->
+    <sc-if value="{{ onHome }}" hint-placeholder-val="{{ true }}">
+      <div>
+
+        <section style="position:relative;min-height:min(78vh,760px);display:flex;align-items:flex-end;overflow:hidden;background:var(--bg-deep)">
+          <sc-if value="{{ useVideo }}" hint-placeholder-val="{{ true }}">
+            <div style="position:absolute;inset:0">
+              <video ref="{{ setVidA }}" src="assets/heroVideo.mp4" muted playsinline preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s linear;opacity:1"></video>
+              <video ref="{{ setVidB }}" src="assets/heroVideo.mp4" muted playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .6s linear;opacity:0"></video>
+            </div>
+          </sc-if>
+          <sc-if value="{{ useStill }}">
+            <img src="assets/satMap_3D_detailed.png" alt="Aerial render of the Tanjung Agas site" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          </sc-if>
+          <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(11,10,8,.92) 0%, rgba(11,10,8,.42) 45%, rgba(11,10,8,.30) 100%)"></div>
+          <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(11,10,8,.66) 0%, rgba(11,10,8,.10) 62%, rgba(11,10,8,0) 100%)"></div>
+
+          <div style="position:relative;width:100%;max-width:1280px;margin:0 auto;padding:120px 20px 56px;color:var(--hero-ink)">
+            <p style="font:600 12px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin:0">Tanjung Agas · Port Dickson, Malaysia</p>
+            <sc-if value="{{ isEN }}" hint-placeholder-val="{{ true }}">
+              <div style="max-width:780px">
+                <h1 style="font:300 clamp(38px,6.4vw,72px)/1.06 var(--serif);letter-spacing:-.02em;margin:18px 0 0">A 38-acre coastal site,<br>released parcel by parcel.</h1>
+                <p style="font:400 clamp(16px,1.5vw,19px)/1.6 var(--sans);color:var(--hero-ink-70);margin:22px 0 0;max-width:560px;text-wrap:pretty">Uniti Sdn Bhd is opening five contiguous parcels at Tanjung Agas to institutional buyers, developers and joint-venture partners. One owner, one title chain, no intermediaries.</p>
+              </div>
+            </sc-if>
+            <sc-if value="{{ isBM }}">
+              <div style="max-width:780px">
+                <h1 style="font:300 clamp(38px,6.4vw,72px)/1.06 var(--serif);letter-spacing:-.02em;margin:18px 0 0">Tapak pesisir 38 ekar,<br>dibuka lot demi lot.</h1>
+                <p style="font:400 clamp(16px,1.5vw,19px)/1.6 var(--sans);color:var(--hero-ink-70);margin:22px 0 0;max-width:560px;text-wrap:pretty">Uniti Sdn Bhd membuka lima lot bersebelahan di Tanjung Agas kepada pembeli institusi, pemaju dan rakan usahasama. Satu pemilik, satu rantaian hakmilik, tanpa perantara.</p>
+              </div>
+            </sc-if>
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:34px">
+              <button type="button" onClick="{{ goSite }}" style="display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--on-accent);font:600 14px/1 var(--sans);padding:17px 28px;border:0;cursor:pointer;transition:background .15s;border-radius:var(--r-sm)" style-hover="background:var(--accent-hover)">
+                <sc-if value="{{ isEN }}" hint-placeholder-val="{{ true }}"><span>View the masterplan</span></sc-if>
+                <sc-if value="{{ isBM }}"><span>Lihat pelan induk</span></sc-if>
+                <span>→</span>
+              </button>
+              <button type="button" onClick="{{ goEnquire }}" style="display:inline-flex;align-items:center;gap:10px;background:transparent;border:1px solid rgba(245,241,231,.34);color:var(--hero-ink);font:600 14px/1 var(--sans);padding:17px 26px;cursor:pointer;transition:border-color .15s;border-radius:var(--r-sm)" style-hover="border-color:var(--hero-ink)">
+                <sc-if value="{{ isEN }}" hint-placeholder-val="{{ true }}"><span>Request the information pack</span></sc-if>
+                <sc-if value="{{ isBM }}"><span>Minta pakej maklumat</span></sc-if>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <div style="border-bottom:1px solid var(--hair);background:var(--bg)">
+          <div style="max-width:1280px;margin:0 auto;padding:0 20px">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+              <div style="padding:22px 0;border-right:1px solid var(--hair);padding-right:20px">
+                <p style="font:500 12px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin:0">{{ lbParcels }}</p>
+                <p style="font:400 26px/1 var(--serif);margin:9px 0 0">5</p>
+              </div>
+              <div style="padding:22px 20px;border-right:1px solid var(--hair)">
+                <p style="font:500 12px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin:0">{{ lbArea }}</p>
+                <p style="font:400 26px/1 var(--serif);margin:9px 0 0">± 38 ac</p>
+              </div>
+              <div style="padding:22px 20px;border-right:1px solid var(--hair)">
+                <p style="font:500 12px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin:0">{{ lbTenure }}</p>
+                <p style="font:400 26px/1 var(--serif);margin:9px 0 0">{{ vFreehold }}</p>
+              </div>
+              <div style="padding:22px 20px;border-right:1px solid var(--hair)">
+                <p style="font:500 12px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin:0">{{ lbFrontage }}</p>
+                <p style="font:400 26px/1 var(--serif);margin:9px 0 0">± 1.1 km</p>
+              </div>
+              <div style="padding:22px 20px">
+                <p style="font:500 12px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin:0">{{ lbFromKL }}</p>
+                <p style="font:400 26px/1 var(--serif);margin:9px 0 0">90 min</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section style="max-width:1280px;margin:0 auto;padding:clamp(56px,8vw,104px) 20px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(32px,5vw,72px);align-items:start">
+            <div>
+              <p style="font:600 12px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-40);margin:0">{{ ebSite }}</p>
+              <sc-if value="{{ isEN }}" hint-placeholder-val="{{ true }}">
+                <div>
+                  <h2 style="font:300 clamp(28px,3.6vw,42px)/1.14 var(--serif);letter-spacing:-.015em;margin:16px 0 0;text-wrap:pretty">One site. Five parcels. Five distinct propositions.</h2>
+                  <p style="font:400 17px/1.65 var(--sans);color:var(--ink-70);margin:20px 0 0;text-wrap:pretty">Tanjung Agas runs from the beach to the river mouth along the N143. Each parcel has its own gazetted use, its own access and its own buyer — an education campus, a marina resort, an eco-tourism reserve, a marine engineering yard, and one compact riverfront lot held for joint venture.</p>
+                  <p style="font:400 17px/1.65 var(--sans);color:var(--ink-70);margin:16px 0 0;text-wrap:pretty">Parcels are sold individually or in combination. Uniti remains the land owner through completion, so title, zoning and conversion are handled by one counterparty.</p>
+                </div>
+              </sc-if>
+              <sc-if value="{{ isBM }}">
+                <div>
+                  <h2 style="font:300 clamp(28px,3.6vw,42px)/1.14 var(--serif);letter-spacing:-.015em;margin:16px 0 0;text-wrap:pretty">Satu tapak. Lima lot. Lima tawaran berbeza.</h2>
+                  <p style="font:400 17px/1.65 var(--sans);color:var(--ink-70);margin:20px 0 0;text-wrap:pretty">Tanjung Agas terbentang dari pantai ke muara sungai sepanjang N143. Setiap lot mempunyai kegunaan, akses dan pembeli tersendiri — kampus pendidikan, resort marina, rizab eko-pelancongan, limbungan kejuruteraan marin, dan satu lot tepi sungai untuk usahasama.</p>
+                  <p style="font:400 17px/1.65 var(--sans);color:var(--ink-70);margin:16px 0 0;text-wrap:pretty">Lot dijual secara individu atau gabungan. Uniti kekal sebagai pemilik tanah sehingga selesai, jadi hakmilik, pengezonan dan penukaran diuruskan oleh satu pihak.</p>
+                </div>
+              </sc-if>
+            </div>
+            <div onClick="{{ goSite }}" style="cursor:pointer;position:relative;border:1px solid var(--hair);background:var(--panel);transition:border-color .18s;border-radius:var(--r-lg);overflow:hidden" style-hover="border-color:var(--hair-2)">
+              <img src="assets/boundMap.png" alt="Masterplan of the five parcels at Tanjung Agas" style="width:100%;display:block;background:#e8e4dc">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 18px;border-top:1px solid var(--hair)">
+                <p style="font:500 13px/1.4 var(--sans);color:var(--ink-70);margin:0">{{ planCaption }}</p>
+                <span style="font:600 13px/1 var(--sans);color:var(--accent);flex:none">→</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Parcels table -->
+        <section ref="{{ setZonesRef }}" style="border-top:1px solid var(--hair);background:var(--bg)">
+          <div style="max-width:1280px;margin:0 auto;padding:clamp(48px,6vw,80px) 20px">
+            <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px">
+              <div>
+                <p style="font:600 12px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-40);margin:0">{{ ebParcels }}</p>
+                <h2 style="font:300 clamp(26px,3.2vw,38px)/1.15 var(--serif);letter-spacing:-.015em;margin:14px 0 0">{{ hParcels }}</h2>
+              </div>
+              <p style="font:400 14px/1.5 var(--sans);color:var(--ink-55);margin:0;max-width:300px">{{ parcelsNote }}</p>
+            </div>
+
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:34px">
+              <p style="font:500 13px/1 var(--sans);color:var(--ink-55);margin:0">
+                <sc-if value="{{ isEN }}" hint-placeholder-val="{{ true }}"><span>5 parcels · scroll or use the arrows</span></sc-if>
+                <sc-if value="{{ isBM }}"><span>5 lot · tatal atau guna anak panah</span></sc-if>
+              </p>
+              <div style="display:flex;gap:8px">
+                <button type="button" onClick="{{ carouselPrev }}" aria-label="Previous" style="width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--hair-2);color:var(--ink);font:500 16px/1 var(--sans);cursor:pointer;transition:border-color .15s" style-hover="border-color:var(--ink)">←</button>
+                <button type="button" onClick="{{ carouselNext }}" aria-label="Next" style="width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--hair-2);color:var(--ink);font:500 16px/1 var(--sans);cursor:pointer;transition:border-color .15s" style-hover="border-color:var(--ink)">→</button>
+              </div>
+            </div>
+            <div data-carousel="parcels" style="display:flex;gap:18px;margin-top:18px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding-bottom:4px;margin-left:-20px;margin-right:-20px;padding-left:20px;padding-right:20px">
+              <sc-for list="{{ zoneRows }}" as="z" hint-placeholder-count="5">
+                <div onClick="{{ z.open }}" style="flex:0 0 min(84vw,360px);scroll-snap-align:start;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--hair);cursor:pointer;transition:border-color .18s;min-width:0;border-radius:var(--r-lg);overflow:hidden" style-hover="border-color:var(--hair-2)">
+                  <div style="position:relative;aspect-ratio:4/3;overflow:hidden;background:#E8E4DC">
+                    <div style="{{ z.imgStyle }}"></div>
+                    <div style="position:absolute;left:12px;top:12px;display:flex;gap:6px">
+                      <span style="{{ z.badgeStyle }}">{{ z.status }}</span>
+                    </div>
+                    <span style="position:absolute;right:12px;top:12px;background:rgba(21,18,14,.78);color:#F5F1E7;font:600 11px/1 var(--sans);letter-spacing:.06em;padding:7px 9px;backdrop-filter:blur(4px);border-radius:999px">{{ selLabel }} {{ z.index }}</span>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:14px;padding:18px 18px 16px;flex:1">
+                    <div>
+                      <div style="display:flex;align-items:center;gap:8px">
+                        <span style="{{ z.swatchStyle }}"></span>
+                        <span style="font:600 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55)">{{ z.use }}</span>
+                      </div>
+                      <p style="font:400 21px/1.2 var(--serif);margin:10px 0 0;color:var(--ink)">{{ z.name }}</p>
+                      <p style="font:400 13px/1.4 var(--sans);color:var(--ink-55);margin:5px 0 0">Tanjung Agas, Port Dickson</p>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding-top:14px;border-top:1px solid var(--hair)">
+                      <div style="min-width:0">
+                        <p style="font:500 10px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-40);margin:0">{{ thArea }}</p>
+                        <p style="font:500 14px/1.3 var(--sans);color:var(--ink);margin:6px 0 0">{{ z.area }}</p>
+                      </div>
+                      <div style="min-width:0">
+                        <p style="font:500 10px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-40);margin:0">{{ thZoning }}</p>
+                        <p style="font:500 14px/1.3 var(--sans);color:var(--ink);margin:6px 0 0">{{ z.zoning }}</p>
+                      </div>
+                      <div style="min-width:0">
+                        <p style="font:500 10px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-40);margin:0">{{ lbTenure }}</p>
+                        <p style="font:500 14px/1.3 var(--sans);color:var(--ink);margin:6px 0 0">{{ vFreehold }}</p>
+                      </div>
+                    </div>
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:14px;border-top:1px solid var(--hair)">
+                      <div>
+                        <p style="font:500 10px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-40);margin:0">{{ thStructure }}</p>
+                        <p style="font:500 14px/1.3 var(--sans);color:var(--ink);margin:6px 0 0">{{ z.structure }}</p>
+                      </div>
+                      <span style="display:inline-flex;align-items:center;gap:8px;font:600 13px/1 var(--sans);color:var(--accent)">{{ ctaViewParcel }} →</span>
+                    </div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <p style="font:400 12px/1.5 var(--sans);color:var(--ink-40);margin:16px 0 0">{{ areaFootnote }}</p>
+          </div>
+        </section>
+
+        <!-- Uniti proof band -->
+        <section ref="{{ setAboutRef }}" style="{{ bandStyle }}">
+          <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,8vw,104px) 20px">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:clamp(32px,5vw,64px);align-items:start">
+              <div>
+                <p style="{{ bandEyebrowStyle }}">{{ ebAbout }}</p>
+                <sc-if value="{{ isEN }}" hint-placeholder-val="{{ true }}">
+                  <div>
+                    <h2 style="{{ bandHeadStyle }}">Two decades of coastal land development, under one owner.</h2>
+                    <p style="{{ bandBodyStyle }}">Uniti Sdn Bhd has developed and stewarded seaside land in Negeri Sembilan since 2003 — beginning with Kolej Uniti, the training campus that still operates at the northern edge of this site. Every parcel offered here comes from that holding.</p>
+                    <p style="{{ bandBodyStyle }}">We deal directly. There is no listing agent, no aggregator and no undisclosed co-broker between you and the land.</p>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ isBM }}">
+                  <div>
+                    <h2 style="{{ bandHeadStyle }}">Dua dekad pembangunan tanah pesisir, di bawah satu pemilik.</h2>
+                    <p style="{{ bandBodyStyle }}">Uniti Sdn Bhd membangunkan dan menguruskan tanah tepi laut di Negeri Sembilan sejak 2003 — bermula dengan Kolej Uniti, kampus latihan yang masih beroperasi di utara tapak ini. Setiap lot yang ditawarkan di sini datang daripada pegangan tersebut.</p>
+                    <p style="{{ bandBodyStyle }}">Kami berurusan secara terus. Tiada ejen penyenaraian, tiada agregator dan tiada broker tersembunyi antara anda dan tanah.</p>
+                  </div>
+                </sc-if>
+
+                <div style="{{ bandStatsWrapStyle }}">
+                  <div style="{{ bandStatStyle }}">
+                    <p style="{{ bandStatValStyle }}">2003</p>
+                    <p style="{{ bandStatLabStyle }}">{{ stFounded }}</p>
+                  </div>
+                  <div style="{{ bandStatStyle }}">
+                    <p style="{{ bandStatValStyle }}">± 38 ac</p>
+                    <p style="{{ bandStatLabStyle }}">{{ stHolding }}</p>
+                  </div>
+                  <div style="{{ bandStatStyle }}">
+                    <p style="{{ bandStatValStyle }}">1</p>
+                    <p style="{{ bandStatLabStyle }}">{{ stOwner }}</p>
+                  </div>
+                </div>
+
+                <div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:12px">
+                  <button type="button" onClick="{{ goEnquire }}" style="{{ bandBtnStyle }}">{{ ctaBrief }}</button>
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:start">
+                <div style="position:relative;aspect-ratio:3/4;min-width:0">
+                  <image-slot id="uniti-track-1" shape="rect" radius="0" placeholder="Kolej Uniti campus — photo"></image-slot>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+                  <div style="position:relative;aspect-ratio:1/1;min-width:0">
+                    <image-slot id="uniti-track-2" shape="rect" radius="0" placeholder="Beachfront frontage — photo"></image-slot>
+                  </div>
+                  <div style="position:relative;flex:1;min-width:0;min-height:110px">
+                    <image-slot id="uniti-track-3" shape="rect" radius="0" placeholder="Leadership / site visit — photo"></image-slot>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Process -->
+        <section style="max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,88px) 20px">
+          <h2 style="font:300 clamp(26px,3.2vw,38px)/1.15 var(--serif);letter-spacing:-.015em;margin:0">{{ hProcess }}</h2>
+          <div data-grid="process" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:32px;border-top:1px solid var(--hair-2)">
+            <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+              <div style="padding:26px 24px 30px 0;border-bottom:1px solid var(--hair)">
+                <p style="font:400 15px/1 var(--serif);color:var(--accent);margin:0;letter-spacing:.06em">{{ s.num }}</p>
+                <h3 style="font:400 21px/1.2 var(--serif);margin:14px 0 0">{{ s.title }}</h3>
+                <p style="font:400 15px/1.6 var(--sans);color:var(--ink-70);margin:10px 0 0;max-width:34ch;text-wrap:pretty">{{ s.desc }}</p>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <!-- General enquiry -->
+        <section ref="{{ setEnqRef }}" style="border-top:1px solid var(--hair);background:var(--bg-deep)">
+          <div style="max-width:1280px;margin:0 auto;padding:clamp(48px,7vw,88px) 20px">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:clamp(32px,5vw,64px);align-items:start">
+              <div>
+                <p style="font:600 12px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-40);margin:0">{{ ebEnquire }}</p>
+                <h2 style="font:300 clamp(26px,3.2vw,38px)/1.15 var(--serif);letter-spacing:-.015em;margin:14px 0 0;text-wrap:pretty">{{ hEnquire }}</h2>
+                <p style="font:400 17px/1.65 var(--sans);color:var(--ink-70);margin:18px 0 0;max-width:44ch;text-wrap:pretty">{{ pEnquire }}</p>
+                <div style="margin-top:28px;border-top:1px solid var(--hair)">
+                  <div style="display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--hair)">
+                    <span style="font:400 14px/1.5 var(--serif);color:var(--accent);flex:none">01</span>
+                    <span style="font:400 15px/1.5 var(--sans);color:var(--ink-70)">{{ packA }}</span>
+                  </div>
+                  <div style="display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--hair)">
+                    <span style="font:400 14px/1.5 var(--serif);color:var(--accent);flex:none">02</span>
+                    <span style="font:400 15px/1.5 var(--sans);color:var(--ink-70)">{{ packB }}</span>
+                  </div>
+                  <div style="display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--hair)">
+                    <span style="font:400 14px/1.5 var(--serif);color:var(--accent);flex:none">03</span>
+                    <span style="font:400 15px/1.5 var(--sans);color:var(--ink-70)">{{ packC }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="border:1px solid var(--hair-2);background:var(--bg);padding:clamp(22px,3vw,32px);border-radius:var(--r-lg)">
+                <sc-if value="{{ sentHome }}">
+                  <div>
+                    <span style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--accent);color:var(--on-accent);font:600 17px/1 var(--sans)">✓</span>
+                    <p style="font:400 22px/1.2 var(--serif);margin:16px 0 0">{{ sentTitle }}</p>
+                    <p style="font:400 15px/1.6 var(--sans);color:var(--ink-70);margin:12px 0 0">{{ sentBody }}</p>
+                    <p style="font:400 13px/1.5 var(--sans);color:var(--ink-55);margin:12px 0 0">{{ orWord }}</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+                      <a href="{{ waHref }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:#1FA855;color:#FFFFFF;font:600 13px/1 var(--sans);padding:12px 16px;border-radius:var(--r-sm)">{{ waLabel }}</a>
+                      <a href="tel:+60300000000" style="display:inline-flex;align-items:center;gap:8px;border:1px solid var(--hair-2);color:var(--ink);font:500 13px/1 var(--sans);padding:12px 16px;border-radius:var(--r-sm)">{{ callLabel }}</a>
+                    </div>
+                    <button type="button" onClick="{{ resetHome }}" style="margin-top:22px;background:transparent;border:1px solid var(--hair-2);color:var(--ink-70);font:600 12px/1 var(--sans);padding:13px 18px;cursor:pointer;border-radius:var(--r-sm)">{{ sendAnother }}</button>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ notSentHome }}" hint-placeholder-val="{{ true }}">
+                  <form onSubmit="{{ submitHome }}" novalidate>
+                    <sc-if value="{{ hasErrsHome }}">
+                      <div role="alert" style="margin-bottom:18px;padding:14px;border:1px solid var(--accent);border-radius:var(--r-sm);background:color-mix(in srgb, var(--accent) 10%, transparent)">
+                        <p style="font:600 13px/1.3 var(--sans);color:var(--ink);margin:0 0 8px">{{ errTitle }}</p>
+                        <sc-for list="{{ errsHome }}" as="msg" hint-placeholder-count="2">
+                          <p style="font:400 13px/1.5 var(--sans);color:var(--ink-70);margin:3px 0 0">— {{ msg }}</p>
+                        </sc-for>
+                      </div>
+                    </sc-if>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px">
+                      <label style="display:block">
+                        <span style="display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin-bottom:8px">{{ fName }}</span>
+                        <input name="fullname" type="text" autocomplete="name" style="width:100%;background:transparent;border:1px solid var(--hair-2);color:var(--ink);font:400 15px/1 var(--sans);padding:13px 14px;outline:none;transition:border-color .15s;border-radius:var(--r-sm)" style-focus="border-color:var(--accent)">
+                      </label>
+                      <label style="display:block">
+                        <span style="display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin-bottom:8px">{{ fOrg }} {{ optionalWord }}</span>
+                        <input name="org" type="text" autocomplete="organization" style="width:100%;background:transparent;border:1px solid var(--hair-2);color:var(--ink);font:400 15px/1 var(--sans);padding:13px 14px;outline:none;transition:border-color .15s;border-radius:var(--r-sm)" style-focus="border-color:var(--accent)">
+                      </label>
+                      <label style="display:block">
+                        <span style="display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin-bottom:8px">{{ fEmail }}</span>
+                        <input name="email" type="email" autocomplete="email" style="width:100%;background:transparent;border:1px solid var(--hair-2);color:var(--ink);font:400 15px/1 var(--sans);padding:13px 14px;outline:none;transition:border-color .15s;border-radius:var(--r-sm)" style-focus="border-color:var(--accent)">
+                      </label>
+                      <label style="display:block">
+                        <span style="display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin-bottom:8px">{{ fPhone }} {{ optionalWord }}</span>
+                        <input name="phone" type="tel" autocomplete="tel" style="width:100%;background:transparent;border:1px solid var(--hair-2);color:var(--ink);font:400 15px/1 var(--sans);padding:13px 14px;outline:none;transition:border-color .15s;border-radius:var(--r-sm)" style-focus="border-color:var(--accent)">
+                      </label>
+                    </div>
+                    <label style="display:block;margin-top:16px">
+                      <span style="display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin-bottom:8px">{{ fInterest }}</span>
+                      <select name="parcel" style="width:100%;background:var(--bg);border:1px solid var(--hair-2);color:var(--ink);font:400 15px/1 var(--sans);padding:13px 14px;outline:none;border-radius:var(--r-sm)">
+                        <option>{{ optAll }}</option>
+                        <sc-for list="{{ zoneRows }}" as="z" hint-placeholder-count="5">
+                          <option>{{ z.name }}</option>
+                        </sc-for>
+                      </select>
+                    </label>
+                    <label style="display:block;margin-top:16px">
+                      <span style="display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin-bottom:8px">{{ fUse }} {{ optionalWord }}</span>
+                      <textarea name="use" style="width:100%;min-height:92px;resize:vertical;background:transparent;border:1px solid var(--hair-2);color:var(--ink);font:400 15px/1.5 var(--sans);padding:13px 14px;outline:none;transition:border-color .15s;border-radius:var(--r-sm)" style-focus="border-color:var(--accent)"></textarea>
+                    </label>
+                    <button type="submit" style="margin-top:20px;width:100%;background:var(--accent);color:var(--on-accent);font:600 14px/1 var(--sans);padding:17px;border:0;cursor:pointer;transition:background .15s;border-radius:var(--r-sm)" style-hover="background:var(--accent-hover)">{{ ctaSubmit }}</button>
+                    <p style="font:400 12px/1.5 var(--sans);color:var(--ink-40);margin:14px 0 0">{{ privacy }}</p>
+                  </form>
+                </sc-if>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </sc-if>
+
+    <!-- ══════════════ LISTINGS ══════════════ -->
+    <sc-if value="{{ onListings }}">
+      <div style="max-width:1280px;margin:0 auto;padding:24px 20px clamp(48px,7vw,80px)">
+
+        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+          <div style="flex:1 1 320px;min-width:0;display:flex;align-items:center;gap:10px;border:1px solid var(--hair-2);background:var(--panel);padding:14px 16px;border-radius:var(--r-sm)">
+            <span style="font:400 15px/1 var(--sans);color:var(--ink-40)">⌕</span>
+            <input type="text" value="Tanjung Agas, Port Dickson" style="flex:1;min-width:0;background:transparent;border:0;outline:none;color:var(--ink);font:400 15px/1 var(--sans)">
+          </div>
+          <button type="button" onClick="{{ goSite }}" style="display:inline-flex;align-items:center;gap:9px;border:1px solid var(--hair-2);background:transparent;color:var(--ink);font:500 14px/1 var(--sans);padding:15px 18px;cursor:pointer;transition:border-color .15s;border-radius:var(--r-sm)" style-hover="border-color:var(--ink)">
+            <sc-if value="{{ isEN }}" hint-placeholder-val="{{ true }}"><span>Show map</span></sc-if>
+            <sc-if value="{{ isBM }}"><span>Tunjukkan peta</span></sc-if>
+          </button>
+        </div>
+
+        <div style="display:flex;gap:10px;overflow-x:auto;margin-top:14px;padding-bottom:2px">
+          <sc-for list="{{ filterPills }}" as="p" hint-placeholder-count="6">
+            <button type="button" onClick="{{ p.apply }}" style="{{ p.style }}">{{ p.label }}</button>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-top:22px;padding-bottom:16px;border-bottom:1px solid var(--hair)">
+          <p style="font:400 15px/1.4 var(--sans);color:var(--ink-70);margin:0">{{ listingCount }}</p>
+          <label style="display:inline-flex;align-items:center;gap:10px">
+            <span style="font:500 12px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-55)">{{ sortWord }}</span>
+            <select onChange="{{ onSortChange }}" style="background:var(--panel);border:1px solid var(--hair-2);color:var(--ink);font:400 14px/1 var(--sans);padding:12px 14px;outline:none;cursor:pointer;border-radius:var(--r-lg);overflow:hidden">
+              <sc-for list="{{ sortOptions }}" as="s" hint-placeholder-count="4">
+                <option>{{ s.label }}</option>
+              </sc-for>
+            </select>
+          </label>
+        </div>
+
+        <div data-grid="listings" style="display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;margin-top:22px;align-items:start">
+          <div style="display:flex;flex-direction:column;gap:20px;min-width:0">
+            <sc-for list="{{ listingZones }}" as="z" hint-placeholder-count="5">
+              <article style="border:1px solid var(--hair-2);background:var(--panel);min-width:0;border-radius:var(--r-lg);overflow:hidden">
+                <div style="position:relative;aspect-ratio:16/10;overflow:hidden;background:#E8E4DC">
+                  <div data-gallery="{{ z.galleryId }}" style="display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none">
+                    <sc-for list="{{ z.photos }}" as="ph" hint-placeholder-count="3">
+                      <div style="{{ ph.style }}"></div>
+                    </sc-for>
+                  </div>
+                  <div style="position:absolute;left:14px;top:14px;display:flex;align-items:center;gap:9px;background:rgba(21,18,14,.7);backdrop-filter:blur(6px);padding:7px 12px 7px 8px;border-radius:999px">
+                    <span style="width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#F5F1E7;color:#15120E;font:700 11px/1 var(--sans)">U</span>
+                    <span style="font:600 12px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:#F5F1E7">Uniti Sdn Bhd</span>
+                  </div>
+                  <div style="position:absolute;right:14px;top:14px;display:flex"><span style="{{ z.badgeStyle }}">{{ z.status }}</span></div>
+                  <button type="button" onClick="{{ z.galPrev }}" aria-label="Previous photo" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:0;background:rgba(245,241,231,.92);color:#15120E;font:500 15px/1 var(--sans);cursor:pointer;display:flex;align-items:center;justify-content:center">‹</button>
+                  <button type="button" onClick="{{ z.galNext }}" aria-label="Next photo" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;border:0;background:rgba(245,241,231,.92);color:#15120E;font:500 15px/1 var(--sans);cursor:pointer;display:flex;align-items:center;justify-content:center">›</button>
+                  <span style="position:absolute;right:14px;bottom:14px;background:rgba(21,18,14,.72);color:#F5F1E7;font:500 12px/1 var(--sans);padding:7px 10px;border-radius:999px">{{ z.photoCount }} ▤</span>
+                </div>
+
+                <div style="display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--hair)">
+                  <span style="{{ z.swatchStyle }}"></span>
+                  <p style="font:500 14px/1.4 var(--sans);color:var(--ink-70);margin:0;min-width:0">{{ z.desc }}</p>
+                </div>
+
+                <div style="padding:18px">
+                  <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:14px">
+                    <div style="min-width:0">
+                      <p style="font:400 23px/1.2 var(--serif);margin:0;color:var(--ink)">{{ z.name }}</p>
+                      <p style="font:400 14px/1.4 var(--sans);color:var(--ink-55);margin:6px 0 0">Tanjung Agas, Port Dickson, Negeri Sembilan</p>
+                    </div>
+                    <div style="text-align:right">
+                      <p style="font:600 18px/1.2 var(--sans);margin:0;color:var(--ink)">{{ priceOnRequest }}</p>
+                      <p style="font:400 13px/1.3 var(--sans);color:var(--ink-55);margin:5px 0 0">{{ z.structure }}</p>
+                    </div>
+                  </div>
+
+                  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:16px">
+                    <span style="font:500 14px/1 var(--sans);color:var(--ink)">{{ z.area }}</span>
+                    <span style="width:1px;height:13px;background:var(--hair-2)"></span>
+                    <span style="font:400 14px/1 var(--sans);color:var(--ink-70)">{{ z.zoning }}</span>
+                    <span style="width:1px;height:13px;background:var(--hair-2)"></span>
+                    <span style="font:400 14px/1 var(--sans);color:var(--ink-70)">{{ z.tenure }}</span>
+                    <span style="width:1px;height:13px;background:var(--hair-2)"></span>
+                    <span style="font:400 14px/1 var(--sans);color:var(--ink-70)">{{ z.frontage }}</span>
+                  </div>
+                  <p style="font:400 13px/1.3 var(--sans);color:var(--ink-40);margin:12px 0 0">{{ z.listed }}</p>
+
+                  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid var(--hair)">
+                    <span style="font:500 12px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-55);margin-right:auto">{{ contactWord }}</span>
+                    <a href="tel:+60300000000" aria-label="{{ callLabel }}" style="width:44px;height:44px;border-radius:50%;border:1px solid var(--hair-2);display:flex;align-items:center;justify-content:center;color:var(--ink);font:400 16px/1 var(--sans);transition:border-color .15s" style-hover="border-color:var(--ink)">✆</a>
+                    <a href="mailto:invest@unitiproperty.com" aria-label="{{ emailLabel }}" style="width:44px;height:44px;border-radius:50%;border:1px solid var(--hair-2);display:flex;align-items:center;justify-content:center;color:var(--ink);font:400 15px/1 var(--sans);transition:border-color .15s" style-hover="border-color:var(--ink)">✉</a>
+                    <button type="button" onClick="{{ z.open }}" style="border:1px solid var(--hair-2);background:transparent;color:var(--ink);font:500 13px/1 var(--sans);padding:14px 16px;cursor:pointer;transition:border-color .15s;border-radius:var(--r-sm)" style-hover="border-color:var(--ink)">{{ ctaViewParcel }}</button>
+                    <a href="{{ z.waHref }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px;background:#1FA855;color:#FFFFFF;font:600 13px/1 var(--sans);padding:14px 20px;border-radius:var(--r-sm);transition:background .15s" style-hover="background:#188F47">
+                      <span style="font:400 15px/1 var(--sans)">✆</span>
+                      <span>{{ waLabel }}</span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            </sc-for>
+          </div>
+
+          <aside data-sticky="1" style="display:flex;flex-direction:column;gap:16px;min-width:0;position:sticky;top:88px">
+            <div style="border:1px solid var(--hair-2);background:var(--panel);padding:20px;border-radius:var(--r-lg);overflow:hidden">
+              <p style="font:400 20px/1.25 var(--serif);margin:0">{{ asideTitle }}</p>
+              <p style="font:400 14px/1.6 var(--sans);color:var(--ink-70);margin:12px 0 0">{{ asideBody }}</p>
+              <button type="button" onClick="{{ goSite }}" style="margin-top:16px;background:transparent;border:1px solid var(--hair-2);color:var(--ink);font:500 13px/1 var(--sans);padding:13px 16px;cursor:pointer;transition:border-color .15s;border-radius:var(--r-sm)" style-hover="border-color:var(--ink)">{{ asideCta }}</button>
+            </div>
+
+            <div style="border:1px solid var(--hair-2);background:var(--panel);padding:20px;border-radius:var(--r-lg);overflow:hidden">
+              <p style="font:600 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-55);margin:0">{{ asideByUse }}</p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
+                <sc-for list="{{ zoneRows }}" as="z" hint-placeholder-count="5">
+                  <button type="button" onClick="{{ z.open }}" style="border:1px solid var(--hair-2);background:transparent;color:var(--ink-70);font:400 13px/1 var(--sans);padding:10px 13px;cursor:pointer;transition:border-color .15s,color .15s;border-radius:var(--r-sm)" style-hover="border-color:var(--ink);color:var(--ink)">{{ z.use }}</button>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="border:1px solid var(--hair-2);background:var(--panel);padding:20px;border-radius:var(--r-lg);overflow:hidden">
+              <p style="font:400 20px/1.25 var(--serif);margin:0 0 6px">{{ faqTitle }}</p>
+              <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="4">
+                <details style="border-top:1px solid var(--hair);padding:14px 0">
+                  <summary style="font:500 14px/1.45 var(--sans);color:var(--ink);cursor:pointer;list-style:none">{{ f.q }}</summary>
+                  <p style="font:400 14px/1.6 var(--sans);color:var(--ink-70);margin:10px 0 0">{{ f.a }}</p>
+                </details>
+              </sc-for>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ══════════════ THE SITE ══════════════ -->
+    <sc-if value="{{ onSite }}">
+      <div>
+        <div style="border-bottom:1px solid var(--hair)">
+          <div style="max-width:1280px;margin:0 auto;padding:26px 20px 22px">
+            <div style="display:flex;align-items:center;gap:10px;font:500 13px/1 var(--sans);color:var(--ink-40)">
+              <button type="button" onClick="{{ goHome }}" style="background:none;border:0;padding:0;cursor:pointer;font:500 13px/1 var(--sans);color:var(--ink-70)" style-hover="color:var(--accent)">{{ mHome }}</button>
+              <span>/</span>
+              <span style="color:var(--ink)">{{ mSite }}</span>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-top:16px">
+              <div>
+                <h1 style="font:300 clamp(28px,3.8vw,44px)/1.1 var(--serif);letter-spacing:-.02em;margin:0">Tanjung Agas</h1>
+                <p style="font:400 15px/1.5 var(--sans);color:var(--ink-55);margin:8px 0 0">Port Dickson, Negeri Sembilan · ± 38 acres · {{ vFreehold }}</p>
+              </div>
+              <div style="display:flex;border:1px solid var(--hair-2);border-radius:var(--r-sm);overflow:hidden">
+                <sc-for list="{{ mapViews }}" as="v" hint-placeholder-count="3">
+                  <button type="button" onClick="{{ v.select }}" style="{{ v.style }}">{{ v.label }}</button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="max-width:1280px;margin:0 auto;padding:24px 20px clamp(48px,7vw,80px)">
+          <div data-grid="site" style="display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:22px;align-items:start">
+            <div style="position:relative;background:var(--panel);border:1px solid var(--hair);overflow:hidden;border-radius:var(--r-lg);overflow:hidden">
+              <img ref="{{ setMapImg }}" alt="Site view of Tanjung Agas" style="width:100%;display:block">
+              <sc-if value="{{ pinsVisible }}">
+                <div style="position:absolute;inset:0">
+                  <sc-for list="{{ zoneRows }}" as="z" hint-placeholder-count="5">
+                    <button type="button" onClick="{{ z.select }}" style="{{ z.pinStyle }}" aria-label="{{ z.name }}">{{ z.index }}</button>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ pinsHidden }}">
+                <p style="position:absolute;left:14px;bottom:14px;margin:0;background:var(--glass);backdrop-filter:blur(6px);border:1px solid var(--hair-2);padding:9px 13px;font:500 12px/1 var(--sans);color:var(--ink-70);border-radius:999px">{{ pinsNote }}</p>
+              </sc-if>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:18px">
+              <div style="border:1px solid var(--hair-2);background:var(--panel);border-radius:var(--r-lg);overflow:hidden">
+                <div style="padding:20px 20px 18px">
+                  <p style="font:600 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-55);margin:0">{{ selLabel }} {{ sel.index }}</p>
+                  <h2 style="font:400 24px/1.2 var(--serif);margin:10px 0 0">{{ sel.name }}</h2>
+                  <p style="font:400 14px/1.6 var(--sans);color:var(--ink-70);margin:10px 0 0">{{ sel.desc }}</p>
+                </div>
+                <div style="border-top:1px solid var(--hair)">
+                  <sc-for list="{{ selFacts }}" as="f" hint-placeholder-count="5">
+                    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:12px 20px;border-bottom:1px solid var(--hair)">
+                      <span style="font:500 12px/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-55)">{{ f.label }}</span>
+                      <span style="font:500 14px/1.3 var(--sans);color:var(--ink);text-align:right">{{ f.value }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="padding:18px 20px">
+                  <button type="button" onClick="{{ openSelected }}" style="width:100%;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--accent);color:var(--on-accent);font:600 14px/1 var(--sans);padding:16px;border:0;cursor:pointer;transition:background .15s;border-radius:var(--r-sm)" style-hover="background:var(--accent-hover)">{{ ctaViewParcel }} <span>→</span></button>
+                </div>
+              </div>
+
+              <div style="border:1px solid var(--hair);background:var(--bg);border-radius:var(--r-lg);overflow:hidden">
+                <p style="font:600 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-55);margin:0;padding:16px 18px 12px">{{ legendLabel }}</p>
+                <sc-for list="{{ zoneRows }}" as="z" hint-placeholder-count="5">
+                  <button type="button" onClick="{{ z.select }}" style="{{ z.legendStyle }}" style-hover="background:rgba(243,238,227,.04)">
+                    <span style="{{ z.swatchStyle }}"></span>
+                    <span style="min-width:0;text-align:left;flex:1">
+                      <span style="display:block;font:500 14px/1.3 var(--sans);color:var(--ink)">{{ z.name }}</span>
+                      <span style="display:block;font:400 12px/1.3 var(--sans);color:var(--ink-55);margin-top:2px">{{ z.use }} · {{ z.area }}</span>
+                    </span>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ══════════════ PARCEL DETAIL ══════════════ -->
+    <sc-if value="{{ onZone }}">
+      <div>
+        <div style="position:relative;height:clamp(280px,44vw,540px);overflow:hidden;background:var(--bg-deep)">
+          <img ref="{{ setDetailImg }}" alt="View of the selected parcel at Tanjung Agas" style="width:100%;height:100%;object-fit:cover;display:block">
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(11,10,8,.72),rgba(11,10,8,0) 55%)"></div>
+          <div style="position:absolute;left:20px;top:20px;display:flex;border:1px solid rgba(245,241,231,.28);background:rgba(11,10,8,.55);backdrop-filter:blur(8px);color:var(--hero-ink)">
+            <sc-for list="{{ mapViews }}" as="v" hint-placeholder-count="3">
+              <button type="button" onClick="{{ v.select }}" style="{{ v.style }}">{{ v.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="max-width:1280px;margin:0 auto;padding:28px 20px clamp(48px,7vw,80px)">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;font:500 13px/1 var(--sans);color:var(--ink-40)">
+            <button type="button" onClick="{{ goHome }}" style="background:none;border:0;padding:0;cursor:pointer;font:500 13px/1 var(--sans);color:var(--ink-70)" style-hover="color:var(--accent)">{{ mHome }}</button>
+            <span>/</span>
+            <button type="button" onClick="{{ goSite }}" style="background:none;border:0;padding:0;cursor:pointer;font:500 13px/1 var(--sans);color:var(--ink-70)" style-hover="color:var(--accent)">Tanjung Agas</button>
+            <span>/</span>
+            <span style="color:var(--ink)">{{ sel.name }}</span>
+          </div>
+
+          <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-top:20px">
+            <div style="min-width:0">
+              <p style="font:600 12px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-40);margin:0">{{ selLabel }} {{ sel.index }} · {{ sel.use }}</p>
+              <h1 style="font:300 clamp(30px,4.4vw,52px)/1.06 var(--serif);letter-spacing:-.02em;margin:14px 0 0;text-wrap:pretty">{{ sel.name }}</h1>
+              <p style="font:400 15px/1.5 var(--sans);color:var(--ink-55);margin:10px 0 0">Tanjung Agas, Port Dickson, Negeri Sembilan</p>
+            </div>
+            <button type="button" onClick="{{ scrollEnquire }}" style="display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:var(--on-accent);font:600 14px/1 var(--sans);padding:17px 26px;border:0;cursor:pointer;transition:background .15s;border-radius:var(--r-sm)" style-hover="background:var(--accent-hover)">{{ ctaRequest }} <span>→</span></button>
+          </div>
+
+          <div style="position:sticky;top:68px;z-index:20;background:var(--bg);border-bottom:1px solid var(--hair);margin-top:28px;display:flex;gap:28px;overflow-x:auto">
+            <sc-for list="{{ sections }}" as="s" hint-placeholder-count="4">
+              <button type="button" onClick="{{ s.go }}" style="{{ s.style }}">{{ s.label }}</button>
+            </sc-for>
+          </div>
+
+          <div ref="{{ setFactsRef }}" style="margin-top:40px">
+            <h2 style="font:300 clamp(24px,2.8vw,32px)/1.2 var(--serif);letter-spacing:-.01em;margin:0">{{ hFacts }}</h2>
+            <div style="margin-top:20px;border-top:1px solid var(--hair-2);display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 48px">
+              <sc-for list="{{ selFactsFull }}" as="f" hint-placeholder-count="8">
+                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--hair)">
+                  <span style="font:500 12px/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-55)">{{ f.label }}</span>
+                  <span style="font:500 15px/1.3 var(--sans);color:var(--ink);text-align:right">{{ f.value }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <p style="font:400 12px/1.5 var(--sans);color:var(--ink-40);margin:14px 0 0">{{ titleFootnote }}</p>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(32px,5vw,64px);align-items:start;margin-top:clamp(40px,6vw,72px)">
+            <div style="min-width:0">
+              <div ref="{{ setHlRef }}">
+                <h2 style="font:300 clamp(24px,2.8vw,32px)/1.2 var(--serif);letter-spacing:-.01em;margin:0">{{ hHighlights }}</h2>
+                <div style="margin-top:18px;border-top:1px solid var(--hair-2)">
+                  <sc-for list="{{ selHighlights }}" as="h" hint-placeholder-count="4">
+                    <div style="display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--hair)">
+                      <span style="font:400 14px/1.6 var(--serif);color:var(--accent);flex:none">{{ h.num }}</span>
+                      <p style="font:400 16px/1.6 var(--sans);color:var(--ink-70);margin:0;text-wrap:pretty">{{ h.text }}</p>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+
+              <div ref="{{ setLmRef }}" style="margin-top:clamp(36px,5vw,56px)">
+                <h2 style="font:300 clamp(24px,2.8vw,32px)/1.2 var(--serif);letter-spacing:-.01em;margin:0">{{ hLandmarks }}</h2>
+                <div style="margin-top:18px;border-top:1px solid var(--hair-2);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0 40px">
+                  <sc-for list="{{ landmarks }}" as="l" hint-placeholder-count="6">
+                    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--hair)">
+                      <span style="font:400 15px/1.4 var(--sans);color:var(--ink-70)">{{ l.name }}</span>
+                      <span style="font:500 13px/1.4 var(--sans);color:var(--ink-40)">{{ l.dist }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+
+              <div style="margin-top:clamp(36px,5vw,56px)">
+                <h2 style="font:300 clamp(24px,2.8vw,32px)/1.2 var(--serif);letter-spacing:-.01em;margin:0">{{ hOther }}</h2>
+                <div data-grid="related" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px">
+                  <sc-for list="{{ otherZones }}" as="z" hint-placeholder-count="4">
+                    <div onClick="{{ z.open }}" style="display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--hair);cursor:pointer;transition:border-color .18s;min-width:0;border-radius:var(--r-lg);overflow:hidden" style-hover="border-color:var(--hair-2)">
+                      <div style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#E8E4DC">
+                        <div style="{{ z.imgStyle }}"></div>
+                        <span style="position:absolute;left:12px;top:12px;display:flex"><span style="{{ z.badgeStyle }}">{{ z.status }}</span></span>
+                      </div>
+                      <div style="padding:16px 16px 14px;display:flex;flex-direction:column;gap:10px;flex:1">
+                        <div style="display:flex;align-items:center;gap:8px">
+                          <span style="{{ z.swatchStyle }}"></span>
+                          <span style="font:600 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55)">{{ z.use }}</span>
+                        </div>
+                        <p style="font:400 19px/1.2 var(--serif);margin:0;color:var(--ink)">{{ z.name }}</p>
+                        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:12px;border-top:1px solid var(--hair)">
+                          <span style="font:500 13px/1.3 var(--sans);color:var(--ink-70)">{{ z.area }} · {{ z.structure }}</span>
+                          <span style="font:600 13px/1 var(--sans);color:var(--accent)">→</span>
+                        </div>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+
+            <div ref="{{ setEnq2Ref }}" data-sticky="1" style="border:1px solid var(--hair-2);background:var(--panel);padding:clamp(22px,3vw,30px);border-radius:var(--r-lg);position:sticky;top:140px">
+              <sc-if value="{{ sentZone }}">
+                <div>
+                  <span style="display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--accent);color:var(--on-accent);font:600 17px/1 var(--sans)">✓</span>
+                  <p style="font:400 22px/1.2 var(--serif);margin:16px 0 0">{{ sentTitle }}</p>
+                  <p style="font:400 14px/1.5 var(--sans);color:var(--ink-55);margin:8px 0 0">{{ sel.name }} · {{ sel.area }}</p>
+                  <p style="font:400 15px/1.6 var(--sans);color:var(--ink-70);margin:12px 0 0">{{ sentBody }}</p>
+                  <p style="font:400 13px/1.5 var(--sans);color:var(--ink-55);margin:12px 0 0">{{ orWord }}</p>
+                  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+                    <a href="{{ waHref }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:#1FA855;color:#FFFFFF;font:600 13px/1 var(--sans);padding:12px 16px;border-radius:var(--r-sm)">{{ waLabel }}</a>
+                    <a href="tel:+60300000000" style="display:inline-flex;align-items:center;gap:8px;border:1px solid var(--hair-2);color:var(--ink);font:500 13px/1 var(--sans);padding:12px 16px;border-radius:var(--r-sm)">{{ callLabel }}</a>
+                  </div>
+                  <button type="button" onClick="{{ resetZone }}" style="margin-top:22px;background:transparent;border:1px solid var(--hair-2);color:var(--ink-70);font:600 12px/1 var(--sans);padding:13px 18px;cursor:pointer;border-radius:var(--r-sm)">{{ sendAnother }}</button>
+                </div>
+              </sc-if>
+              <sc-if value="{{ notSentZone }}" hint-placeholder-val="{{ true }}">
+                <form onSubmit="{{ submitZone }}" novalidate>
+                  <p style="font:400 22px/1.25 var(--serif);margin:0">{{ hZoneForm }}</p>
+                  <p style="font:400 14px/1.55 var(--sans);color:var(--ink-55);margin:10px 0 16px">{{ pZoneForm }}</p>
+
+                  <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;margin-bottom:18px;border:1px solid var(--hair);background:var(--bg);border-radius:var(--r-sm)">
+                    <span style="{{ sel.swatchStyle }}"></span>
+                    <span style="min-width:0">
+                      <span style="display:block;font:500 14px/1.3 var(--sans);color:var(--ink)">{{ sel.name }}</span>
+                      <span style="display:block;font:400 12px/1.3 var(--sans);color:var(--ink-55);margin-top:2px">{{ sel.area }} · {{ sel.use }}</span>
+                    </span>
+                  </div>
+
+                  <sc-if value="{{ hasErrsZone }}">
+                    <div role="alert" style="margin-bottom:18px;padding:14px;border:1px solid var(--accent);border-radius:var(--r-sm);background:color-mix(in srgb, var(--accent) 10%, transparent)">
+                      <p style="font:600 13px/1.3 var(--sans);color:var(--ink);margin:0 0 8px">{{ errTitle }}</p>
+                      <sc-for list="{{ errsZone }}" as="msg" hint-placeholder-count="2">
+                        <p style="font:400 13px/1.5 var(--sans);color:var(--ink-70);margin:3px 0 0">— {{ msg }}</p>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+
+                  <label style="display:block;margin-bottom:14px">
+                    <span style="display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin-bottom:8px">{{ fName }}</span>
+                    <input name="fullname" type="text" autocomplete="name" style="width:100%;background:var(--bg);border:1px solid var(--hair-2);color:var(--ink);font:400 15px/1 var(--sans);padding:13px 14px;outline:none;transition:border-color .15s;border-radius:var(--r-sm)" style-focus="border-color:var(--accent)">
+                  </label>
+                  <label style="display:block;margin-bottom:14px">
+                    <span style="display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin-bottom:8px">{{ fEmail }}</span>
+                    <input name="email" type="email" autocomplete="email" style="width:100%;background:var(--bg);border:1px solid var(--hair-2);color:var(--ink);font:400 15px/1 var(--sans);padding:13px 14px;outline:none;transition:border-color .15s;border-radius:var(--r-sm)" style-focus="border-color:var(--accent)">
+                  </label>
+                  <label style="display:block;margin-bottom:14px">
+                    <span style="display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin-bottom:8px">{{ fOrg }} {{ optionalWord }}</span>
+                    <input name="org" type="text" autocomplete="organization" style="width:100%;background:var(--bg);border:1px solid var(--hair-2);color:var(--ink);font:400 15px/1 var(--sans);padding:13px 14px;outline:none;transition:border-color .15s;border-radius:var(--r-sm)" style-focus="border-color:var(--accent)">
+                  </label>
+                  <label style="display:block;margin-bottom:14px">
+                    <span style="display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin-bottom:8px">{{ fRole }} {{ optionalWord }}</span>
+                    <select name="role" style="width:100%;background:var(--bg);border:1px solid var(--hair-2);color:var(--ink);font:400 15px/1 var(--sans);padding:13px 14px;outline:none;border-radius:var(--r-sm)">
+                      <sc-for list="{{ roleOptions }}" as="r" hint-placeholder-count="5">
+                        <option>{{ r.label }}</option>
+                      </sc-for>
+                    </select>
+                  </label>
+                  <label style="display:block;margin-bottom:14px">
+                    <span style="display:block;font:600 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin-bottom:8px">{{ fUse }} {{ optionalWord }}</span>
+                    <textarea name="use" style="width:100%;min-height:84px;resize:vertical;background:var(--bg);border:1px solid var(--hair-2);color:var(--ink);font:400 15px/1.5 var(--sans);padding:13px 14px;outline:none;transition:border-color .15s;border-radius:var(--r-sm)" style-focus="border-color:var(--accent)"></textarea>
+                  </label>
+
+                  <div style="margin:18px 0;padding-top:16px;border-top:1px solid var(--hair)">
+                    <p style="font:600 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-55);margin:0 0 10px">{{ packTitle }}</p>
+                    <p style="font:400 13px/1.5 var(--sans);color:var(--ink-70);margin:0">— {{ packA }}</p>
+                    <p style="font:400 13px/1.5 var(--sans);color:var(--ink-70);margin:4px 0 0">— {{ packB }}</p>
+                    <p style="font:400 13px/1.5 var(--sans);color:var(--ink-70);margin:4px 0 0">— {{ packC }}</p>
+                  </div>
+                  <label style="display:flex;gap:10px;align-items:flex-start;margin:0;cursor:pointer">
+                    <input name="nda" type="checkbox" style="margin:3px 0 0;accent-color:var(--accent);width:15px;height:15px;flex:none">
+                    <span style="font:400 13px/1.5 var(--sans);color:var(--ink-70)">{{ ndaLabel }}</span>
+                  </label>
+                  <button type="submit" style="margin-top:20px;width:100%;background:var(--accent);color:var(--on-accent);font:600 14px/1 var(--sans);padding:17px;border:0;cursor:pointer;transition:background .15s;border-radius:var(--r-sm)" style-hover="background:var(--accent-hover)">{{ ctaSubmit }}</button>
+                  <p style="font:400 13px/1.5 var(--sans);color:var(--ink-70);margin:14px 0 0">{{ replyNote }}</p>
+
+                  <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--hair)">
+                    <p style="font:400 12px/1 var(--sans);color:var(--ink-55);margin:0 0 10px">{{ orWord }}</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px">
+                      <a href="{{ waHref }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;background:#1FA855;color:#FFFFFF;font:600 13px/1 var(--sans);padding:12px 16px;border-radius:var(--r-sm);transition:background .15s" style-hover="background:#188F47">{{ waLabel }}</a>
+                      <a href="tel:+60300000000" style="display:inline-flex;align-items:center;gap:8px;border:1px solid var(--hair-2);color:var(--ink);font:500 13px/1 var(--sans);padding:12px 16px;border-radius:var(--r-sm);transition:border-color .15s" style-hover="border-color:var(--ink)">{{ callLabel }}</a>
+                    </div>
+                  </div>
+                  <p style="font:400 12px/1.5 var(--sans);color:var(--ink-40);margin:14px 0 0">{{ privacy }}</p>
+                </form>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+
+        <div data-mob-flex="1" style="display:none;position:sticky;bottom:0;z-index:30;align-items:center;gap:14px;padding:12px 20px;background:var(--glass);backdrop-filter:blur(14px);border-top:1px solid var(--hair-2)">
+          <div style="flex:1;min-width:0">
+            <p style="font:400 15px/1.2 var(--serif);margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ sel.name }}</p>
+            <p style="font:400 12px/1.2 var(--sans);color:var(--ink-55);margin:4px 0 0">{{ sel.area }} · {{ priceOnRequest }}</p>
+          </div>
+          <button type="button" onClick="{{ scrollEnquire }}" style="flex:none;background:var(--accent);color:var(--on-accent);font:600 13px/1 var(--sans);padding:15px 20px;border:0;cursor:pointer;border-radius:var(--r-sm)">{{ ctaRequestShort }}</button>
+        </div>
+      </div>
+    </sc-if>
+
+  </main>
+
+  <footer style="border-top:1px solid var(--hair);background:var(--bg-deep)">
+    <div style="max-width:1280px;margin:0 auto;padding:48px 20px 36px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:36px">
+        <div style="max-width:280px">
+          <div style="display:flex;align-items:baseline;gap:7px">
+            <span style="font:700 15px/1 var(--sans);letter-spacing:.14em">UNITI</span>
+            <span style="font:400 15px/1 var(--sans);letter-spacing:.14em;color:var(--ink-55)">PROPERTY</span>
+          </div>
+          <p style="font:400 14px/1.6 var(--sans);color:var(--ink-55);margin:14px 0 0">{{ footerBlurb }}</p>
+        </div>
+        <div>
+          <p style="font:600 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-40);margin:0">{{ fcContact }}</p>
+          <div style="display:flex;flex-direction:column;gap:9px;margin-top:14px">
+            <a href="mailto:invest@unitiproperty.com" style="font:400 14px/1.4 var(--sans);color:var(--ink-70)">invest@unitiproperty.com</a>
+            <a href="tel:+60300000000" style="font:400 14px/1.4 var(--sans);color:var(--ink-70)">+60 3-0000-0000</a>
+          </div>
+        </div>
+        <div>
+          <p style="font:600 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-40);margin:0">{{ fcNav }}</p>
+          <div style="display:flex;flex-direction:column;gap:9px;margin-top:14px;align-items:flex-start">
+            <button type="button" onClick="{{ goSite }}" style="background:none;border:0;padding:0;cursor:pointer;font:400 14px/1.4 var(--sans);color:var(--ink-70)" style-hover="color:var(--accent)">{{ mSite }}</button>
+            <button type="button" onClick="{{ goZones }}" style="background:none;border:0;padding:0;cursor:pointer;font:400 14px/1.4 var(--sans);color:var(--ink-70)" style-hover="color:var(--accent)">{{ mParcels }}</button>
+            <button type="button" onClick="{{ goAbout }}" style="background:none;border:0;padding:0;cursor:pointer;font:400 14px/1.4 var(--sans);color:var(--ink-70)" style-hover="color:var(--accent)">{{ mAbout }}</button>
+          </div>
+        </div>
+        <div>
+          <p style="font:600 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-40);margin:0">{{ fcLegal }}</p>
+          <p style="font:400 13px/1.6 var(--sans);color:var(--ink-55);margin:14px 0 0">{{ legalNote }}</p>
+        </div>
+      </div>
+      <p style="font:400 12px/1.5 var(--sans);color:var(--ink-40);margin:32px 0 0;padding-top:20px;border-top:1px solid var(--hair)">© 2026 Uniti Sdn Bhd. {{ rights }}</p>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#C2622B&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#C2622B&quot;,&quot;#8C6A3F&quot;,&quot;#5E6E5A&quot;,&quot;#9A4B3C&quot;],&quot;section&quot;:&quot;Identity&quot;},&quot;ground&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Warm paper&quot;,&quot;options&quot;:[&quot;Warm paper&quot;,&quot;Cool paper&quot;,&quot;Warm charcoal&quot;,&quot;Cool graphite&quot;,&quot;Deep clay&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Identity&quot;},&quot;corners&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Soft&quot;,&quot;options&quot;:[&quot;Soft&quot;,&quot;Rounded&quot;,&quot;Square&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Identity&quot;},&quot;proofBand&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Light sand&quot;,&quot;options&quot;:[&quot;Light sand&quot;,&quot;Dark panel&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Identity&quot;},&quot;heroMedia&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Video loop&quot;,&quot;options&quot;:[&quot;Video loop&quot;,&quot;Still image&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Hero&quot;}}">
+const ZONES = [
+  {
+    id: 'uniti', color: '#9E7554', left: '46%', top: '30%',
+    name: 'Uniti Campus Parcel',
+    use: { EN: 'Education & training', BM: 'Pendidikan & latihan' },
+    desc: {
+      EN: 'Beachfront land adjoining the operating Kolej Uniti campus.',
+      BM: 'Tanah tepi pantai bersebelahan kampus Kolej Uniti yang beroperasi.'
+    },
+    area: '± 14.2 ac', frontage: '± 420 m', zoning: { EN: 'Institutional', BM: 'Institusi' },
+    title: { EN: 'Agricultural*', BM: 'Pertanian*' },
+    structure: { EN: 'Outright / JV', BM: 'Jualan / UJS' },
+    access: 'N143', status: { EN: 'Available', BM: 'Tersedia' },
+    highlights: {
+      EN: [
+        'Direct beach access, suited to outdoor, marine and experiential training programmes.',
+        'Adjoins an operating training campus — shared utilities, road and security already in place.',
+        'Surrounded by established outbound and team-building operators, giving an immediate catchment.',
+        'Agricultural title convertible to institutional or commercial use, subject to state approval.'
+      ],
+      BM: [
+        'Akses terus ke pantai, sesuai untuk program latihan luar, marin dan pengalaman.',
+        'Bersebelahan kampus latihan yang beroperasi — utiliti, jalan dan keselamatan sudah ada.',
+        'Dikelilingi pengendali outbound dan pembinaan pasukan yang mantap, memberi tadahan segera.',
+        'Hakmilik pertanian boleh ditukar kepada kegunaan institusi atau komersial, tertakluk kelulusan negeri.'
+      ]
+    }
+  },
+  {
+    id: 'marina', color: '#7E8A63', left: '27%', top: '46%',
+    name: 'Sembilan Marine Resort',
+    use: { EN: 'Hospitality & tourism', BM: 'Hospitaliti & pelancongan' },
+    desc: {
+      EN: 'The widest beach frontage on the site, with marina club access.',
+      BM: 'Muka pantai terluas di tapak ini, dengan akses kelab marina.'
+    },
+    area: '± 9.6 ac', frontage: '± 380 m', zoning: { EN: 'Resort / commercial', BM: 'Resort / komersial' },
+    title: { EN: 'Agricultural*', BM: 'Pertanian*' },
+    structure: { EN: 'Outright / JV', BM: 'Jualan / UJS' },
+    access: 'N143', status: { EN: 'Available', BM: 'Tersedia' },
+    highlights: {
+      EN: [
+        'Unbroken west-facing beach frontage — sunset aspect across the Strait of Malacca.',
+        'Marina club house and jetty within walking distance of the parcel boundary.',
+        'Depth allows a low-rise resort footprint without setback compromise.',
+        'Port Dickson tourism corridor: roughly 90 minutes from Kuala Lumpur by road.'
+      ],
+      BM: [
+        'Muka pantai menghadap barat tanpa gangguan — pemandangan matahari terbenam Selat Melaka.',
+        'Rumah kelab marina dan jeti dalam jarak berjalan dari sempadan lot.',
+        'Kedalaman lot membenarkan resort bertingkat rendah tanpa kompromi anjakan.',
+        'Koridor pelancongan Port Dickson: kira-kira 90 minit dari Kuala Lumpur.'
+      ]
+    }
+  },
+  {
+    id: 'nature', color: '#557C79', left: '55%', top: '82%',
+    name: 'Dynac Nature Reserve',
+    use: { EN: 'Eco-tourism', BM: 'Eko-pelancongan' },
+    desc: {
+      EN: 'Riverine forest at the river mouth, held for low-density tourism.',
+      BM: 'Hutan tepi sungai di muara, untuk pelancongan berkepadatan rendah.'
+    },
+    area: '± 6.8 ac', frontage: '± 210 m', zoning: { EN: 'Nature tourism', BM: 'Pelancongan alam' },
+    title: { EN: 'Agricultural', BM: 'Pertanian' },
+    structure: { EN: 'JV preferred', BM: 'UJS diutamakan' },
+    access: 'M143', status: { EN: 'Available', BM: 'Tersedia' },
+    highlights: {
+      EN: [
+        'Mature riverine canopy — the only parcel with standing forest cover retained.',
+        'River mouth frontage supports boardwalk, kayak and mangrove interpretation uses.',
+        'Low-density brief protects the setting and shortens the approvals path.',
+        'Adjacent to Kampung Telok Perun, giving a community-tourism partner on the boundary.'
+      ],
+      BM: [
+        'Kanopi tepi sungai matang — satu-satunya lot dengan litupan hutan dikekalkan.',
+        'Muka muara sungai sesuai untuk denai kayu, kayak dan tafsiran bakau.',
+        'Brif kepadatan rendah melindungi persekitaran dan memendekkan laluan kelulusan.',
+        'Bersebelahan Kampung Telok Perun, memberi rakan pelancongan komuniti di sempadan.'
+      ]
+    }
+  },
+  {
+    id: 'shipyard', color: '#6B7699', left: '73%', top: '80%',
+    name: 'Sembilan Shipyard Yard',
+    use: { EN: 'Marine industrial', BM: 'Industri marin' },
+    desc: {
+      EN: 'Riverfront hardstanding for marine engineering and slipway use.',
+      BM: 'Kawasan keras tepi sungai untuk kejuruteraan marin dan limbungan.'
+    },
+    area: '± 5.1 ac', frontage: '± 150 m', zoning: { EN: 'Light industrial', BM: 'Industri ringan' },
+    title: { EN: 'Industrial', BM: 'Industri' },
+    structure: { EN: 'Outright', BM: 'Jualan penuh' },
+    access: 'M143', status: { EN: 'Available', BM: 'Tersedia' },
+    highlights: {
+      EN: [
+        'Already zoned light industrial — no conversion required before construction.',
+        'River frontage with sufficient draft for slipway and small-vessel fabrication.',
+        'Direct heavy-vehicle route to the M143 without passing residential frontage.',
+        'Neighbouring shipyard operations provide an established labour pool.'
+      ],
+      BM: [
+        'Sudah dizonkan industri ringan — tiada penukaran diperlukan sebelum pembinaan.',
+        'Muka sungai dengan kedalaman mencukupi untuk limbungan dan fabrikasi vesel kecil.',
+        'Laluan kenderaan berat terus ke M143 tanpa melalui kawasan kediaman.',
+        'Operasi limbungan berdekatan menyediakan kumpulan tenaga kerja yang mantap.'
+      ]
+    }
+  },
+  {
+    id: 'walit', color: '#8E6B85', left: '63%', top: '76%',
+    name: 'Walit Riverfront Lot',
+    use: { EN: 'Joint venture', BM: 'Usahasama' },
+    desc: {
+      EN: 'Compact riverfront lot retained for a structured partnership.',
+      BM: 'Lot tepi sungai padat yang dikekalkan untuk perkongsian berstruktur.'
+    },
+    area: '± 2.4 ac', frontage: '± 95 m', zoning: { EN: 'Mixed use', BM: 'Guna campuran' },
+    title: { EN: 'Agricultural*', BM: 'Pertanian*' },
+    structure: { EN: 'JV only', BM: 'UJS sahaja' },
+    access: 'M143', status: { EN: 'JV discussions open', BM: 'Perbincangan UJS dibuka' },
+    highlights: {
+      EN: [
+        'Retained by Uniti for joint venture — land contributed as equity, not sold.',
+        'Small footprint suits a serviced-apartment, F&B or marina-support scheme.',
+        'Sits between the nature reserve and the shipyard, with access to both frontages.',
+        'Partner selection is by brief, not by price; concept fit is the first filter.'
+      ],
+      BM: [
+        'Dikekalkan oleh Uniti untuk usahasama — tanah disumbang sebagai ekuiti, bukan dijual.',
+        'Keluasan kecil sesuai untuk apartmen servis, F&B atau sokongan marina.',
+        'Terletak antara rizab alam dan limbungan, dengan akses ke kedua-dua muka.',
+        'Pemilihan rakan berdasarkan brif, bukan harga; kesesuaian konsep ialah penapis pertama.'
+      ]
+    }
+  }
+];
+
+const LANDMARKS = [
+  { name: { EN: 'Kolej Uniti', BM: 'Kolej Uniti' }, dist: '0 km' },
+  { name: { EN: 'Marina club house', BM: 'Rumah kelab marina' }, dist: '0.4 km' },
+  { name: { EN: 'Tanjung Agas beach', BM: 'Pantai Tanjung Agas' }, dist: '0.1 km' },
+  { name: { EN: 'UTC Port Dickson', BM: 'UTC Port Dickson' }, dist: '6 km' },
+  { name: { EN: 'Ixora Permai', BM: 'Ixora Permai' }, dist: '1.8 km' },
+  { name: { EN: 'Kuala Lumpur', BM: 'Kuala Lumpur' }, dist: '90 min' }
+];
+
+const T = {
+  mHome: { EN: 'Overview', BM: 'Gambaran' },
+  mSite: { EN: 'The site', BM: 'Tapak' },
+  mParcels: { EN: 'Parcels', BM: 'Lot' },
+  mAbout: { EN: 'Uniti', BM: 'Uniti' },
+  mEnquire: { EN: 'Enquire', BM: 'Hubungi' },
+  lbParcels: { EN: 'Parcels', BM: 'Lot' },
+  lbArea: { EN: 'Total area', BM: 'Keluasan' },
+  lbTenure: { EN: 'Tenure', BM: 'Pegangan' },
+  lbFrontage: { EN: 'Beach frontage', BM: 'Muka pantai' },
+  lbFromKL: { EN: 'From Kuala Lumpur', BM: 'Dari Kuala Lumpur' },
+  vFreehold: { EN: 'Freehold', BM: 'Kekal' },
+  ebSite: { EN: 'The site', BM: 'Tapak' },
+  ebParcels: { EN: 'Parcels', BM: 'Lot' },
+  ebAbout: { EN: 'About Uniti', BM: 'Tentang Uniti' },
+  ebEnquire: { EN: 'Enquiry', BM: 'Pertanyaan' },
+  planCaption: { EN: 'Open the interactive masterplan', BM: 'Buka pelan induk interaktif' },
+  hParcels: { EN: 'What is available', BM: 'Apa yang tersedia' },
+  parcelsNote: {
+    EN: 'Indicative areas, subject to final survey. Pricing is released with the information pack.',
+    BM: 'Keluasan indikatif, tertakluk ukur akhir. Harga dikeluarkan bersama pakej maklumat.'
+  },
+  thParcel: { EN: 'Parcel', BM: 'Lot' },
+  thUse: { EN: 'Intended use', BM: 'Kegunaan' },
+  thArea: { EN: 'Area', BM: 'Luas' },
+  thZoning: { EN: 'Zoning', BM: 'Pengezonan' },
+  thStructure: { EN: 'Structure', BM: 'Struktur' },
+  areaFootnote: {
+    EN: 'Areas total ± 38 acres including internal access reserves and the TNB / LRK corridors, which are not for sale.',
+    BM: 'Jumlah keluasan ± 38 ekar termasuk rizab akses dalaman dan koridor TNB / LRK, yang tidak dijual.'
+  },
+  stFounded: { EN: 'Operating since', BM: 'Beroperasi sejak' },
+  stHolding: { EN: 'Single holding', BM: 'Satu pegangan' },
+  stOwner: { EN: 'Land owner, start to finish', BM: 'Pemilik tanah, awal ke akhir' },
+  ctaBrief: { EN: 'Request the site brief (PDF)', BM: 'Minta brif tapak (PDF)' },
+  hProcess: { EN: 'From first enquiry to agreement', BM: 'Dari pertanyaan pertama ke perjanjian' },
+  hEnquire: { EN: 'Request the information pack', BM: 'Minta pakej maklumat' },
+  pEnquire: {
+    EN: 'Pricing is released on enquiry, per parcel. Tell us which parcel and what you intend to build; we will send the pack and a proposed structure.',
+    BM: 'Harga dikeluarkan atas pertanyaan, mengikut lot. Beritahu kami lot mana dan apa yang anda ingin bina; kami akan hantar pakej dan struktur yang dicadangkan.'
+  },
+  packA: { EN: 'Survey plan, title search and zoning confirmation', BM: 'Pelan ukur, carian hakmilik dan pengesahan pengezonan' },
+  packB: { EN: 'Indicative pricing and payment structure per parcel', BM: 'Harga indikatif dan struktur bayaran bagi setiap lot' },
+  packC: { EN: 'Conversion and approvals timeline, with our planner', BM: 'Jadual penukaran dan kelulusan, bersama perancang kami' },
+  fName: { EN: 'Full name', BM: 'Nama penuh' },
+  fOrg: { EN: 'Organisation', BM: 'Organisasi' },
+  fEmail: { EN: 'Email', BM: 'E-mel' },
+  fPhone: { EN: 'Phone', BM: 'Telefon' },
+  fInterest: { EN: 'Parcel of interest', BM: 'Lot yang diminati' },
+  fUse: { EN: 'Intended use', BM: 'Kegunaan yang dirancang' },
+  fRole: { EN: 'You are', BM: 'Anda adalah' },
+  optAll: { EN: 'The whole site', BM: 'Keseluruhan tapak' },
+  ctaSubmit: { EN: 'Send enquiry', BM: 'Hantar pertanyaan' },
+  privacy: {
+    EN: 'Used only to respond to this enquiry. Not shared with agents or third parties.',
+    BM: 'Digunakan hanya untuk membalas pertanyaan ini. Tidak dikongsi dengan ejen atau pihak ketiga.'
+  },
+  sentTitle: { EN: 'Enquiry received', BM: 'Pertanyaan diterima' },
+  sentBody: {
+    EN: 'Our investment team replies within two business days with the pack and a proposed next step.',
+    BM: 'Pasukan pelaburan kami akan membalas dalam dua hari bekerja dengan pakej dan langkah seterusnya.'
+  },
+  sendAnother: { EN: 'Send another', BM: 'Hantar lagi' },
+  selLabel: { EN: 'Parcel', BM: 'Lot' },
+  legendLabel: { EN: 'All parcels', BM: 'Semua lot' },
+  ctaViewParcel: { EN: 'View parcel', BM: 'Lihat lot' },
+  pinsNote: {
+    EN: 'Parcel markers are shown on the survey plan view.',
+    BM: 'Penanda lot ditunjukkan pada paparan pelan ukur.'
+  },
+  ctaRequest: { EN: 'Request details', BM: 'Minta maklumat' },
+  ctaRequestShort: { EN: 'Enquire', BM: 'Hubungi' },
+  hFacts: { EN: 'Parcel facts', BM: 'Fakta lot' },
+  hHighlights: { EN: 'Why this parcel', BM: 'Mengapa lot ini' },
+  hLandmarks: { EN: 'Distances', BM: 'Jarak' },
+  hOther: { EN: 'Other parcels on this site', BM: 'Lot lain di tapak ini' },
+  hZoneForm: { EN: 'Request this parcel', BM: 'Minta lot ini' },
+  pZoneForm: {
+    EN: 'Pricing, survey plan and title search, sent directly by Uniti.',
+    BM: 'Harga, pelan ukur dan carian hakmilik, dihantar terus oleh Uniti.'
+  },
+  ndaLabel: {
+    EN: 'I understand the pack is shared in confidence and will sign an NDA if requested.',
+    BM: 'Saya faham pakej ini dikongsi secara sulit dan akan menandatangani NDA jika diminta.'
+  },
+  titleFootnote: {
+    EN: '*Convertible to institutional or commercial title subject to state approval. Areas are indicative pending final survey.',
+    BM: '*Boleh ditukar kepada hakmilik institusi atau komersial tertakluk kelulusan negeri. Keluasan adalah indikatif sementara menunggu ukur akhir.'
+  },
+  priceOnRequest: { EN: 'Price on request', BM: 'Harga atas permintaan' },
+  footerBlurb: {
+    EN: 'Coastal land at Tanjung Agas, offered directly by its owner, Uniti Sdn Bhd.',
+    BM: 'Tanah pesisir di Tanjung Agas, ditawarkan terus oleh pemiliknya, Uniti Sdn Bhd.'
+  },
+  fcContact: { EN: 'Contact', BM: 'Hubungi' },
+  fcNav: { EN: 'Navigate', BM: 'Navigasi' },
+  fcLegal: { EN: 'Notice', BM: 'Notis' },
+  legalNote: {
+    EN: 'Areas, zoning and imagery are indicative and do not form an offer or contract.',
+    BM: 'Keluasan, pengezonan dan imej adalah indikatif dan bukan tawaran atau kontrak.'
+  },
+  rights: { EN: 'All rights reserved.', BM: 'Hak cipta terpelihara.' },
+  fLabels: {
+    area: { EN: 'Area', BM: 'Luas' },
+    frontage: { EN: 'Frontage', BM: 'Muka' },
+    tenure: { EN: 'Tenure', BM: 'Pegangan' },
+    title: { EN: 'Title type', BM: 'Jenis hakmilik' },
+    zoning: { EN: 'Zoning', BM: 'Pengezonan' },
+    structure: { EN: 'Structure', BM: 'Struktur' },
+    access: { EN: 'Road access', BM: 'Akses jalan' },
+    status: { EN: 'Status', BM: 'Status' }
+  }
+};
+
+const STEPS = {
+  EN: [
+    ['01', 'Enquire', 'Tell us the parcel and the intended use. No agent sits in between.'],
+    ['02', 'Pack & site visit', 'Survey plan, title search and zoning confirmation, then a walk of the boundary.'],
+    ['03', 'Structure', 'Outright purchase, staged payment, or land-as-equity joint venture.'],
+    ['04', 'Agreement', 'Documented with your counsel. Uniti holds the land through completion.']
+  ],
+  BM: [
+    ['01', 'Pertanyaan', 'Beritahu kami lot dan kegunaannya. Tiada ejen di antara.'],
+    ['02', 'Pakej & lawatan', 'Pelan ukur, carian hakmilik dan pengesahan zon, diikuti lawatan sempadan.'],
+    ['03', 'Struktur', 'Beli terus, bayaran berperingkat, atau usahasama tanah sebagai ekuiti.'],
+    ['04', 'Perjanjian', 'Didokumen bersama peguam anda. Uniti memegang tanah sehingga selesai.']
+  ]
+};
+
+const ROLES = {
+  EN: ['Developer', 'Institutional investor', 'Operator / occupier', 'Government agency', 'Adviser / agent'],
+  BM: ['Pemaju', 'Pelabur institusi', 'Pengendali / penghuni', 'Agensi kerajaan', 'Penasihat / ejen']
+};
+
+const SORTS = {
+  EN: [['featured', 'Recommended'], ['area-desc', 'Largest first'], ['area-asc', 'Smallest first'], ['newest', 'Most recent']],
+  BM: [['featured', 'Disyorkan'], ['area-desc', 'Terbesar dahulu'], ['area-asc', 'Terkecil dahulu'], ['newest', 'Terbaru']]
+};
+
+const VIEWS = {
+  EN: [['plan', 'Survey plan'], ['3d', '3D model'], ['satellite', 'Satellite']],
+  BM: [['plan', 'Pelan ukur'], ['3d', 'Model 3D'], ['satellite', 'Satelit']]
+};
+
+const IMGS = {
+  plan: 'assets/boundMap.png',
+  '3d': 'assets/satMap_3D_detailed.png',
+  satellite: 'assets/satMap.png'
+};
+
+class Component extends DCLogic {
+  state = {
+    screen: 'home', lang: 'EN', zoneId: 'uniti', view: 'plan',
+    menuOpen: false, sentHome: false, sentZone: false,
+    active: 'facts', reduced: false
+  };
+
+  componentDidMount() {
+    this.applyAccent();
+    this.setState({ reduced: window.matchMedia('(prefers-reduced-motion: reduce)').matches });
+    this.startVideo();
+    this.observe();
+    this.syncViewImages();
+    this.snapshot();
+  }
+
+  snapshot() {
+    this._prev = {
+      screen: this.state.screen,
+      zoneId: this.state.zoneId,
+      reduced: this.state.reduced
+    };
+  }
+
+  componentDidUpdate() {
+    this.applyAccent();
+    this.syncViewImages();
+    const p = this._prev || {};
+    const screenChanged = p.screen !== this.state.screen || p.zoneId !== this.state.zoneId;
+    const reducedChanged = p.reduced !== this.state.reduced;
+    this.snapshot();
+    if (screenChanged) this.observe();
+    if (reducedChanged) this.startVideo();
+  }
+
+  componentWillUnmount() {
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+    clearTimeout(this._fadeTimer);
+  }
+
+  syncViewImages() {
+    const src = IMGS[this.state.view];
+    [this._mapImg, this._detailImg].forEach(el => {
+      if (el && el.getAttribute('src') !== src) el.setAttribute('src', src);
+    });
+  }
+
+  /* Mix a hex toward black by `amt` (0-1). */
+  darken(hex, amt) {
+    const h = String(hex).replace('#', '');
+    const n = h.length === 3 ? h.split('').map(c => c + c).join('') : h;
+    const v = parseInt(n, 16);
+    if (isNaN(v)) return hex;
+    const f = 1 - amt;
+    const ch = i => Math.round(((v >> (16 - i * 8)) & 255) * f).toString(16).padStart(2, '0');
+    return '#' + ch(0) + ch(1) + ch(2);
+  }
+
+  applyAccent() {
+    const r = document.documentElement;
+    const base = this.props.accentColor || '#C2622B';
+    /* A single accent cannot clear 4.5:1 on both a near-black and a paper ground,
+       so the accent itself is darkened for light grounds rather than swapping the
+       label colour sitting on it. */
+    const onLight = this.isLight();
+    const acc = onLight ? this.darken(base, 0.19) : base;
+    r.style.setProperty('--accent', acc);
+    r.style.setProperty('--accent-hover', onLight
+      ? this.darken(base, 0.34)
+      : `color-mix(in oklab, ${acc}, #ffffff 20%)`);
+    const D = {
+      ink: '#F3EEE3', i70: 'rgba(243,238,227,.76)', i55: 'rgba(243,238,227,.62)',
+      i40: 'rgba(243,238,227,.54)', hair: 'rgba(243,238,227,.10)', hair2: 'rgba(243,238,227,.20)',
+      onAccent: '#15120E'
+    };
+    const L = {
+      ink: '#1A1611', i70: 'rgba(26,22,17,.78)', i55: 'rgba(26,22,17,.64)',
+      i40: 'rgba(26,22,17,.54)', hair: 'rgba(26,22,17,.13)', hair2: 'rgba(26,22,17,.24)',
+      onAccent: '#FBF8F1'
+    };
+    const grounds = {
+      'Warm charcoal': { g: ['#15120E', '#0B0907', '#201C16'], t: D, glass: 'rgba(21,18,14,.86)' },
+      'Cool graphite': { g: ['#111214', '#08090A', '#1B1D20'], t: D, glass: 'rgba(17,18,20,.86)' },
+      'Deep clay': { g: ['#1C1813', '#12100C', '#282219'], t: D, glass: 'rgba(28,24,19,.86)' },
+      'Warm paper': { g: ['#F6F2E9', '#EDE8DC', '#FCFAF5'], t: L, glass: 'rgba(246,242,233,.88)' },
+      'Cool paper': { g: ['#F2F3F1', '#E8EAE7', '#FBFBFA'], t: L, glass: 'rgba(242,243,241,.88)' }
+    };
+    const s = grounds[this.props.ground] || grounds['Warm charcoal'];
+    r.style.setProperty('--bg', s.g[0]);
+    r.style.setProperty('--bg-deep', s.g[1]);
+    r.style.setProperty('--panel', s.g[2]);
+    r.style.setProperty('--ink', s.t.ink);
+    r.style.setProperty('--ink-70', s.t.i70);
+    r.style.setProperty('--ink-55', s.t.i55);
+    r.style.setProperty('--ink-40', s.t.i40);
+    r.style.setProperty('--hair', s.t.hair);
+    r.style.setProperty('--hair-2', s.t.hair2);
+    r.style.setProperty('--on-accent', s.t.onAccent);
+    r.style.setProperty('--glass', s.glass);
+
+    const corners = {
+      'Square': ['0px', '0px', '0px'],
+      'Soft': ['8px', '10px', '14px'],
+      'Rounded': ['12px', '16px', '22px']
+    };
+    const c = corners[this.props.corners] || corners['Soft'];
+    r.style.setProperty('--r-sm', c[0]);
+    r.style.setProperty('--r-md', c[1]);
+    r.style.setProperty('--r-lg', c[2]);
+  }
+
+  isLight() {
+    return this.props.ground === 'Warm paper' || this.props.ground === 'Cool paper';
+  }
+
+  /* ---------- hero video crossfade ----------
+     Ref callbacks are STABLE instance methods (bound once in the constructor
+     path below): inline closures make React detach/reattach the ref on every
+     render. play() is called only when a layer becomes active — never on the
+     render path — and the outgoing layer is paused, so exactly one video
+     decodes at a time. Opacity is driven directly on the nodes rather than
+     through a re-render, so the crossfade costs no React work at all. */
+  setVidA = el => {
+    this._vidA = el;
+    if (el) { el.muted = true; el.playbackRate = 0.85; }
+    this.bindVideos();
+  };
+
+  setVidB = el => {
+    this._vidB = el;
+    if (el) { el.muted = true; el.playbackRate = 0.85; }
+    this.bindVideos();
+  };
+
+  /* Read matchMedia directly: the ref callbacks fire on first render, before
+     componentDidMount has put `reduced` into state. */
+  videosOff() {
+    const rm = typeof window !== 'undefined' && window.matchMedia
+      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      : false;
+    return rm || this.state.reduced || this.props.heroMedia === 'Still image';
+  }
+
+  showLayer(which) {
+    const a = this._vidA, b = this._vidB;
+    if (!a || !b) return;
+    this._activeVid = which;
+    const on = which === 'a' ? a : b;
+    const off = which === 'a' ? b : a;
+    on.style.opacity = '1';
+    off.style.opacity = '0';
+    on.play().catch(() => {});
+  }
+
+  bindVideos() {
+    const a = this._vidA, b = this._vidB;
+    if (!a || !b || this._bound || this.videosOff()) return;
+    this._bound = true;
+    this._activeVid = 'a';
+    const step = (cur, self) => () => {
+      if (this._activeVid !== self) return;
+      if (cur.duration && cur.duration - cur.currentTime <= 0.6) {
+        const other = self === 'a' ? this._vidB : this._vidA;
+        other.currentTime = 0;
+        this.showLayer(self === 'a' ? 'b' : 'a');
+        /* Let the 0.6s crossfade finish, then stop decoding the old layer. */
+        clearTimeout(this._fadeTimer);
+        this._fadeTimer = setTimeout(() => { try { cur.pause(); } catch (e) {} }, 700);
+      }
+    };
+    a.addEventListener('timeupdate', step(a, 'a'));
+    b.addEventListener('timeupdate', step(b, 'b'));
+    this.showLayer('a');
+  }
+
+  startVideo() {
+    if (this.videosOff()) {
+      [this._vidA, this._vidB].forEach(v => { if (v) { try { v.pause(); } catch (e) {} } });
+      return;
+    }
+    this.bindVideos();
+  }
+
+  /* ---------- section tracking ---------- */
+  /* Deterministic: the active section is the LAST in-flow content wrapper whose
+     top has passed the reading line. The sticky enquiry panel is never a target —
+     it is taller than the viewport and can't report a meaningful position. */
+  observe() {
+    if (this.state.screen !== 'zone') {
+      if (this._onScroll) { window.removeEventListener('scroll', this._onScroll); this._onScroll = null; }
+      return;
+    }
+    if (!this._onScroll) {
+      this._onScroll = () => this.updateActive();
+      window.addEventListener('scroll', this._onScroll, { passive: true });
+    }
+    this.updateActive();
+  }
+
+  updateActive() {
+    if (this.state.screen !== 'zone') return;
+    const defs = [['facts', this._facts], ['highlights', this._hl], ['landmarks', this._lm]]
+      .filter(d => d[1]);
+    if (!defs.length) return;
+    const line = 200;
+    let id = defs[0][0];
+    defs.forEach(([key, el]) => { if (el.getBoundingClientRect().top <= line) id = key; });
+    /* Measured live, not from state: the enquiry panel only sits in the flow at
+       narrow widths, and a cached width goes stale on resize. */
+    const stacked = window.matchMedia('(max-width:860px)').matches;
+    if (stacked && this._enq2 && this._enq2.getBoundingClientRect().top <= line) id = 'enquire';
+    if (id !== this.state.active) this.setState({ active: id });
+  }
+
+  /* Parcel carousel. Deliberately stateless: any React state driven by the
+     scroll position re-renders the track, which resets scrollLeft, which fires
+     another scroll event. Arrows scroll by exactly one card and scroll-snap
+     settles the position — nothing to track, nothing to loop. */
+  /* Per-card photo gallery — same stateless pattern as the parcel carousel. */
+  /* Direct assignment, NOT scrollBy({behavior:'smooth'}): under
+     scroll-snap-type: x mandatory the smooth form never settles and
+     scrollLeft stays put. The track's CSS scroll-behavior still animates it. */
+  gallery(id, dir) {
+    const t = document.querySelector(`[data-gallery="${id}"]`);
+    if (!t) return;
+    t.scrollLeft += dir * t.clientWidth;
+  }
+
+  slide(dir) {
+    const t = document.querySelector('[data-carousel="parcels"]');
+    const first = t && t.firstElementChild;
+    if (!first) return;
+    const step = first.getBoundingClientRect().width + 18;
+    t.scrollLeft += dir * step;
+  }
+
+  /* Validation surfaces as a single summary block rather than per-field styling:
+     a dynamic style hole on an input that also carries style-focus does not
+     re-apply, so per-field colour changes would silently never show. */
+  submitForm(e, which) {
+    e.preventDefault();
+    const f = e.target.elements;
+    const bm = this.state.lang === 'BM';
+    const val = k => (f[k] && typeof f[k].value === 'string' ? f[k].value.trim() : '');
+    const errs = [];
+    if (!val('fullname')) errs.push(bm ? 'Nama penuh diperlukan.' : 'Full name is required.');
+    const email = val('email');
+    if (!email) errs.push(bm ? 'E-mel diperlukan.' : 'Email is required.');
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      errs.push(bm ? 'E-mel itu kelihatan tidak lengkap.' : 'That email looks incomplete.');
+    }
+    if (f.nda && !f.nda.checked) {
+      errs.push(bm ? 'Sila akui terma keyakinan.' : 'Please acknowledge the confidentiality terms.');
+    }
+    if (errs.length) {
+      this.setState(which === 'Home' ? { errsHome: errs } : { errsZone: errs });
+      return;
+    }
+    this.setState(which === 'Home'
+      ? { sentHome: true, errsHome: [] }
+      : { sentZone: true, errsZone: [] });
+  }
+
+  scrollTo(el) {
+    if (!el) return;
+    const y = el.getBoundingClientRect().top + window.scrollY - 140;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+
+  nav(screen, extra) {
+    this.setState(Object.assign({ screen, menuOpen: false }, extra || {}), () => {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      this.startVideo();
+    });
+  }
+
+  jump(getEl) {
+    if (this.state.screen !== 'home') {
+      this.setState({ screen: 'home', menuOpen: false }, () => {
+        setTimeout(() => this.scrollTo(getEl()), 60);
+      });
+    } else {
+      this.setState({ menuOpen: false });
+      this.scrollTo(getEl());
+    }
+  }
+
+  renderVals() {
+    const L = this.state.lang;
+    const tr = k => (T[k] ? (T[k][L] !== undefined ? T[k][L] : T[k]) : '');
+    const out = {};
+    Object.keys(T).forEach(k => { if (k !== 'fLabels') out[k] = T[k][L]; });
+
+    const dark = this.props.proofBand !== 'Light sand';
+    const sel = ZONES.find(z => z.id === this.state.zoneId) || ZONES[0];
+    const selIndex = ZONES.indexOf(sel) + 1;
+
+    const zoneRows = ZONES.map((z, i) => ({
+      name: z.name,
+      index: i + 1,
+      desc: z.desc[L],
+      use: z.use[L],
+      area: z.area,
+      zoning: z.zoning[L],
+      structure: z.structure[L],
+      status: z.status[L],
+      barStyle: `width:3px;border-radius:2px;align-self:stretch;min-height:34px;flex:none;background:${z.color}`,
+      imgStyle: `position:absolute;inset:0;background-image:linear-gradient(${z.color}66,${z.color}33),url(assets/boundMap.png);background-size:cover,155%;background-position:center,${z.left} ${z.top};transition:transform .4s ease`,
+      badgeStyle: `background:${z.structure.EN === 'JV only' ? 'var(--accent)' : '#F5F1E7'};color:${z.structure.EN === 'JV only' ? 'var(--on-accent)' : '#15120E'};font:600 11px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:7px 9px;border-radius:999px`,
+      swatchStyle: `width:14px;height:14px;border-radius:3px;flex:none;background:${z.color}`,
+      legendStyle: `width:100%;display:flex;align-items:center;gap:12px;padding:13px 18px;background:${z.id === sel.id ? 'rgba(243,238,227,.06)' : 'transparent'};border:0;border-top:1px solid var(--hair);border-left:2px solid ${z.id === sel.id ? 'var(--accent)' : 'transparent'};cursor:pointer;transition:background .15s`,
+      pinStyle: `position:absolute;left:${z.left};top:${z.top};transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font:600 13px/1 var(--sans);cursor:pointer;transition:transform .16s,box-shadow .16s;background:${z.id === sel.id ? 'var(--accent)' : '#15120E'};color:${z.id === sel.id ? 'var(--on-accent)' : '#F5F1E7'};border:2px solid ${z.id === sel.id ? '#15120E' : 'rgba(245,241,231,.9)'};box-shadow:0 2px 12px rgba(0,0,0,.5)`,
+      select: () => this.setState({ zoneId: z.id }),
+      open: () => this.nav('zone', { zoneId: z.id, sentZone: false, active: 'facts' })
+    }));
+
+    /* ---- Listings (marketplace search-results) ---- */
+    const catOf = z => z.use[L];
+    const pills = [[L === 'EN' ? 'All parcels' : 'Semua lot', 'all']].concat(
+      ZONES.map(z => [z.use[L], z.id])
+    );
+    const activeFilter = this.state.filter || 'all';
+    const filterPills = pills.map(([label, id]) => ({
+      label,
+      style: `white-space:nowrap;display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:11px 18px;font:500 13px/1 var(--sans);cursor:pointer;border:1px solid ${id === activeFilter ? 'var(--accent)' : 'var(--hair-2)'};background:${id === activeFilter ? 'var(--accent)' : 'transparent'};color:${id === activeFilter ? 'var(--on-accent)' : 'var(--ink-70)'}`,
+      apply: () => this.setState({ filter: id })
+    }));
+
+    const LISTED = ['11 Sep 2026', '9 Sep 2026', '2 Sep 2026', '28 Aug 2026', '21 Aug 2026'];
+    const acres = z => parseFloat(String(z.area).replace(/[^\d.]/g, '')) || 0;
+    let pool = activeFilter === 'all' ? ZONES.slice() : ZONES.filter(z => z.id === activeFilter);
+    const sort = this.state.sort || 'featured';
+    if (sort === 'area-desc') pool.sort((x, y) => acres(y) - acres(x));
+    if (sort === 'area-asc') pool.sort((x, y) => acres(x) - acres(y));
+    if (sort === 'newest') pool = pool.slice();
+
+    const shot = (z, img, zoom, pos) =>
+      `flex:0 0 100%;scroll-snap-align:start;height:100%;background-image:url(${img});background-size:${zoom};background-position:${pos};background-repeat:no-repeat`;
+
+    const listingZones = pool.map(z => {
+      const i = ZONES.indexOf(z);
+      return {
+        id: z.id,
+        name: z.name,
+        use: z.use[L],
+        desc: z.desc[L],
+        area: z.area,
+        zoning: z.zoning[L],
+        structure: z.structure[L],
+        status: z.status[L],
+        tenure: T.vFreehold[L],
+        frontage: z.frontage,
+        listed: (L === 'EN' ? 'Listed ' : 'Disenaraikan ') + LISTED[i],
+        photoCount: '3',
+        galleryId: `gal-${z.id}`,
+        swatchStyle: `width:12px;height:12px;border-radius:3px;flex:none;background:${z.color}`,
+        badgeStyle: `background:${'var(--accent)'};color:var(--on-accent);font:600 11px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:7px 10px;border-radius:999px`,
+        photos: [
+          { style: shot(z, 'assets/boundMap.png', '260%', `${z.left} ${z.top}`) },
+          { style: shot(z, 'assets/satMap_3D_detailed.png', 'cover', 'center') },
+          { style: shot(z, 'assets/satMap.png', '200%', `${z.left} ${z.top}`) }
+        ],
+        waHref: `https://wa.me/60300000000?text=${encodeURIComponent(
+          (L === 'EN' ? 'Hello Uniti, I am enquiring about ' : 'Salam Uniti, saya bertanya tentang ') + z.name + ', Tanjung Agas.'
+        )}`,
+        galPrev: () => this.gallery(`gal-${z.id}`, -1),
+        galNext: () => this.gallery(`gal-${z.id}`, 1),
+        open: () => this.nav('zone', { zoneId: z.id, sentZone: false, active: 'facts' })
+      };
+    });
+
+    const fl = T.fLabels;
+    const factsShort = [
+      { label: fl.area[L], value: sel.area },
+      { label: fl.zoning[L], value: sel.zoning[L] },
+      { label: fl.tenure[L], value: T.vFreehold[L] },
+      { label: fl.structure[L], value: sel.structure[L] },
+      { label: fl.status[L], value: sel.status[L] }
+    ];
+    const factsFull = [
+      { label: fl.area[L], value: sel.area },
+      { label: fl.frontage[L], value: sel.frontage },
+      { label: fl.tenure[L], value: T.vFreehold[L] },
+      { label: fl.title[L], value: sel.title[L] },
+      { label: fl.zoning[L], value: sel.zoning[L] },
+      { label: fl.structure[L], value: sel.structure[L] },
+      { label: fl.access[L], value: sel.access },
+      { label: fl.status[L], value: sel.status[L] }
+    ];
+
+    const viewBtn = (id, active) => `background:${active ? 'var(--accent)' : 'transparent'};color:${active ? 'var(--on-accent)' : 'inherit'};opacity:${active ? 1 : .72};border:0;padding:12px 16px;font:600 12px/1 var(--sans);letter-spacing:.04em;cursor:pointer;border-radius:var(--r-sm);transition:background .15s,opacity .15s`;
+    const mapViews = VIEWS[L].map(([id, label]) => ({
+      label,
+      style: viewBtn(id, this.state.view === id),
+      select: () => this.setState({ view: id })
+    }));
+
+    const secBtn = active => `white-space:nowrap;background:none;border:0;border-bottom:2px solid ${active ? 'var(--accent)' : 'transparent'};padding:16px 0;font:600 12px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:${active ? 'var(--ink)' : 'var(--ink-55)'};cursor:pointer;transition:color .15s,border-color .15s`;
+    const secDefs = [
+      ['facts', T.hFacts[L], () => this._facts],
+      ['highlights', T.hHighlights[L], () => this._hl],
+      ['landmarks', T.hLandmarks[L], () => this._lm],
+      ['enquire', T.mEnquire[L], () => this._enq2]
+    ];
+
+    /* The proof band is the page's tonal counterpoint: on a dark ground it goes
+       light (sand), on a paper ground it inverts to ink. */
+    const light = this.isLight();
+    const band = light
+      ? { bg: '#1A1611', ink: '#F5F1E7', ink2: 'rgba(245,241,231,.78)', hair: 'rgba(245,241,231,.15)', meta: 'rgba(245,241,231,.62)', btn: 'rgba(245,241,231,.32)' }
+      : dark
+        ? { bg: 'var(--panel)', ink: 'var(--ink)', ink2: 'var(--ink-70)', hair: 'var(--hair)', meta: 'var(--ink-55)', btn: 'var(--hair-2)' }
+        : { bg: 'var(--sand)', ink: 'var(--sand-ink)', ink2: 'var(--sand-ink-2)', hair: 'var(--sand-hair)', meta: 'rgba(23,19,16,.62)', btn: 'rgba(23,19,16,.3)' };
+    const bandBg = band.bg, bandInk = band.ink, bandInk2 = band.ink2, bandHair = band.hair;
+
+    return Object.assign(out, {
+      isEN: L === 'EN', isBM: L === 'BM',
+      carouselPrev: () => this.slide(-1),
+      carouselNext: () => this.slide(1),
+      bandStatsWrapStyle: `display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:0;margin-top:36px;border-top:1px solid ${bandHair}`,
+      onSite: this.state.screen === 'site',
+      onZone: this.state.screen === 'zone',
+      menuOpen: this.state.menuOpen,
+      useVideo: this.props.heroMedia !== 'Still image' && !this.state.reduced,
+      useStill: this.props.heroMedia === 'Still image' || this.state.reduced,
+
+      setEN: () => this.setState({ lang: 'EN' }),
+      setBM: () => this.setState({ lang: 'BM' }),
+      enChipStyle: `border:0;border-radius:999px;padding:7px 13px;font:600 11px/1 var(--sans);letter-spacing:.06em;cursor:pointer;background:${L === 'EN' ? 'var(--ink)' : 'transparent'};color:${L === 'EN' ? 'var(--on-accent)' : 'var(--ink-55)'}`,
+      bmChipStyle: `border:0;border-radius:999px;padding:7px 13px;font:600 11px/1 var(--sans);letter-spacing:.06em;cursor:pointer;background:${L === 'BM' ? 'var(--ink)' : 'transparent'};color:${L === 'BM' ? 'var(--on-accent)' : 'var(--ink-55)'}`,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      burgerTopStyle: `width:20px;height:1.5px;background:var(--ink);transition:transform .2s;transform:${this.state.menuOpen ? 'translateY(3.25px) rotate(45deg)' : 'none'}`,
+      burgerBotStyle: `width:20px;height:1.5px;background:var(--ink);transition:transform .2s;transform:${this.state.menuOpen ? 'translateY(-3.25px) rotate(-45deg)' : 'none'}`,
+
+      goHome: () => this.nav('home'),
+      goSite: () => this.nav('site'),
+      goZones: () => this.nav('listings'),
+      onHome: this.state.screen === 'home',
+      onListings: this.state.screen === 'listings',
+      listingCount: `${listingZones.length} ${listingZones.length === 1 ? (L === 'EN' ? 'parcel' : 'lot') : (L === 'EN' ? 'parcels' : 'lot')} ${L === 'EN' ? 'at Tanjung Agas — price on request' : 'di Tanjung Agas — harga atas permintaan'}`,
+      listingZones,
+      filterPills,
+      sortOptions: SORTS[L].map(([id, label]) => ({ label, apply: () => this.setState({ sort: id }) })),
+      sortLabel: (SORTS[L].find(s => s[0] === (this.state.sort || 'featured')) || SORTS[L][0])[1],
+      sortWord: L === 'EN' ? 'Sort' : 'Susun',
+      contactWord: L === 'EN' ? 'Contact Uniti' : 'Hubungi Uniti',
+      asideTitle: L === 'EN' ? 'Explore Tanjung Agas' : 'Terokai Tanjung Agas',
+      asideBody: L === 'EN'
+        ? 'All five parcels sit on one contiguous coastal site under a single owner. The masterplan shows how they relate — boundaries, access and frontage.'
+        : 'Kelima-lima lot terletak di satu tapak pesisir bersebelahan di bawah satu pemilik. Pelan induk menunjukkan hubungannya — sempadan, akses dan muka tanah.',
+      asideCta: L === 'EN' ? 'Open the masterplan' : 'Buka pelan induk',
+      asideByUse: L === 'EN' ? 'Browse by intended use' : 'Layari mengikut kegunaan',
+      faqTitle: L === 'EN' ? 'Frequently asked' : 'Soalan lazim',
+      faqs: (L === 'EN' ? [
+        ['Why is there no price listed?', 'Pricing depends on parcel combination and structure — outright, staged, or land-as-equity. We release indicative pricing with the information pack.'],
+        ['Can parcels be bought together?', 'Yes. Adjoining parcels are commonly taken as one transaction, and the access reserves between them are included in the arrangement.'],
+        ['Is the agricultural title a problem?', 'It is convertible to institutional or commercial title subject to state approval. Our planner walks you through the timeline before you commit.'],
+        ['Do I deal with an agent?', 'No. Uniti Sdn Bhd owns the land and handles the transaction directly — there is no listing agent or co-broker.']
+      ] : [
+        ['Mengapa harga tidak disenaraikan?', 'Harga bergantung pada gabungan lot dan struktur — jualan penuh, berperingkat, atau tanah sebagai ekuiti. Harga indikatif dikeluarkan bersama pakej maklumat.'],
+        ['Bolehkah lot dibeli bersama?', 'Ya. Lot bersebelahan lazimnya diambil sebagai satu transaksi, dan rizab akses di antaranya disertakan dalam susunan tersebut.'],
+        ['Adakah hakmilik pertanian menjadi masalah?', 'Ia boleh ditukar kepada hakmilik institusi atau komersial tertakluk kelulusan negeri. Perancang kami akan menerangkan jadualnya sebelum anda komit.'],
+        ['Adakah saya berurusan dengan ejen?', 'Tidak. Uniti Sdn Bhd memiliki tanah dan menguruskan transaksi secara terus — tiada ejen penyenaraian atau broker.']
+      ]).map(([q, a]) => ({ q, a })),
+      onSortChange: e => {
+        const i = e.target.selectedIndex;
+        this.setState({ sort: SORTS[L][i][0] });
+      },
+      goAbout: () => this.jump(() => this._about),
+      goEnquire: () => this.jump(() => this._enq),
+
+      setVidA: this.setVidA,
+      setVidB: this.setVidB,
+
+      setZonesRef: el => { this._zones = el; },
+      setAboutRef: el => { this._about = el; },
+      setEnqRef: el => { this._enq = el; },
+      setFactsRef: el => { this._facts = el; },
+      setHlRef: el => { this._hl = el; },
+      setLmRef: el => { this._lm = el; },
+      setEnq2Ref: el => { this._enq2 = el; },
+
+      zoneRows,
+      otherZones: zoneRows.filter(z => z.name !== sel.name),
+      sel: {
+        name: sel.name, desc: sel.desc[L], use: sel.use[L], area: sel.area, index: selIndex,
+        swatchStyle: `width:14px;height:14px;border-radius:3px;flex:none;background:${sel.color}`
+      },
+      selFacts: factsShort,
+      selFactsFull: factsFull,
+      selHighlights: sel.highlights[L].map((text, i) => ({ num: '0' + (i + 1), text })),
+      landmarks: LANDMARKS.map(l => ({ name: l.name[L], dist: l.dist })),
+      steps: STEPS[L].map(([num, title, desc]) => ({ num, title, desc })),
+      roleOptions: ROLES[L].map(label => ({ label })),
+      mapViews,
+      setMapImg: el => { this._mapImg = el; this.syncViewImages(); },
+      setDetailImg: el => { this._detailImg = el; this.syncViewImages(); },
+      pinsVisible: this.state.view === 'plan',
+      pinsHidden: this.state.view !== 'plan',
+      openSelected: () => this.nav('zone', { zoneId: sel.id, sentZone: false, active: 'facts' }),
+      scrollEnquire: () => this.scrollTo(this._enq2),
+      sections: secDefs.map(([id, label, get]) => ({
+        label,
+        style: secBtn(this.state.active === id),
+        go: () => { this.setState({ active: id }); this.scrollTo(get()); }
+      })),
+
+      sentHome: this.state.sentHome,
+      notSentHome: !this.state.sentHome,
+      sentZone: this.state.sentZone,
+      notSentZone: !this.state.sentZone,
+      submitHome: e => this.submitForm(e, 'Home'),
+      submitZone: e => this.submitForm(e, 'Zone'),
+      resetHome: () => this.setState({ sentHome: false, errsHome: [] }),
+      resetZone: () => this.setState({ sentZone: false, errsZone: [] }),
+      errsHome: this.state.errsHome || [],
+      errsZone: this.state.errsZone || [],
+      hasErrsHome: !!(this.state.errsHome || []).length,
+      hasErrsZone: !!(this.state.errsZone || []).length,
+      errTitle: L === 'EN' ? 'Please check the following' : 'Sila periksa yang berikut',
+      optionalWord: L === 'EN' ? '(optional)' : '(pilihan)',
+      packTitle: L === 'EN' ? 'What you will receive' : 'Apa yang anda akan terima',
+      replyNote: L === 'EN'
+        ? 'Uniti replies within 2 business days. For anything urgent, WhatsApp is fastest.'
+        : 'Uniti membalas dalam 2 hari bekerja. Untuk hal segera, WhatsApp paling pantas.',
+      orWord: L === 'EN' ? 'or contact us directly' : 'atau hubungi kami terus',
+      waHref: `https://wa.me/60300000000?text=${encodeURIComponent(
+        (L === 'EN' ? 'Hello Uniti, I am enquiring about ' : 'Salam Uniti, saya bertanya tentang ') + sel.name + ', Tanjung Agas.'
+      )}`,
+      waLabel: 'WhatsApp',
+      callLabel: L === 'EN' ? 'Call' : 'Telefon',
+      emailLabel: L === 'EN' ? 'Email' : 'E-mel',
+
+      bandStyle: `background:${bandBg};border-top:1px solid ${bandHair};border-bottom:1px solid ${bandHair};color:${bandInk}`,
+      bandEyebrowStyle: `font:600 12px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:${band.meta};margin:0`,
+      bandHeadStyle: `font:300 clamp(28px,3.6vw,42px)/1.14 var(--serif);letter-spacing:-.015em;margin:16px 0 0;color:${bandInk};text-wrap:pretty`,
+      bandBodyStyle: `font:400 17px/1.65 var(--sans);color:${bandInk2};margin:18px 0 0;max-width:50ch;text-wrap:pretty`,
+      bandStatStyle: `padding:18px 20px 18px 0;border-bottom:1px solid ${bandHair}`,
+      bandStatValStyle: `font:400 26px/1 var(--serif);margin:0;color:${bandInk}`,
+      bandStatLabStyle: `font:500 11px/1.4 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:${band.meta};margin:9px 0 0`,
+      bandBtnStyle: `display:inline-flex;align-items:center;gap:10px;background:transparent;border:1px solid ${band.btn};color:${bandInk};font:600 14px/1 var(--sans);padding:16px 24px;cursor:pointer;transition:border-color .15s`
+    });
+  }
+}
+</script>
+</body>
+</html>
