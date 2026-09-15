@@ -20,7 +20,17 @@ export const T = {
   lbTenure: { EN: "Tenure", BM: "Pegangan" },
   lbFrontage: { EN: "Beach frontage", BM: "Muka pantai" },
   lbFromKL: { EN: "From Kuala Lumpur", BM: "Dari Kuala Lumpur" },
-  vFreehold: { EN: "Freehold", BM: "Kekal" },
+  // Was a hardcoded "Freehold" claim, asserted blanket across every parcel and the
+  // whole site total. Missed in the 2026-09-15 fact audit, caught after the fact:
+  // ~/Downloads/unitipropertypdf.pdf shows UTC's title as "PN NO: 28942" and Ixora
+  // Permai's as "PN NO: 28943" — "PN" (Pajakan Negeri / State Lease) is the standard
+  // Malaysian title-number prefix for LEASEHOLD, not freehold (freehold titles are
+  // typically "GRN"/"GM"-prefixed). That's real evidence against "Freehold" for at
+  // least 2 named parcels, not just an absence of support — so this isn't a case where
+  // a plausible-sounding placeholder is even safe to guess at. The sub-lot table for
+  // the Uniti zone (K1–K7/R1–R6/NA1–3) shows title numbers too but not their prefix, so
+  // tenure for those remains unconfirmed either way, not evidenced against.
+  vTenureTBC: { EN: "To be confirmed", BM: "Akan disahkan" },
   ebSite: { EN: "The site", BM: "Tapak" },
   ebParcels: { EN: "Parcels", BM: "Lot" },
   ebAbout: { EN: "About Uniti", BM: "Tentang Uniti" },

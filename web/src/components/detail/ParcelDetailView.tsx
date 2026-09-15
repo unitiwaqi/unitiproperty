@@ -67,7 +67,7 @@ export function ParcelDetailView({ parcel }: { parcel: Parcel }) {
   const factsFull = [
     { label: fLabels.area[lang], value: parcel.area[lang] },
     { label: fLabels.frontage[lang], value: parcel.frontage[lang] },
-    { label: fLabels.tenure[lang], value: T.vFreehold[lang] },
+    { label: fLabels.tenure[lang], value: T.vTenureTBC[lang] },
     { label: fLabels.title[lang], value: parcel.title[lang] },
     { label: fLabels.zoning[lang], value: parcel.zoning[lang] },
     { label: fLabels.structure[lang], value: parcel.structure[lang] },

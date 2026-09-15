@@ -106,7 +106,7 @@ export function ParcelCarousel() {
               <div className="grid grid-cols-3 gap-[10px] border-t border-hair pt-[14px]">
                 <Cell label={T.thArea[lang]} value={z.area[lang]} />
                 <Cell label={T.thZoning[lang]} value={z.zoning[lang]} />
-                <Cell label={T.lbTenure[lang]} value={T.vFreehold[lang]} />
+                <Cell label={T.lbTenure[lang]} value={T.vTenureTBC[lang]} />
               </div>
 
               <div className="mt-auto flex items-center justify-between gap-3 border-t border-hair pt-[14px]">

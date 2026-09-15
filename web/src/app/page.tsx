@@ -110,7 +110,7 @@ export default function Home() {
           <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))]">
             <FactCell label={T.lbParcels[lang]} value={String(SITE_TOTALS.parcels)} bordered first />
             <FactCell label={T.lbArea[lang]} value={SITE_TOTALS.area[lang]} bordered />
-            <FactCell label={T.lbTenure[lang]} value={T.vFreehold[lang]} bordered />
+            <FactCell label={T.lbTenure[lang]} value={T.vTenureTBC[lang]} bordered />
             <FactCell label={T.lbFrontage[lang]} value={SITE_TOTALS.frontage} bordered />
             <FactCell label={T.lbFromKL[lang]} value={SITE_TOTALS.fromKL} />
           </div>

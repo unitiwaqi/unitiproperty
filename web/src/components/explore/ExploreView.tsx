@@ -88,7 +88,7 @@ export function ExploreView() {
   const facts = [
     { label: fLabels.area[lang], value: sel.area[lang] },
     { label: fLabels.zoning[lang], value: sel.zoning[lang] },
-    { label: fLabels.tenure[lang], value: T.vFreehold[lang] },
+    { label: fLabels.tenure[lang], value: T.vTenureTBC[lang] },
     { label: fLabels.structure[lang], value: sel.structure[lang] },
     { label: fLabels.status[lang], value: sel.status[lang] },
   ];
@@ -109,7 +109,7 @@ export function ExploreView() {
               Tanjung Agas
             </h1>
             <p className="mt-2 font-sans text-[15px] text-ink-55">
-              Port Dickson, Negeri Sembilan · {SITE_TOTALS.area[lang]} · {T.vFreehold[lang]}
+              Port Dickson, Negeri Sembilan · {SITE_TOTALS.area[lang]} · {T.vTenureTBC[lang]}
             </p>
           </div>
         </div>
@@ -383,7 +383,7 @@ function ListingCard({ parcel: z, lang }: { parcel: Parcel; lang: Lang }) {
         <div className="grid grid-cols-3 gap-[10px] border-t border-hair pt-[14px]">
           <Cell label={T.thArea[lang]} value={z.area[lang]} />
           <Cell label={T.thZoning[lang]} value={z.zoning[lang]} />
-          <Cell label={T.lbTenure[lang]} value={T.vFreehold[lang]} />
+          <Cell label={T.lbTenure[lang]} value={T.vTenureTBC[lang]} />
         </div>
 
         <div className="flex items-center justify-between gap-3 border-t border-hair pt-[14px]">
