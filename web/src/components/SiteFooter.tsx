@@ -6,7 +6,7 @@
 import Link from "next/link";
 import { useLang } from "@/lib/LangContext";
 import { T } from "@/lib/dict";
-import { EMAIL, PHONE_NUMBER } from "@/lib/parcels";
+import { CONTACT_URL } from "@/lib/parcels";
 
 export function SiteFooter() {
   const { lang } = useLang();
@@ -32,11 +32,13 @@ export function SiteFooter() {
               {T.fcContact[lang]}
             </p>
             <div className="mt-[14px] flex flex-col gap-[9px]">
-              <a href={`mailto:${EMAIL}`} className="font-sans text-[14px] text-ink-70">
-                {EMAIL}
-              </a>
-              <a href={`tel:${PHONE_NUMBER.replace(/[^+\d]/g, "")}`} className="font-sans text-[14px] text-ink-70">
-                {PHONE_NUMBER}
+              <a
+                href={CONTACT_URL}
+                target="_blank"
+                rel="noopener"
+                className="font-sans text-[14px] text-ink-70 hover:text-accent"
+              >
+                {T.mEnquire[lang]}
               </a>
             </div>
           </div>

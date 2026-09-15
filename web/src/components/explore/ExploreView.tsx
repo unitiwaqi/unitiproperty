@@ -23,13 +23,12 @@ import { useMemo, useState } from "react";
 import { useLang } from "@/lib/LangContext";
 import { T, fLabels } from "@/lib/dict";
 import {
+  CONTACT_URL,
   FAQS,
   PARCELS,
+  SITE_TOTALS,
   SORTS,
   VIEW_IMAGES,
-  waHref,
-  PHONE_NUMBER,
-  EMAIL,
   type Lang,
   type Parcel,
   type ParcelId,
@@ -110,7 +109,7 @@ export function ExploreView() {
               Tanjung Agas
             </h1>
             <p className="mt-2 font-sans text-[15px] text-ink-55">
-              Port Dickson, Negeri Sembilan · ± 38 acres · {T.vFreehold[lang]}
+              Port Dickson, Negeri Sembilan · {SITE_TOTALS.area[lang]} · {T.vFreehold[lang]}
             </p>
           </div>
         </div>
@@ -336,7 +335,6 @@ export function ExploreView() {
 // doesn't need, but otherwise the two cards should read as the same design.
 function ListingCard({ parcel: z, lang }: { parcel: Parcel; lang: Lang }) {
   const index = PARCELS.indexOf(z) + 1;
-  const tel = `tel:${PHONE_NUMBER.replace(/[^+\d]/g, "")}`;
 
   return (
     <article className="flex min-w-0 flex-col overflow-hidden rounded-soft-lg border border-hair bg-panel transition-colors duration-150 hover:border-hair-2">
@@ -393,30 +391,14 @@ function ListingCard({ parcel: z, lang }: { parcel: Parcel; lang: Lang }) {
           <span className="font-sans text-[18px] font-semibold leading-[1.2] text-ink">{T.priceOnRequest[lang]}</span>
         </div>
 
-        <div className="mt-auto flex items-center gap-2 border-t border-hair pt-[14px]">
+        <div className="mt-auto flex items-center gap-3 border-t border-hair pt-[14px]">
           <a
-            href={tel}
-            aria-label={T.callLabel[lang]}
-            className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-hair-2 font-sans text-[14px] text-ink transition-colors duration-150 hover:border-ink"
-          >
-            ✆
-          </a>
-          <a
-            href={`mailto:${EMAIL}`}
-            aria-label={T.emailLabel[lang]}
-            className="flex h-9 w-9 flex-none items-center justify-center rounded-full border border-hair-2 font-sans text-[13px] text-ink transition-colors duration-150 hover:border-ink"
-          >
-            ✉
-          </a>
-          <a
-            href={waHref(lang, z.name)}
+            href={CONTACT_URL}
             target="_blank"
             rel="noopener"
-            aria-label={T.waLabel[lang]}
-            className="flex h-9 w-9 flex-none items-center justify-center rounded-full text-white transition-colors duration-150"
-            style={{ background: "var(--whatsapp)" }}
+            className="inline-flex items-center gap-2 rounded-soft-sm border border-hair-2 px-4 py-[10px] font-sans text-[13px] font-medium text-ink transition-colors duration-150 hover:border-ink"
           >
-            <span className="font-sans text-[13px]">✆</span>
+            {T.mEnquire[lang]}
           </a>
           <Link
             href={`/explore/${z.id}`}

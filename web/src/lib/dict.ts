@@ -12,7 +12,9 @@ export const T = {
   // separate "The site" nav destination, now folded into this one and no longer linked.
   mParcels: { EN: "Explore", BM: "Terokai" },
   mAbout: { EN: "UNITI", BM: "UNITI" },
-  mEnquire: { EN: "Enquire", BM: "Hubungi" },
+  // Single external contact action site-wide — see CONTACT_URL in parcels.ts. Replaced
+  // the on-site enquiry form (call/email/WhatsApp icons, embedded forms) 2026-09-15.
+  mEnquire: { EN: "Contact us", BM: "Hubungi Kami" },
   lbParcels: { EN: "Parcels", BM: "Lot" },
   lbArea: { EN: "Total area", BM: "Keluasan" },
   lbTenure: { EN: "Tenure", BM: "Pegangan" },
@@ -33,42 +35,22 @@ export const T = {
   thZoning: { EN: "Zoning", BM: "Pengezonan" },
   thStructure: { EN: "Structure", BM: "Struktur" },
   areaFootnote: {
-    EN: "Areas total ± 38 acres including internal access reserves and the TNB / LRK corridors, which are not for sale.",
-    BM: "Jumlah keluasan ± 38 ekar termasuk rizab akses dalaman dan koridor TNB / LRK, yang tidak dijual.",
+    EN: "Areas total ± 134.4 acres (excludes Walit, whose area is unconfirmed) including internal access reserves and the TNB / LRK corridors, which are not for sale.",
+    BM: "Jumlah keluasan ± 134.4 ekar (tidak termasuk Walit, keluasan belum disahkan) termasuk rizab akses dalaman dan koridor TNB / LRK, yang tidak dijual.",
   },
   stFounded: { EN: "Operating since", BM: "Beroperasi sejak" },
   stHolding: { EN: "Single holding", BM: "Satu pegangan" },
   stOwner: { EN: "Land owner, start to finish", BM: "Pemilik tanah, awal ke akhir" },
-  ctaBrief: { EN: "Request the site brief (PDF)", BM: "Minta brif tapak (PDF)" },
+  ctaBrief: { EN: "Contact us", BM: "Hubungi Kami" },
   hProcess: { EN: "From first enquiry to agreement", BM: "Dari pertanyaan pertama ke perjanjian" },
-  hEnquire: { EN: "Request the information pack", BM: "Minta pakej maklumat" },
+  hEnquire: { EN: "Get in touch", BM: "Hubungi Kami" },
   pEnquire: {
-    EN: "Pricing is released on enquiry, per parcel. Tell us which parcel and what you intend to build; we will send the pack and a proposed structure.",
-    BM: "Harga dikeluarkan atas pertanyaan, mengikut lot. Beritahu kami lot mana dan apa yang anda ingin bina; kami akan hantar pakej dan struktur yang dicadangkan.",
+    EN: "Pricing is released on enquiry, per parcel. Contact us directly and tell us which parcel and what you intend to build.",
+    BM: "Harga dikeluarkan atas pertanyaan, mengikut lot. Hubungi kami terus dan beritahu lot mana serta apa yang anda ingin bina.",
   },
   packA: { EN: "Survey plan, title search and zoning confirmation", BM: "Pelan ukur, carian hakmilik dan pengesahan pengezonan" },
   packB: { EN: "Indicative pricing and payment structure per parcel", BM: "Harga indikatif dan struktur bayaran bagi setiap lot" },
   packC: { EN: "Conversion and approvals timeline, with our planner", BM: "Jadual penukaran dan kelulusan, bersama perancang kami" },
-  fName: { EN: "Full name", BM: "Nama penuh" },
-  fOrg: { EN: "Organisation", BM: "Organisasi" },
-  fEmail: { EN: "Email", BM: "E-mel" },
-  fPhone: { EN: "Phone", BM: "Telefon" },
-  fInterest: { EN: "Parcel of interest", BM: "Lot yang diminati" },
-  fUse: { EN: "Intended use", BM: "Kegunaan yang dirancang" },
-  fRole: { EN: "You are", BM: "Anda adalah" },
-  optAll: { EN: "The whole site", BM: "Keseluruhan tapak" },
-  optionalWord: { EN: "(optional)", BM: "(pilihan)" },
-  ctaSubmit: { EN: "Send enquiry", BM: "Hantar pertanyaan" },
-  privacy: {
-    EN: "Used only to respond to this enquiry. Not shared with agents or third parties.",
-    BM: "Digunakan hanya untuk membalas pertanyaan ini. Tidak dikongsi dengan ejen atau pihak ketiga.",
-  },
-  sentTitle: { EN: "Enquiry received", BM: "Pertanyaan diterima" },
-  sentBody: {
-    EN: "Our investment team replies within two business days with the pack and a proposed next step.",
-    BM: "Pasukan pelaburan kami akan membalas dalam dua hari bekerja dengan pakej dan langkah seterusnya.",
-  },
-  sendAnother: { EN: "Send another", BM: "Hantar lagi" },
   selLabel: { EN: "Parcel", BM: "Lot" },
   legendLabel: { EN: "All parcels", BM: "Semua lot" },
   ctaViewParcel: { EN: "View parcel", BM: "Lihat lot" },
@@ -87,13 +69,13 @@ export const T = {
     EN: "Pricing, survey plan and title search, sent directly by Uniti.",
     BM: "Harga, pelan ukur dan carian hakmilik, dihantar terus oleh Uniti.",
   },
-  ndaLabel: {
-    EN: "The pack is shared in confidence; we may ask you to sign an NDA before the site visit.",
-    BM: "Pakej ini dikongsi secara sulit; kami mungkin meminta anda menandatangani NDA sebelum lawatan tapak.",
-  },
+  // Rewritten 2026-09-15: the previous copy asserted a specific title-conversion claim
+  // with no source. This is now a general disclaimer instead, covering every field
+  // marked "to be confirmed"/"to be discussed" in parcels.ts (title/zoning/structure/
+  // frontage) rather than asserting anything about them individually.
   titleFootnote: {
-    EN: "*Convertible to institutional or commercial title subject to state approval. Areas are indicative pending final survey.",
-    BM: "*Boleh ditukar kepada hakmilik institusi atau komersial tertakluk kelulusan negeri. Keluasan adalah indikatif sementara menunggu ukur akhir.",
+    EN: "Title, zoning and deal structure shown are subject to confirmation via title search and survey. Areas for four of the five parcels are sourced from Uniti's own land-status records; Walit's area has not yet been confirmed.",
+    BM: "Hakmilik, pengezonan dan struktur transaksi yang ditunjukkan tertakluk pengesahan melalui carian hakmilik dan ukur. Keluasan bagi empat daripada lima lot disumberkan daripada rekod status tanah Uniti sendiri; keluasan Walit belum disahkan.",
   },
   priceOnRequest: { EN: "Price on request", BM: "Harga atas permintaan" },
   footerBlurb: {
@@ -108,17 +90,7 @@ export const T = {
     BM: "Keluasan, pengezonan dan imej adalah indikatif dan bukan tawaran atau kontrak.",
   },
   rights: { EN: "All rights reserved.", BM: "Hak cipta terpelihara." },
-  callLabel: { EN: "Call", BM: "Hubungi" },
-  emailLabel: { EN: "Email", BM: "E-mel" },
-  waLabel: { EN: "WhatsApp", BM: "WhatsApp" },
-  orWord: { EN: "Or reach us directly", BM: "Atau hubungi kami terus" },
-  contactWord: { EN: "Contact Uniti", BM: "Hubungi Uniti" },
   sortWord: { EN: "Sort", BM: "Susun" },
-  errTitle: { EN: "Please check the following", BM: "Sila semak perkara berikut" },
-  replyNote: {
-    EN: "Our investment team replies within two business days.",
-    BM: "Pasukan pelaburan kami akan membalas dalam dua hari bekerja.",
-  },
   packTitle: { EN: "What you will receive", BM: "Apa yang anda akan terima" },
 } satisfies Record<string, Entry>;
 

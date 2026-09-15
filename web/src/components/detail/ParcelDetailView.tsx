@@ -11,8 +11,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useLang } from "@/lib/LangContext";
 import { T, fLabels } from "@/lib/dict";
-import { LANDMARKS, PARCELS, VIEW_IMAGES, type Parcel } from "@/lib/parcels";
-import { EnquiryForm } from "@/components/EnquiryForm";
+import { CONTACT_URL, LANDMARKS, PARCELS, VIEW_IMAGES, type Parcel } from "@/lib/parcels";
 
 type View = "plan" | "3d" | "satellite";
 type SectionId = "facts" | "highlights" | "landmarks" | "enquire";
@@ -67,7 +66,7 @@ export function ParcelDetailView({ parcel }: { parcel: Parcel }) {
 
   const factsFull = [
     { label: fLabels.area[lang], value: parcel.area[lang] },
-    { label: fLabels.frontage[lang], value: parcel.frontage },
+    { label: fLabels.frontage[lang], value: parcel.frontage[lang] },
     { label: fLabels.tenure[lang], value: T.vFreehold[lang] },
     { label: fLabels.title[lang], value: parcel.title[lang] },
     { label: fLabels.zoning[lang], value: parcel.zoning[lang] },
@@ -283,7 +282,37 @@ export function ParcelDetailView({ parcel }: { parcel: Parcel }) {
             className="sticky rounded-soft-lg border border-hair-2 bg-panel p-[clamp(22px,3vw,30px)]"
             style={{ top: 140 }}
           >
-            <EnquiryForm parcel={parcel} />
+            <p className="font-serif text-[22px] leading-[1.25]">{T.hZoneForm[lang]}</p>
+            <p className="mt-[10px] font-sans text-[14px] leading-[1.55] text-ink-55">{T.pZoneForm[lang]}</p>
+
+            <div className="mt-[18px] flex items-center gap-[10px] rounded-soft-sm border border-hair bg-bg px-[14px] py-3">
+              <span className="h-[14px] w-[14px] flex-none rounded-[3px]" style={{ background: parcel.color }} />
+              <span className="min-w-0">
+                <span className="block font-sans text-[14px] font-medium text-ink">{parcel.name}</span>
+                <span className="mt-[2px] block font-sans text-[12px] text-ink-55">
+                  {parcel.area[lang]} · {parcel.use[lang]}
+                </span>
+              </span>
+            </div>
+
+            <div className="mt-[18px] border-t border-hair pt-4">
+              <p className="mb-[10px] font-sans text-[11px] font-semibold uppercase tracking-[.12em] text-ink-55">
+                {T.packTitle[lang]}
+              </p>
+              <p className="font-sans text-[13px] leading-relaxed text-ink-70">— {T.packA[lang]}</p>
+              <p className="mt-1 font-sans text-[13px] leading-relaxed text-ink-70">— {T.packB[lang]}</p>
+              <p className="mt-1 font-sans text-[13px] leading-relaxed text-ink-70">— {T.packC[lang]}</p>
+            </div>
+
+            <a
+              href={CONTACT_URL}
+              target="_blank"
+              rel="noopener"
+              className="mt-5 flex w-full items-center justify-center gap-[10px] rounded-soft-sm px-[17px] py-[17px] font-sans text-[14px] font-semibold transition-colors duration-150"
+              style={{ background: "var(--accent)", color: "var(--on-accent)" }}
+            >
+              {T.mEnquire[lang]}
+            </a>
           </div>
         </div>
       </div>
@@ -299,14 +328,15 @@ export function ParcelDetailView({ parcel }: { parcel: Parcel }) {
             {parcel.area[lang]} · {T.priceOnRequest[lang]}
           </p>
         </div>
-        <button
-          type="button"
-          onClick={() => scrollTo(enqRef.current)}
+        <a
+          href={CONTACT_URL}
+          target="_blank"
+          rel="noopener"
           className="flex-none rounded-soft-sm px-5 py-[15px] font-sans text-[13px] font-semibold"
           style={{ background: "var(--accent)", color: "var(--on-accent)" }}
         >
           {T.ctaRequestShort[lang]}
-        </button>
+        </a>
       </div>
     </div>
   );

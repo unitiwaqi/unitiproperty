@@ -8,10 +8,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { HeroVideo } from "@/components/HeroVideo";
 import { ParcelCarousel } from "@/components/ParcelCarousel";
-import { EnquiryForm } from "@/components/EnquiryForm";
 import { useLang } from "@/lib/LangContext";
 import { T } from "@/lib/dict";
-import { SITE_TOTALS, STEPS } from "@/lib/parcels";
+import { CONTACT_URL, SITE_TOTALS, STEPS } from "@/lib/parcels";
 
 export default function Home() {
   const { lang } = useLang();
@@ -58,13 +57,13 @@ export default function Home() {
           <div className="max-w-[780px]">
             {lang === "EN" ? (
               <h1 className="mt-[18px] font-serif font-light leading-[1.06] tracking-[-.02em]" style={{ fontSize: "clamp(38px,6.4vw,72px)" }}>
-                A 38-acre coastal site,
+                A 134-acre coastal site,
                 <br />
                 released parcel by parcel.
               </h1>
             ) : (
               <h1 className="mt-[18px] font-serif font-light leading-[1.06] tracking-[-.02em]" style={{ fontSize: "clamp(38px,6.4vw,72px)" }}>
-                Tapak pesisir 38 ekar,
+                Tapak pesisir 134 ekar,
                 <br />
                 dibuka lot demi lot.
               </h1>
@@ -84,13 +83,15 @@ export default function Home() {
               <span>{lang === "EN" ? "View the masterplan" : "Lihat pelan induk"}</span>
               <span>→</span>
             </Link>
-            <Link
-              href="/#enquire"
+            <a
+              href={CONTACT_URL}
+              target="_blank"
+              rel="noopener"
               className="inline-flex items-center gap-[10px] rounded-soft-sm border px-[26px] py-[17px] font-sans text-[14px] font-semibold transition-colors duration-150"
               style={{ borderColor: "rgba(245,241,231,.34)", color: "var(--hero-ink)" }}
             >
-              {lang === "EN" ? "Request the information pack" : "Minta pakej maklumat"}
-            </Link>
+              {T.mEnquire[lang]}
+            </a>
           </div>
         </div>
       </section>
@@ -248,13 +249,15 @@ export default function Home() {
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  href="/#enquire"
+                <a
+                  href={CONTACT_URL}
+                  target="_blank"
+                  rel="noopener"
                   className="rounded-soft-sm border px-[18px] py-[13px] font-sans text-[13px] font-semibold"
                   style={{ borderColor: "rgba(245,241,231,.32)", color: "#F5F1E7" }}
                 >
                   {T.ctaBrief[lang]}
-                </Link>
+                </a>
               </div>
             </div>
 
@@ -318,8 +321,22 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="rounded-soft-lg border border-hair-2 bg-bg p-[clamp(22px,3vw,32px)]">
-              <EnquiryForm />
+            <div className="flex flex-col items-start gap-5 rounded-soft-lg border border-hair-2 bg-bg p-[clamp(22px,3vw,32px)]">
+              <p className="font-sans text-[15px] leading-relaxed text-ink-70">
+                {lang === "EN"
+                  ? "Reach us directly — no form, no agent in between."
+                  : "Hubungi kami terus — tanpa borang, tanpa ejen di antara."}
+              </p>
+              <a
+                href={CONTACT_URL}
+                target="_blank"
+                rel="noopener"
+                className="inline-flex items-center gap-[10px] rounded-soft-sm px-7 py-[17px] font-sans text-[14px] font-semibold transition-colors duration-150"
+                style={{ background: "var(--accent)", color: "var(--on-accent)" }}
+              >
+                <span>{T.mEnquire[lang]}</span>
+                <span>→</span>
+              </a>
             </div>
           </div>
         </div>

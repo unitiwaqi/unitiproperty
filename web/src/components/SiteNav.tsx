@@ -18,6 +18,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useLang } from "@/lib/LangContext";
 import { T } from "@/lib/dict";
+import { CONTACT_URL } from "@/lib/parcels";
 
 const NAV_LINKS = [
   { key: "mHome", href: "/" },
@@ -115,14 +116,16 @@ export function SiteNav() {
             </button>
           </div>
 
-          <Link
-            href="/#enquire"
+          <a
+            href={CONTACT_URL}
+            target="_blank"
+            rel="noopener"
             data-desk="1"
             className="inline-flex items-center gap-2 rounded-soft-sm border px-[18px] py-3 font-sans text-[13px] font-semibold transition-colors duration-300"
             style={{ borderColor: hairColor, color: inkStrong }}
           >
             {T.mEnquire[lang]}
-          </Link>
+          </a>
 
           <button
             type="button"
@@ -157,13 +160,15 @@ export function SiteNav() {
                 {T[link.key][lang]}
               </Link>
             ))}
-            <Link
-              href="/#enquire"
+            <a
+              href={CONTACT_URL}
+              target="_blank"
+              rel="noopener"
               onClick={() => setMenuOpen(false)}
               className="px-5 py-[18px] font-serif text-xl text-accent"
             >
               {T.mEnquire[lang]}
-            </Link>
+            </a>
           </div>
         </div>
       )}
