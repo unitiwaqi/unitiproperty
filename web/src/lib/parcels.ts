@@ -378,3 +378,7 @@ export const SITE_TOTALS = {
 // Single external contact channel — replaces the on-site enquiry form (call/email/
 // WhatsApp icons, embedded forms) with one consistent "Contact us" action everywhere.
 export const CONTACT_URL = "https://uniti.asia";
+
+// Real, user-confirmed official address — same in both languages (a proper address
+// doesn't translate), so a plain string rather than Bilingual.
+export const OFFICE_ADDRESS = "Level 7, Menara Arina UNITI, Jalan Raja Muda Abdul Aziz, 50300 Kuala Lumpur";

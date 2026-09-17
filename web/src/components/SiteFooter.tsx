@@ -6,7 +6,7 @@
 import Link from "next/link";
 import { useLang } from "@/lib/LangContext";
 import { T } from "@/lib/dict";
-import { CONTACT_URL } from "@/lib/parcels";
+import { CONTACT_URL, OFFICE_ADDRESS } from "@/lib/parcels";
 
 export function SiteFooter() {
   const { lang } = useLang();
@@ -32,6 +32,7 @@ export function SiteFooter() {
               {T.fcContact[lang]}
             </p>
             <div className="mt-[14px] flex flex-col gap-[9px]">
+              <p className="font-sans text-[14px] leading-relaxed text-ink-70">{OFFICE_ADDRESS}</p>
               <a
                 href={CONTACT_URL}
                 target="_blank"
